@@ -28,29 +28,19 @@ class ViewController: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        switch identifier {
-        case "loginSegue":
-            
-            let isAuth = login()
-            
-            if !isAuth {
-                loginField.text = nil
-                passwordField.text = nil
-                createDialogWindow(title: "Внимание!", message: "Вы ввели неверную комбинацию логин/пароль")
-            }
-            
-            return isAuth
-        default:
-            return true
-        }
-    }
     
-    func login() -> Bool {
+    @IBAction func loginWasPressed(_ sender: UIButton) {
         let login = loginField.text!
         let password = passwordField.text!
         
-        return login == "admin" && password == "123456"
+        
+        if login == "admin" && password == "123456" {
+            createDialogWindow(title: "", message: "Вы успешно авторизовались!")
+        } else {
+            loginField.text = nil
+            passwordField.text = nil
+            createDialogWindow(title: "Внимание!", message: "Вы ввели неверную комбинацию логин/пароль")
+        }
     }
     
     
