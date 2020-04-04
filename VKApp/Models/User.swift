@@ -20,7 +20,7 @@ class User {
         let img = UIImage(named: avatar)
         self.avatar = img
         if let unwrappedImage = img {
-            self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: 10, liked: true), count: 10)
+            self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: Int.random(in: 0...100), liked: true), count: 10)
         }
     }
     

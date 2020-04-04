@@ -12,7 +12,11 @@ class FriendsController: UITableViewController {
     
     var users : [User] = [
         User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"),
-        User(name: "Евгений", surname: "Ёлчев", avatar: "eugene")
+        User(name: "Евгений", surname: "Ёлчев", avatar: "eugene"),
+        User(name: "Александр", surname: "Черных", avatar: "chernih"),
+        User(name: "Виталий", surname: "Кулагин", avatar: "kulagin"),
+        User(name: "Карим", surname: "Султанов", avatar: "sultanov"),
+        User(name: "Станислав", surname: "Белых", avatar: "belih")
     ]
     
     override func viewDidLoad() {
@@ -28,8 +32,7 @@ class FriendsController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
         let user = users[indexPath.row]
         cell.userLabel.text = "\(user.name) \(user.surname)"
-        cell.userLabel.adjustsFontSizeToFitWidth = true
-        cell.userLabel.minimumScaleFactor = CGFloat(10)
+        cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
         cell.photoView.imageView.image = user.avatar
         return cell
     }
