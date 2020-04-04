@@ -30,7 +30,7 @@ class FriendsController: UITableViewController {
         cell.userLabel.text = "\(user.name) \(user.surname)"
         cell.userLabel.adjustsFontSizeToFitWidth = true
         cell.userLabel.minimumScaleFactor = CGFloat(10)
-        cell.photoView.image = user.avatar
+        cell.photoView.imageView.image = user.avatar
         return cell
     }
     
