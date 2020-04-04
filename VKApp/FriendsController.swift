@@ -9,16 +9,42 @@
 import UIKit
 
 class FriendsController: UITableViewController {
-   
+    
+    var users : [User] = [
+        User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"),
+        User(name: "Евгений", surname: "Ёлчев", avatar: "eugene")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self.tableView.backgroundColor = #colorLiteral(red: 0.3215686275, green: 0.462745098, blue: 0.6431372549, alpha: 1)
+        tableView.dataSource = self
     }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int { 1 }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { users.count }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
+        let user = users[indexPath.row]
+        cell.userLabel.text = "\(user.name) \(user.surname)"
+        cell.userLabel.adjustsFontSizeToFitWidth = true
+        cell.userLabel.minimumScaleFactor = CGFloat(10)
+        cell.photoView.image = user.avatar
+        return cell
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       if segue.identifier == "photoAlbumSegue" {
-          return
-       }
+        if segue.identifier == "photoAlbumSegue" {
+            let photoAlbumVC = segue.destination as! PhotoAlbumController
+            if let index = tableView.indexPathForSelectedRow {
+                let user = users[index.row]
+                photoAlbumVC.photos = user.photos
+                photoAlbumVC.title = "\(user.name) \(user.surname)"
+            }
+        }
     }
-
+    
 }
+
+
