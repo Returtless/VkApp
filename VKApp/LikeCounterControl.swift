@@ -11,6 +11,8 @@ import UIKit
 class LikeCounterControl: UIControl {
     var countOfLikes : UInt = 0
     var like : Bool = false
+    private let liked = "♥︎"
+    private let unliked = "♡"
     var counterLabel = UILabel()
     var iconButton = UIButton()
 
@@ -22,8 +24,10 @@ class LikeCounterControl: UIControl {
     
     private func setupView() {
         backgroundColor = .clear
-        iconButton.tintColor = like ? .red : .white
-        iconButton.setImage(UIImage(named: "heart"), for: .normal)
+        iconButton.setTitle(like ? liked : unliked, for: .normal)
+        iconButton.titleLabel?.font = .systemFont(ofSize: CGFloat(15))
+        iconButton.setTitleColor(like ? .red : .black, for: .normal)
+        iconButton.setTitleColor(.white, for: .selected)
         iconButton.addTarget(self, action: #selector(changeCounter(_:)), for: .touchUpInside)
         
         counterLabel.text = String(countOfLikes)
@@ -47,12 +51,12 @@ class LikeCounterControl: UIControl {
     @objc private func changeCounter(_ sender: UIButton) {
         if like {
             countOfLikes-=1
-            sender.tintColor = .white
         } else {
             countOfLikes+=1
-            sender.tintColor = .red
         }
         like = !like
+        iconButton.setTitleColor(like ? .red : .black, for: .normal)
+        iconButton.setTitle(like ? liked : unliked, for: .normal)
         counterLabel.text = String(countOfLikes)
     }
 }
