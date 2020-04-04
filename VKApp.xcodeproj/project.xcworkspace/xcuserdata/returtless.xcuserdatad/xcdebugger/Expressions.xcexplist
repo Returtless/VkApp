@@ -10,5 +10,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "PhotoAlbumController.collectionView(_:cellForItemAt:):PhotoAlbumController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " cell.likeControl.countOfLikes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -394,6 +394,7 @@
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="160" height="160"/>
                                 <connections>
+                                    <outlet property="likeControl" destination="2m8-dT-XK1" id="87T-ni-sRa"/>
                                     <outlet property="photoImageView" destination="gvU-te-5K1" id="JL5-Pl-SH5"/>
                                 </connections>
                             </collectionViewCell>

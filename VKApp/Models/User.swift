@@ -12,7 +12,7 @@ class User {
     var name : String
     var surname : String
     var avatar : UIImage?
-    var photos : [UIImage] = []
+    var photos : [Photo] = []
     
     init(name : String, surname : String, avatar : String) {
         self.name = name
@@ -20,8 +20,14 @@ class User {
         let img = UIImage(named: avatar)
         self.avatar = img
         if let unwrappedImage = img {
-            self.photos = Array(repeating: unwrappedImage, count: 10)
+            self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: 10, liked: true), count: 10)
         }
     }
     
+}
+
+struct Photo {
+    var image = UIImage()
+    var countOfLikes = 0
+    var liked = false
 }

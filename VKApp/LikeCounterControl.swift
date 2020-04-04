@@ -9,16 +9,16 @@
 import UIKit
 
 class LikeCounterControl: UIControl {
-    var countOfLikes : UInt = 0
-    var like : Bool = false
-    private let liked = "♥︎"
-    private let unliked = "♡"
     var counterLabel = UILabel()
     var iconButton = UIButton()
-
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    var countOfLikes : Int = 0
+    var like : Bool = false
+    
+    private let liked = "♥︎"
+    private let unliked = "♡"
+    
+    override func layoutSubviews() {
         setupView()
     }
     
