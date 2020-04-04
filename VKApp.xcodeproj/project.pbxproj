@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520675002438CADC00C76B86 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520674FF2438CADC00C76B86 /* AvatarView.swift */; };
 		521FA4482435384D00522D8C /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521FA4472435384D00522D8C /* AddGroupTableViewController.swift */; };
 		521FA44A24353CD300522D8C /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521FA44924353CD300522D8C /* AddGroupTableViewCell.swift */; };
 		52335DBD242A89A6002A5318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52335DBC242A89A6002A5318 /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		520674FF2438CADC00C76B86 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		521FA4472435384D00522D8C /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		521FA44924353CD300522D8C /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		52335DB9242A89A6002A5318 /* VKApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				5234852C2430D4DE003DF0BD /* GroupsController.swift */,
 				5234852E2430DEDE003DF0BD /* FriendsController.swift */,
 				521FA4472435384D00522D8C /* AddGroupTableViewController.swift */,
+				520674FF2438CADC00C76B86 /* AvatarView.swift */,
 				52335DBC242A89A6002A5318 /* AppDelegate.swift */,
 				52335DBE242A89A6002A5318 /* SceneDelegate.swift */,
 				52335DC0242A89A6002A5318 /* ViewController.swift */,
@@ -192,6 +195,7 @@
 				528A488F243522B10063708D /* PhotoAlbumController.swift in Sources */,
 				528A489124352A790063708D /* PhotoCollectionViewCell.swift in Sources */,
 				521FA4482435384D00522D8C /* AddGroupTableViewController.swift in Sources */,
+				520675002438CADC00C76B86 /* AvatarView.swift in Sources */,
 				528A488D243520820063708D /* Group.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
