@@ -9,32 +9,32 @@
 import UIKit
 
 class FriendsController: UIViewController {
-    var sorterView = SorterBarControl()
     
+    @IBOutlet weak var sorterControl: SorterBarControl!
     @IBOutlet weak var tableView: UITableView!
     var users : [User] = [
         User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"),
-        User(name: "Евгений", surname: "Ёлчев", avatar: "eugene"),
+        User(name: "Евгений", surname: "Елчев", avatar: "eugene"),
         User(name: "Александр", surname: "Черных", avatar: "chernih"),
         User(name: "Виталий", surname: "Кулагин", avatar: "kulagin"),
         User(name: "Карим", surname: "Султанов", avatar: "sultanov"),
+        User(name: "Сергей", surname: "Логинов", avatar: "vladislav"),
         User(name: "Станислав", surname: "Белых", avatar: "belih")
     ]
+    var sectionLetters = [String]()
+    var usersBySections: [(key: String.Element, value: [User])] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        tableView.addSubview(sorterView)
-        sorterView.translatesAutoresizingMaskIntoConstraints = false
-        sorterView.frame = CGRect(x: 0, y: 0, width: 20, height: 100)
-
-        NSLayoutConstraint.activate([
-            sorterView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            sorterView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        tableView.delegate = self
+        
+        let usersByLetter = Dictionary(grouping: users, by: { $0.surname.first! })
+        sectionLetters = Array(usersByLetter.keys.map({String($0)})).sorted(by: <)
+        sorterControl.letters = sectionLetters
+        usersBySections = Array(usersByLetter).sorted(by: {$0.key < $1.key})
     }
     
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "photoAlbumSegue" {
@@ -50,13 +50,17 @@ class FriendsController: UIViewController {
 }
 
 extension FriendsController : UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int { 1 }
+    func numberOfSections(in tableView: UITableView) -> Int { sectionLetters.count }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { users.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {  self.usersBySections[section].value.count }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return String(self.usersBySections[section].key)
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
-        let user = users[indexPath.row]
+        let user = usersBySections[indexPath.section].value[indexPath.row]
         cell.userLabel.text = "\(user.name) \(user.surname)"
         cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
         cell.photoView.imageView.image = user.avatar

@@ -366,6 +366,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Amw-FY-BiM"/>
                     <connections>
+                        <outlet property="sorterControl" destination="2jE-tq-PVZ" id="cln-qn-f2t"/>
                         <outlet property="tableView" destination="O1P-PW-frm" id="jPX-sE-0cc"/>
                     </connections>
                 </viewController>

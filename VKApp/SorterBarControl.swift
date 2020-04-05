@@ -9,27 +9,19 @@
 import UIKit
 
 class SorterBarControl: UIControl {
-    private var letters = [String]()
+    var letters = [String]()
     private var letterButtons = [UIButton]()
     var stackView = UIStackView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        letters = ["A","B","C","D","E","F","G"]
-        self.setupView()
+    override func layoutSubviews() {
+        setupView()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        letters = ["A","B","C","D","E","F","G"]
-        self.setupView()
-    }
-    
-    private func setupView() {
+    func setupView() {
         for letter in letters {
             let button = UIButton(type: .system)
             button.setTitle(letter, for: .normal)
-            button.setTitleColor(.lightGray, for: .normal)
+            button.setTitleColor(.black, for: .normal)
             button.setTitleColor(.white, for: .selected)
             button.frame = CGRect(x: 0, y: 0, width: 15, height: 10)
             button.addTarget(self, action: #selector(selectLetter(_:)), for: .touchUpInside)
