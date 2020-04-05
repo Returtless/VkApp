@@ -9,6 +9,7 @@
 import UIKit
 
 class FriendsController: UITableViewController {
+    var sorterView = SorterBarControl()
     
     var users : [User] = [
         User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"),
@@ -22,6 +23,14 @@ class FriendsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.addSubview(sorterView)
+        sorterView.translatesAutoresizingMaskIntoConstraints = false
+        sorterView.frame = CGRect(x: 0, y: 0, width: 20, height: 100)
+
+        NSLayoutConstraint.activate([
+            sorterView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            sorterView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
