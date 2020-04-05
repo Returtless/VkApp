@@ -28,7 +28,7 @@ class PhotoAlbumController: UICollectionViewController {
         let currentPhoto = photos[indexPath.row]
         cell.photoImageView.image = currentPhoto.image
         cell.likeControl.countOfLikes = currentPhoto.countOfLikes
-        cell.likeControl.like = currentPhoto.liked
+        cell.likeControl.isLiked = currentPhoto.liked
         return cell
     }
 }

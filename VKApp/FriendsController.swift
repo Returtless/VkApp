@@ -10,29 +10,30 @@ import UIKit
 
 class FriendsController: UIViewController {
     
+    @IBAction func sorterBarWasChanged(_ sender: SorterBarControl) {
+        let indexPath = IndexPath(row: 0, section: usersBySections.firstIndex(where: {String($0.key) == sender.choosedLetter}) ?? 0)
+        self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        
+    }
+    
     @IBOutlet weak var sorterControl: SorterBarControl!
     @IBOutlet weak var tableView: UITableView!
-    var users : [User] = [
-        User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"),
-        User(name: "Евгений", surname: "Елчев", avatar: "eugene"),
-        User(name: "Александр", surname: "Черных", avatar: "chernih"),
-        User(name: "Виталий", surname: "Кулагин", avatar: "kulagin"),
-        User(name: "Карим", surname: "Султанов", avatar: "sultanov"),
-        User(name: "Сергей", surname: "Логинов", avatar: "vladislav"),
-        User(name: "Станислав", surname: "Белых", avatar: "belih")
-    ]
+    var users : [User] = []
     var sectionLetters = [String]()
     var usersBySections: [(key: String.Element, value: [User])] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        users = setUsersArray()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = CGFloat(70)
         
         let usersByLetter = Dictionary(grouping: users, by: { $0.surname.first! })
         sectionLetters = Array(usersByLetter.keys.map({String($0)})).sorted(by: <)
         sorterControl.letters = sectionLetters
         usersBySections = Array(usersByLetter).sorted(by: {$0.key < $1.key})
+        
     }
     
     
@@ -40,13 +41,36 @@ class FriendsController: UIViewController {
         if segue.identifier == "photoAlbumSegue" {
             let photoAlbumVC = segue.destination as! PhotoAlbumController
             if let index = tableView.indexPathForSelectedRow {
-                let user = users[index.row]
+                let user = usersBySections[index.section].value[index.row]
                 photoAlbumVC.photos = user.photos
                 photoAlbumVC.title = "\(user.name) \(user.surname)"
             }
         }
     }
     
+    private func setUsersArray() -> [User] {
+        return [
+            User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"),
+            User(name: "Евгений", surname: "Елчев", avatar: "eugene"),
+            User(name: "Александр", surname: "Черных", avatar: "chernih"),
+            User(name: "Виталий", surname: "Кулагин", avatar: "kulagin"),
+            User(name: "Карим", surname: "Султанов", avatar: "sultanov"),
+            User(name: "Сергей", surname: "Логинов", avatar: ""),
+            User(name: "Станислав", surname: "Белых", avatar: "belih"),
+            User(name: "Артём", surname: "Лукашенко", avatar: ""),
+            User(name: "Чеслав", surname: "Молчанов", avatar: ""),
+            User(name: "Матвей", surname: "Козлов", avatar: ""),
+            User(name: "Шарль", surname: "Ермаков", avatar: ""),
+            User(name: "Остап", surname: "Новиков", avatar: ""),
+            User(name: "Всеволод", surname: "Сидоров", avatar: ""),
+            User(name: "Устин", surname: "Яковенко", avatar: ""),
+            User(name: "Эрик", surname: "Рымар", avatar: ""),
+            User(name: "Конрад", surname: "Самойлов", avatar: ""),
+            User(name: "Георгий", surname: "Поляков", avatar: ""),
+            User(name: "Эдуард", surname: "Громов", avatar: ""),
+            User(name: "Прохор", surname: "Сасько", avatar: "")
+        ]
+    }
 }
 
 extension FriendsController : UITableViewDataSource, UITableViewDelegate {
@@ -64,6 +88,7 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         cell.userLabel.text = "\(user.name) \(user.surname)"
         cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
         cell.photoView.imageView.image = user.avatar
+        
         return cell
     }
 }

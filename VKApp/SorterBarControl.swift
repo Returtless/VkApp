@@ -12,12 +12,13 @@ class SorterBarControl: UIControl {
     var letters = [String]()
     private var letterButtons = [UIButton]()
     var stackView = UIStackView()
+    var choosedLetter = ""
     
     override func layoutSubviews() {
         setupView()
     }
-    
     func setupView() {
+        isUserInteractionEnabled = true
         for letter in letters {
             let button = UIButton(type: .system)
             button.setTitle(letter, for: .normal)
@@ -31,18 +32,22 @@ class SorterBarControl: UIControl {
         stackView = UIStackView(arrangedSubviews: self.letterButtons)
         
         self.addSubview(stackView)
-        stackView.frame = CGRect(x: 0, y: 0, width: 20, height: 100)
-        stackView.spacing = 8
+        stackView.frame = CGRect(x: 0, y: 0, width: 20, height: 15*letters.count)
+        stackView.spacing = 1
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fillEqually
-        contentVerticalAlignment = .fill
+    //    stackView.translatesAutoresizingMaskIntoConstraints = false
+    //    NSLayoutConstraint.activate([
+     //        stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
+     //    ])
+ 
     }
     
     @objc private func selectLetter(_ sender: UIButton) {
-       // guard let index = self.buttons.index(of: sender) else { return }
-        //guard let day = Day(rawValue: index) else { return }
-        //self.selectedDay = day
+        if let index = letterButtons.firstIndex(of: sender){
+            choosedLetter = letters[index]
+            sendActions(for: .valueChanged)
+        }
     }
-
 }

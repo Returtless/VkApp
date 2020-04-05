@@ -14,7 +14,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "FriendsController.sorterBarWasChanged(_:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.awakeFromNib():AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageView.image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SorterBarControl.setupView():SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "stackView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "stackView">
+            </PersistentString>
+            <PersistentString
+               value = "sender.titleLabel?.text">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "PhotoAlbumController.collectionView(_:cellForItemAt:):PhotoAlbumController.swift">
