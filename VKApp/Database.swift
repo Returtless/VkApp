@@ -32,5 +32,15 @@ class Database{
             User(name: "Прохор", surname: "Сасько", avatar: "")
         ]
     }
+    static func getGroupsData() -> [Group] {
+        [Group(name: "GeekBrains", avatar: "geekbrains"), Group(name: "Dodo pizza", avatar: "dodo")]
+    }
     
+    static func getNewGroupsData() -> [Group] { [
+        Group(name: "Dodo pizza Belgorod", avatar: "dodo"),
+        Group(name: "Dodo pizza Saint Petersburg", avatar: "dodo"),
+        Group(name: "Dodo pizza Moskow", avatar: "dodo"),
+        Group(name: "Dodo pizza Samara", avatar: "dodo")
+        ]
+    }
 }

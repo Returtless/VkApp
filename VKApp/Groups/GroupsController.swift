@@ -10,12 +10,12 @@ import UIKit
 
 class GroupsController: UITableViewController {
     
-    var groups : [Group] = [Group(name: "GeekBrains", avatar: "geekbrains"), Group(name: "Dodo pizza", avatar: "dodo")]
+    var groups : [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
+        groups = Database.getGroupsData()
+        tableView.rowHeight = CGFloat(70)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
@@ -28,7 +28,7 @@ class GroupsController: UITableViewController {
         
         let group = groups[indexPath.row]
         cell.groupNameLabel.text = group.name
-        cell.avatarImageView.image = group.avatar
+        cell.avatarImageView.imageView.image = group.avatar
         
         return cell
     }

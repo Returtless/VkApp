@@ -97,7 +97,7 @@
             <objects>
                 <tabBarController modalPresentationStyle="fullScreen" id="fnU-Gf-gkr" customClass="TabBarViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="gUJ-RW-bxd"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="centered" id="jPn-kn-QzK">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="centered" id="jPn-kn-QzK" customClass="NavigationTabBar" customModule="VKApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

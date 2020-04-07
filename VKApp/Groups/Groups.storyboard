@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c3q-hp-erS">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,40 +11,50 @@
             <objects>
                 <tableViewController id="Sq5-ds-32e" customClass="GroupsController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IQV-9A-eN6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="sectionIndexColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="107" id="aI5-5w-DyX" customClass="GroupTableViewCell" customModule="VKApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="107"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="70" id="aI5-5w-DyX" customClass="GroupTableViewCell" customModule="VKApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aI5-5w-DyX" id="dkH-os-moz">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="107"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TR2-Vp-cXu">
-                                            <rect key="frame" x="20" y="10" width="50" height="87"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TR2-Vp-cXu" customClass="AvatarView" customModule="VKApp" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="10" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="1LD-Cx-Sa8"/>
                                                 <constraint firstAttribute="width" constant="50" id="F88-SA-5uV"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="opacity">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoC-R4-xJn">
-                                            <rect key="frame" x="90" y="43" width="284" height="21"/>
+                                            <rect key="frame" x="90" y="24.5" width="284" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="TR2-Vp-cXu" firstAttribute="centerY" secondItem="dkH-os-moz" secondAttribute="centerY" id="4Qn-FT-bDG"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="DoC-R4-xJn" secondAttribute="trailing" constant="20" id="KFw-s6-ebk"/>
-                                        <constraint firstAttribute="bottom" secondItem="TR2-Vp-cXu" secondAttribute="bottom" constant="10" id="Pny-x8-etW"/>
                                         <constraint firstItem="DoC-R4-xJn" firstAttribute="leading" secondItem="TR2-Vp-cXu" secondAttribute="trailing" constant="20" id="naO-0e-n8J"/>
                                         <constraint firstItem="DoC-R4-xJn" firstAttribute="centerY" secondItem="dkH-os-moz" secondAttribute="centerY" id="rTM-nV-reC"/>
-                                        <constraint firstItem="TR2-Vp-cXu" firstAttribute="top" secondItem="dkH-os-moz" secondAttribute="top" constant="10" id="vPF-Tl-42k"/>
                                         <constraint firstItem="TR2-Vp-cXu" firstAttribute="leading" secondItem="dkH-os-moz" secondAttribute="leading" constant="20" id="wzK-ny-N4s"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -76,37 +87,47 @@
             <objects>
                 <tableViewController id="boh-z0-rIr" customClass="AddGroupTableViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="s1i-TH-d1M">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newGroupCell" rowHeight="129" id="ntG-mO-UvJ" customClass="AddGroupTableViewCell" customModule="VKApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="129"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newGroupCell" rowHeight="70" id="ntG-mO-UvJ" customClass="AddGroupTableViewCell" customModule="VKApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ntG-mO-UvJ" id="Ih1-XV-zQ0">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mRi-wT-X2t">
-                                            <rect key="frame" x="20" y="10" width="50" height="109"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mRi-wT-X2t" customClass="AvatarView" customModule="VKApp" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="10" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="BAS-T8-BnU"/>
                                                 <constraint firstAttribute="height" constant="50" id="vQp-0M-1EF"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="opacity">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBh-Dy-nxg">
-                                            <rect key="frame" x="90" y="54" width="284" height="21"/>
+                                            <rect key="frame" x="90" y="24.5" width="284" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="mRi-wT-X2t" firstAttribute="centerY" secondItem="Ih1-XV-zQ0" secondAttribute="centerY" id="APN-f5-uIx"/>
                                         <constraint firstItem="mRi-wT-X2t" firstAttribute="leading" secondItem="Ih1-XV-zQ0" secondAttribute="leading" constant="20" id="gg3-Aq-teZ"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="CBh-Dy-nxg" secondAttribute="trailing" constant="20" id="haT-aa-gdQ"/>
                                         <constraint firstItem="CBh-Dy-nxg" firstAttribute="centerY" secondItem="Ih1-XV-zQ0" secondAttribute="centerY" id="l9K-4y-puW"/>
-                                        <constraint firstAttribute="bottom" secondItem="mRi-wT-X2t" secondAttribute="bottom" constant="10" id="mC3-nh-vn1"/>
-                                        <constraint firstItem="mRi-wT-X2t" firstAttribute="top" secondItem="Ih1-XV-zQ0" secondAttribute="top" constant="10" id="q7t-FT-bcu"/>
                                         <constraint firstItem="CBh-Dy-nxg" firstAttribute="leading" secondItem="mRi-wT-X2t" secondAttribute="trailing" constant="20" id="y1Q-sN-mHB"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -135,7 +156,7 @@
                 <navigationController id="c3q-hp-erS" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="e7z-gs-ewI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T7M-4K-fDM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>

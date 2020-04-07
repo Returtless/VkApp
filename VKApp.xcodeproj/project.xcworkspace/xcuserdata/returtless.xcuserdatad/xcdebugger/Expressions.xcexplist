@@ -3,54 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "SorterBarControl.init(frame:):SorterBarControl.swift">
-      </ContextState>
-      <ContextState
-         contextName = "FriendsController.tableView(_:cellForRowAt:):FriendsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.column">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsController.sorterBarWasChanged(_:):FriendsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "AvatarView.awakeFromNib():AvatarView.swift">
          <PersistentStrings>
             <PersistentString
+               value = "subviews">
+            </PersistentString>
+            <PersistentString
                value = "imageView.image">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SorterBarControl.setupView():SorterBarControl.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "stackView.frame">
-            </PersistentString>
-            <PersistentString
-               value = "stackView">
-            </PersistentString>
-            <PersistentString
-               value = "sender.titleLabel?.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "PhotoAlbumController.collectionView(_:cellForItemAt:):PhotoAlbumController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = " cell.likeControl.countOfLikes">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -63,7 +22,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SorterBarControl.init(coder:):SorterBarControl.swift">
+         contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sender.titleLabel?.text">
+            </PersistentString>
+            <PersistentString
+               value = "stackView">
+            </PersistentString>
+            <PersistentString
+               value = "stackView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TabBarViewController.setTabBarItems():TabBarViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tabBar.items">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.init(frame:):SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in FriendsController.viewDidLoad():FriendsController.swift">
       </ContextState>
       <ContextState
          contextName = "FriendsController.viewDidLoad():FriendsController.swift">
@@ -75,6 +59,36 @@
                value = "x[0].1[0]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.init(coder:):SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.sorterBarWasChanged(_:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.tableView(_:cellForRowAt:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.column">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotoAlbumController.collectionView(_:cellForItemAt:):PhotoAlbumController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " cell.likeControl.countOfLikes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.setupView():SorterBarControl.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

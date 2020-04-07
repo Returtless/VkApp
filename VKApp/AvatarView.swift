@@ -16,18 +16,21 @@ class AvatarView: UIImageView {
     @IBInspectable var radius: CGFloat = 10 {
         didSet {
             setNeedsDisplay()
+            configureShadowView()
         }
     }
     
     @IBInspectable var opacity: Float = 2 {
         didSet {
             setNeedsDisplay()
+            configureShadowView()
         }
     }
     
     @IBInspectable var color: UIColor = .black {
         didSet {
             setNeedsDisplay()
+            configureShadowView()
         }
     }
     

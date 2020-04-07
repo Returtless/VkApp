@@ -15,7 +15,7 @@ class GroupTableViewCell: UITableViewCell {
     }
 
     @IBOutlet weak var groupNameLabel: UILabel!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: AvatarView!
    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

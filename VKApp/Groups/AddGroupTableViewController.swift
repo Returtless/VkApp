@@ -9,17 +9,12 @@
 import UIKit
 
 class AddGroupTableViewController: UITableViewController {
-    var newGroups : [Group] = [
-        Group(name: "Dodo pizza Belgorod", avatar: "dodo"),
-        Group(name: "Dodo pizza Saint Petersburg", avatar: "dodo"),
-        Group(name: "Dodo pizza Moskow", avatar: "dodo"),
-        Group(name: "Dodo pizza Samara", avatar: "dodo")
-    ]
+    var newGroups : [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        newGroups = Database.getNewGroupsData()
+        tableView.rowHeight = CGFloat(70)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
@@ -30,7 +25,7 @@ class AddGroupTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newGroupCell", for: indexPath) as! AddGroupTableViewCell
         let group = newGroups[indexPath.row]
         cell.groupNameLabel.text = group.name
-        cell.groupImageView.image = group.avatar
+        cell.groupImageView.imageView.image = group.avatar
         return cell
     }
     

@@ -24,6 +24,7 @@
 		5286D9EC243D0404008E36C6 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9EA243D0404008E36C6 /* Friends.storyboard */; };
 		5286D9EE243D0423008E36C6 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9ED243D0423008E36C6 /* Groups.storyboard */; };
 		5286D9F0243D04DA008E36C6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5286D9EF243D04DA008E36C6 /* Database.swift */; };
+		5286D9F2243D1B6F008E36C6 /* NavigationTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */; };
 		528A488824350CBD0063708D /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528A488724350CBD0063708D /* FriendTableViewCell.swift */; };
 		528A488B24350F420063708D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528A488A24350F420063708D /* User.swift */; };
 		528A488D243520820063708D /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528A488C243520820063708D /* Group.swift */; };
@@ -52,6 +53,7 @@
 		5286D9EB243D0404008E36C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VKApp/Base.lproj/Friends.storyboard; sourceTree = "<group>"; };
 		5286D9ED243D0423008E36C6 /* Groups.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		5286D9EF243D04DA008E36C6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabBar.swift; sourceTree = "<group>"; };
 		528A488724350CBD0063708D /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		528A488A24350F420063708D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		528A488C243520820063708D /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -94,10 +96,12 @@
 				5286D9E8243D033E008E36C6 /* Friends */,
 				5286D9E9243D0361008E36C6 /* Groups */,
 				52335DBC242A89A6002A5318 /* AppDelegate.swift */,
+				520674FF2438CADC00C76B86 /* AvatarView.swift */,
 				5286D9EF243D04DA008E36C6 /* Database.swift */,
 				52335DBE242A89A6002A5318 /* SceneDelegate.swift */,
 				52335DC0242A89A6002A5318 /* ViewController.swift */,
 				52335DC2242A89A6002A5318 /* Main.storyboard */,
+				5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */,
 				52335DC5242A89A8002A5318 /* Assets.xcassets */,
 				52335DC7242A89A8002A5318 /* LaunchScreen.storyboard */,
 				52335DCA242A89A8002A5318 /* Info.plist */,
@@ -111,12 +115,11 @@
 			children = (
 				5286D9EA243D0404008E36C6 /* Friends.storyboard */,
 				5234852E2430DEDE003DF0BD /* FriendsController.swift */,
-				520674FF2438CADC00C76B86 /* AvatarView.swift */,
-				520675012438F12100C76B86 /* LikeCounterControl.swift */,
-				520675032439266700C76B86 /* SorterBarControl.swift */,
 				528A488724350CBD0063708D /* FriendTableViewCell.swift */,
 				528A488E243522B10063708D /* PhotoAlbumController.swift */,
 				528A489024352A790063708D /* PhotoCollectionViewCell.swift */,
+				520675012438F12100C76B86 /* LikeCounterControl.swift */,
+				520675032439266700C76B86 /* SorterBarControl.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -126,9 +129,9 @@
 			children = (
 				5286D9ED243D0423008E36C6 /* Groups.storyboard */,
 				5234852C2430D4DE003DF0BD /* GroupsController.swift */,
+				528A48942435356B0063708D /* GroupTableViewCell.swift */,
 				521FA4472435384D00522D8C /* AddGroupTableViewController.swift */,
 				521FA44924353CD300522D8C /* AddGroupTableViewCell.swift */,
-				528A48942435356B0063708D /* GroupTableViewCell.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				528A488F243522B10063708D /* PhotoAlbumController.swift in Sources */,
 				528A489124352A790063708D /* PhotoCollectionViewCell.swift in Sources */,
 				521FA4482435384D00522D8C /* AddGroupTableViewController.swift in Sources */,
+				5286D9F2243D1B6F008E36C6 /* NavigationTabBar.swift in Sources */,
 				520675002438CADC00C76B86 /* AvatarView.swift in Sources */,
 				528A488D243520820063708D /* Group.swift in Sources */,
 			);
