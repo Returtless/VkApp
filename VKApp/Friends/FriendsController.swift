@@ -14,6 +14,7 @@ class FriendsController: UIViewController {
     
     @IBOutlet weak var sorterControl: SorterBarControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var friendSearchBar: FriendsSearchBar!
     
     
     override func viewDidLoad() {
@@ -21,10 +22,8 @@ class FriendsController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = CGFloat(70)
-        
-        let usersByLetter = Dictionary(grouping: Database.getUsersData(), by: { $0.surname.first! })
-        usersBySections = usersByLetter.map({(letter:String($0.key),users: $0.value)}).sorted(by: {$0.letter < $1.letter})
-        sorterControl.letters = Array(usersByLetter.keys.map({String($0)})).sorted(by: <)
+        usersBySections = Database.getSortedUsersData()
+        sorterControl.letters = usersBySections.map({$0.letter})
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,6 +61,23 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         cell.photoView.imageView.image = user.avatar
         
         return cell
+    }
+}
+extension FriendsController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText.isEmpty){
+            usersBySections = Database.getSortedUsersData()
+        } else {
+            for i in 0..<usersBySections.count {
+                usersBySections[i].users = usersBySections[i].users.filter({$0.surname.range(of:  searchText, options: .caseInsensitive) != nil || $0.name.range(of:  searchText, options: .caseInsensitive) != nil })
+            }
+            usersBySections.removeAll(where: {$0.users.isEmpty})
+        }
+        sorterControl.letters = usersBySections.map({$0.letter})
+        tableView.reloadData()
+    }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        friendSearchBar.endEditing(true)
     }
 }
 

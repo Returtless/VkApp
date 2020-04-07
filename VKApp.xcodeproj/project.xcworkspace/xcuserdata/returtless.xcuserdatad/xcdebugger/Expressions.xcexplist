@@ -3,6 +3,9 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "SorterBarControl.letterButtons.didset:SorterBarControl.swift">
+      </ContextState>
+      <ContextState
          contextName = "AvatarView.awakeFromNib():AvatarView.swift">
          <PersistentStrings>
             <PersistentString
@@ -18,6 +21,14 @@
          <PersistentStrings>
             <PersistentString
                value = "iconButton">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "usersBySections.map({$0.letter})">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -61,13 +72,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SorterBarControl.letters.didset:SorterBarControl.swift">
+      </ContextState>
+      <ContextState
          contextName = "SorterBarControl.init(coder:):SorterBarControl.swift">
       </ContextState>
       <ContextState
          contextName = "FriendsController.sorterBarWasChanged(_:):FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "indexPath.section">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

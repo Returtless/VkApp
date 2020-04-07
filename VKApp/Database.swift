@@ -32,6 +32,10 @@ class Database{
             User(name: "Прохор", surname: "Сасько", avatar: "")
         ]
     }
+    static func getSortedUsersData() ->[(letter: String, users: [User])] {
+        let usersByLetter = Dictionary(grouping: self.getUsersData(), by: { $0.surname.first! })
+        return usersByLetter.map({(letter:String($0.key),users: $0.value)}).sorted(by: {$0.letter < $1.letter})
+    }
     static func getGroupsData() -> [Group] {
         [Group(name: "GeekBrains", avatar: "geekbrains"), Group(name: "Dodo pizza", avatar: "dodo")]
     }

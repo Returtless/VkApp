@@ -9,17 +9,23 @@
 import UIKit
 
 class SorterBarControl: UIControl {
-    var letters = [String]()
+    var letters = [String]() {
+        didSet{
+            if oldValue != letters{
+                setupView()
+            }
+        }
+    }
     var choosedLetter = ""
     
     private var letterButtons = [UIButton]()
     private var stackView = UIStackView()
     
     override func layoutSubviews() {
-        setupView()
+        super.layoutSubviews()
     }
+    
     func setupView() {
-
         letterButtons.removeAll()
         for letter in letters {
             let button = UIButton(type: .system)
@@ -39,11 +45,11 @@ class SorterBarControl: UIControl {
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-             stackView.topAnchor.constraint(equalTo: topAnchor),
-             stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
-         ])
- 
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
     }
     
     @objc private func selectLetter(_ sender: UIButton) {
