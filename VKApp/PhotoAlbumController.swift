@@ -12,12 +12,12 @@ import UIKit
 
 class PhotoAlbumController: UICollectionViewController {
     
-    var photos = [UIImage]()
+    var photos = [Photo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
     
     
@@ -25,7 +25,10 @@ class PhotoAlbumController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.photoImageView.image = photos[indexPath.row]
+        let currentPhoto = photos[indexPath.row]
+        cell.photoImageView.image = currentPhoto.image
+        cell.likeControl.countOfLikes = currentPhoto.countOfLikes
+        cell.likeControl.isLiked = currentPhoto.liked
         return cell
     }
 }
