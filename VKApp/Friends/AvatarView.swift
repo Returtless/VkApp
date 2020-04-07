@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AvatarView: UIView {
+class AvatarView: UIImageView {
     var imageView = UIImageView()
     var shadowView = UIView()
     

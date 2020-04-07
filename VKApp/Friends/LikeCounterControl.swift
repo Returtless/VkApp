@@ -10,7 +10,13 @@ import UIKit
 
 class LikeCounterControl: UIControl {
     var counterLabel = UILabel()
-    var iconButton = UIButton()
+    var iconButton: UIButton = {
+        let iconButton = UIButton()
+        iconButton.titleLabel?.font = .systemFont(ofSize: CGFloat(15))
+        iconButton.setTitleColor(.white, for: .selected)
+        iconButton.addTarget(self, action: #selector(changeCounter(_:)), for: .touchUpInside)
+        return iconButton
+    }()
     
     var countOfLikes : Int = 0
     var isLiked : Bool = false
@@ -19,17 +25,14 @@ class LikeCounterControl: UIControl {
     private let unliked = "♡"
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         setupView()
     }
     
     private func setupView() {
         backgroundColor = .clear
         iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
-        iconButton.titleLabel?.font = .systemFont(ofSize: CGFloat(15))
         iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
-        iconButton.setTitleColor(.white, for: .selected)
-        iconButton.addTarget(self, action: #selector(changeCounter(_:)), for: .touchUpInside)
-        
         counterLabel.text = String(countOfLikes)
         counterLabel.font = .boldSystemFont(ofSize: CGFloat(9))
         
@@ -54,7 +57,7 @@ class LikeCounterControl: UIControl {
         } else {
             countOfLikes+=1
         }
-        isLiked = !isLiked
+        isLiked.toggle()
         iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
         iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
         counterLabel.text = String(countOfLikes)
