@@ -25,6 +25,11 @@ class SorterBarControl: UIControl {
         super.layoutSubviews()
     }
     
+    override func awakeFromNib() {
+           super.awakeFromNib()
+           
+       }
+    
     func setupView() {
         letterButtons.removeAll()
         for letter in letters {
@@ -45,9 +50,7 @@ class SorterBarControl: UIControl {
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
     }

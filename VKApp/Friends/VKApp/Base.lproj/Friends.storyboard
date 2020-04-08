@@ -98,33 +98,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jE-tq-PVZ" customClass="SorterBarControl" customModule="VKApp" customModuleProvider="target">
-                                <rect key="frame" x="394" y="297" width="20" height="300"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="1ac-ny-t7G"/>
-                                    <constraint firstAttribute="height" constant="300" id="I78-Up-s8h"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="sorterBarWasChanged:" destination="Gpq-c0-chq" eventType="valueChanged" id="KSO-qI-rd0"/>
-                                </connections>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="w6m-bX-d69" firstAttribute="trailing" secondItem="O1P-PW-frm" secondAttribute="trailing" id="OsG-vw-cGo"/>
                             <constraint firstItem="w6m-bX-d69" firstAttribute="bottom" secondItem="O1P-PW-frm" secondAttribute="bottom" id="Vsw-Da-dIC"/>
                             <constraint firstItem="O1P-PW-frm" firstAttribute="top" secondItem="w6m-bX-d69" secondAttribute="top" id="iDH-Ow-Bbh"/>
-                            <constraint firstItem="2jE-tq-PVZ" firstAttribute="centerY" secondItem="O1P-PW-frm" secondAttribute="centerY" constant="-28" id="stU-2T-hU7"/>
                             <constraint firstItem="O1P-PW-frm" firstAttribute="leading" secondItem="w6m-bX-d69" secondAttribute="leading" id="vwM-lt-csl"/>
-                            <constraint firstItem="w6m-bX-d69" firstAttribute="trailing" secondItem="2jE-tq-PVZ" secondAttribute="trailing" id="xNu-4l-9qY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w6m-bX-d69"/>
                     </view>
                     <navigationItem key="navigationItem" id="Amw-FY-BiM"/>
                     <connections>
                         <outlet property="friendSearchBar" destination="ldS-lY-ugq" id="2Hp-BU-nj5"/>
-                        <outlet property="sorterControl" destination="2jE-tq-PVZ" id="cln-qn-f2t"/>
                         <outlet property="tableView" destination="O1P-PW-frm" id="jPX-sE-0cc"/>
                     </connections>
                 </viewController>

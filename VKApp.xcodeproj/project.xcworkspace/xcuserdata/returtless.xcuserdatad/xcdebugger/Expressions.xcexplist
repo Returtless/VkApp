@@ -28,6 +28,9 @@
          contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
+            </PersistentString>
+            <PersistentString
                value = "usersBySections.map({$0.letter})">
             </PersistentString>
          </PersistentStrings>
@@ -98,6 +101,17 @@
          <PersistentStrings>
             <PersistentString
                value = " cell.likeControl.countOfLikes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.awakeFromNib():FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tableView">
+            </PersistentString>
+            <PersistentString
+               value = "tableView.centerYAnchor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
