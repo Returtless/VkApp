@@ -9,6 +9,7 @@
 import UIKit
 
 class GroupsController: UITableViewController {
+    @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     
     var groups : [Group] = []
     
@@ -55,4 +56,18 @@ class GroupsController: UITableViewController {
     }
     
     
+}
+
+extension GroupsController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        groups = Database.getGroupsData()
+        if (!searchText.isEmpty){
+            groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
+        }
+        tableView.reloadData()
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        groupsSearchBar.endEditing(true)
+    }
 }

@@ -138,14 +138,39 @@
         <!--Лента-->
         <scene sceneID="AIp-FN-LZz">
             <objects>
-                <viewController title="Лента" modalPresentationStyle="fullScreen" id="oQh-yC-JOS" sceneMemberID="viewController">
+                <viewController title="Лента" modalPresentationStyle="fullScreen" id="oQh-yC-JOS" customClass="NewsViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tvA-sE-3Pw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nBq-8w-p9i">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" id="jJr-Hv-9gx" customClass="NewsTableViewCell" customModule="VKApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jJr-Hv-9gx" id="H2w-Y7-weI" customClass="NewsTableViewCell" customModule="VKApp" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="nBq-8w-p9i" firstAttribute="leading" secondItem="iJW-Wq-pQd" secondAttribute="leading" id="0C4-2L-5tw"/>
+                            <constraint firstItem="iJW-Wq-pQd" firstAttribute="bottom" secondItem="nBq-8w-p9i" secondAttribute="bottom" id="EUQ-eq-yHh"/>
+                            <constraint firstItem="nBq-8w-p9i" firstAttribute="top" secondItem="iJW-Wq-pQd" secondAttribute="top" id="nJm-rL-cdV"/>
+                            <constraint firstItem="iJW-Wq-pQd" firstAttribute="trailing" secondItem="nBq-8w-p9i" secondAttribute="trailing" id="y8p-b2-snJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iJW-Wq-pQd"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="q8L-2F-GId"/>
+                    <connections>
+                        <outlet property="tableView" destination="nBq-8w-p9i" id="SoQ-0m-r7n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHl-ZR-AWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

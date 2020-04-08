@@ -6,7 +6,7 @@
 //  Copyright © 2020 Vladislav Likhachev. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Database{
     static func getUsersData() -> [User] {
@@ -37,14 +37,35 @@ class Database{
         return usersByLetter.map({(letter:String($0.key),users: $0.value)}).sorted(by: {$0.letter < $1.letter})
     }
     static func getGroupsData() -> [Group] {
-        [Group(name: "GeekBrains", avatar: "geekbrains"), Group(name: "Dodo pizza", avatar: "dodo")]
+        [
+            Group(name: "GeekBrains", avatar: "geekbrains"),
+            Group(name: "Youtube", avatar: ""),
+            Group(name: "Yandex", avatar: ""),
+            Group(name: "Google", avatar: ""),
+            Group(name: "Kavabanga", avatar: ""),
+            Group(name: "Gogogo", avatar: ""),
+            Group(name: "MDK", avatar: ""),
+            Group(name: "Dodo pizza", avatar: "dodo")
+        ]
     }
     
-    static func getNewGroupsData() -> [Group] { [
-        Group(name: "Dodo pizza Belgorod", avatar: "dodo"),
-        Group(name: "Dodo pizza Saint Petersburg", avatar: "dodo"),
-        Group(name: "Dodo pizza Moskow", avatar: "dodo"),
-        Group(name: "Dodo pizza Samara", avatar: "dodo")
+    static func getNewGroupsData() -> [Group] {
+        [
+            Group(name: "Dodo pizza Belgorod", avatar: "dodo"),
+            Group(name: "Dodo pizza Saint Petersburg", avatar: "dodo"),
+            Group(name: "Dodo pizza Moskow", avatar: "dodo"),
+            Group(name: "Dodo pizza Samara", avatar: "dodo")
+        ]
+    }
+    
+    static func getNewsData() -> [News] {
+        [
+            News(
+                author: User(name: "Евгений", surname: "Елчев", avatar: "eugene"),
+                text: "Мэрия Москвы потратит 1,9 миллиарда рублей на дезинфекцию дорог.Собянин решил — пилить, так по-крупному, пока все дома сидят.",
+                photos: ["photo"],
+                comments: [Comment(author: User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"), text: "Ну вот опять!")])
+            
         ]
     }
 }

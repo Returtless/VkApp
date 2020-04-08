@@ -15,7 +15,8 @@ class Group {
     
     init(name : String, avatar : String) {
         self.name = name
-        self.avatar = UIImage(named: avatar)
+        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
+        self.avatar = img
     }
     
 }
