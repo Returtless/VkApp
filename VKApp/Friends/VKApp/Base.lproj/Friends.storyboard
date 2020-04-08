@@ -108,7 +108,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w6m-bX-d69"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Amw-FY-BiM"/>
+                    <navigationItem key="navigationItem" title="Мои друзья" id="Amw-FY-BiM"/>
                     <connections>
                         <outlet property="friendSearchBar" destination="ldS-lY-ugq" id="2Hp-BU-nj5"/>
                         <outlet property="tableView" destination="O1P-PW-frm" id="jPX-sE-0cc"/>

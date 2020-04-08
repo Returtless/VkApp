@@ -22,7 +22,7 @@ class News{
         self.author = author
         self.createDate = Date.init()
         self.text = text
-        self.photos = photos.map({UIImage(imageLiteralResourceName: $0)})
+        self.photos = photos.map({UIImage(systemName: $0)!})
         self.comments = comments
         self.likesCount = Int.random(in: 1...100)
         self.viewsCount = Int.random(in: 1...1000)
