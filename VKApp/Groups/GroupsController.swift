@@ -9,13 +9,14 @@
 import UIKit
 
 class GroupsController: UITableViewController {
+    @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     
-    var groups : [Group] = [Group(name: "GeekBrains", avatar: "geekbrains"), Group(name: "Dodo pizza", avatar: "dodo")]
+    var groups : [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
+        groups = Database.getGroupsData()
+        tableView.rowHeight = CGFloat(70)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
@@ -28,7 +29,7 @@ class GroupsController: UITableViewController {
         
         let group = groups[indexPath.row]
         cell.groupNameLabel.text = group.name
-        cell.avatarImageView.image = group.avatar
+        cell.avatarImageView.imageView.image = group.avatar
         
         return cell
     }
@@ -55,4 +56,18 @@ class GroupsController: UITableViewController {
     }
     
     
+}
+
+extension GroupsController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        groups = Database.getGroupsData()
+        if (!searchText.isEmpty){
+            groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
+        }
+        tableView.reloadData()
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        groupsSearchBar.endEditing(true)
+    }
 }

@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     
     
     @objc func keyboardWasShown(notification: Notification) {
-        print("keboard is shown")
+
         let userInfo = (notification as NSNotification).userInfo as! [String: Any]
         let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         

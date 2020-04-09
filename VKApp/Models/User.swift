@@ -17,10 +17,10 @@ class User {
     init(name : String, surname : String, avatar : String) {
         self.name = name
         self.surname = surname
-        let img = UIImage(named: avatar) ?? UIImage.init(systemName: "nosign")
+        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
         self.avatar = img
         if let unwrappedImage = img {
-            self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: Int.random(in: 0...100), liked: true), count: 10)
+            self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: Int.random(in: 0...100), liked: Bool.random()), count: 10)
         }
     }
     
