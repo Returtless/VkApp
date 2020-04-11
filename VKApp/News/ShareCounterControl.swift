@@ -8,17 +8,16 @@
 
 import UIKit
 
-class LikeCounterControl: UIControl {
+class ShareCounterControl: UIControl {
     var counterLabel = UILabel()
     var iconButton: UIButton = {
         let iconButton = UIButton()
-        iconButton.titleLabel?.font = .systemFont(ofSize: CGFloat(15))
-        iconButton.setTitleColor(.white, for: .selected)
+        iconButton.setImage(UIImage(systemName: "arrow.up.right.circle"), for: .normal)
         iconButton.addTarget(self, action: #selector(changeCounter(_:)), for: .touchUpInside)
         return iconButton
     }()
     
-    var countOfLikes : Int = 0
+    var countOfShares : Int = 0
     var isLiked : Bool = false
     
     private let liked = "♥︎"
@@ -31,10 +30,8 @@ class LikeCounterControl: UIControl {
     
     private func setupView() {
         backgroundColor = .clear
-        iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
-        iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
-        counterLabel.text = String(countOfLikes)
-        counterLabel.font = .boldSystemFont(ofSize: CGFloat(16))
+        counterLabel.text = String(countOfShares)
+        counterLabel.font = .boldSystemFont(ofSize: CGFloat(14))
         
         let stack = UIStackView()
         stack.addArrangedSubview(counterLabel)
@@ -53,13 +50,14 @@ class LikeCounterControl: UIControl {
     
     @objc private func changeCounter(_ sender: UIButton) {
         if isLiked {
-            countOfLikes-=1
+            countOfShares-=1
         } else {
-            countOfLikes+=1
+            countOfShares+=1
         }
         isLiked.toggle()
-        iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
-        iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
-        counterLabel.text = String(countOfLikes)
+        
+        //iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
+        //iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
+        counterLabel.text = String(countOfShares)
     }
 }

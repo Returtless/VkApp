@@ -78,6 +78,14 @@
          contextName = "SorterBarControl.letters.didset:SorterBarControl.swift">
       </ContextState>
       <ContextState
+         contextName = "NewsTableViewCell.collectionView(_:layout:sizeForItemAt:):NewsTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "collectionView.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SorterBarControl.init(coder:):SorterBarControl.swift">
       </ContextState>
       <ContextState
@@ -112,6 +120,14 @@
             </PersistentString>
             <PersistentString
                value = "tableView.centerYAnchor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewsTableViewCell.collectionView(_:cellForItemAt:):NewsTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.photoImageView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -63,7 +63,7 @@ class Database{
             News(
                 author: User(name: "Евгений", surname: "Елчев", avatar: "eugene"),
                 text: "Мэрия Москвы потратит 1,9 миллиарда рублей на дезинфекцию дорог.Собянин решил — пилить, так по-крупному, пока все дома сидят.",
-                photos: ["nosign"],
+                photos: ["vladislav", "vladislav", "vladislav", "vladislav"],
                 comments: [Comment(author: User(name: "Владислав", surname: "Лихачев", avatar: "vladislav"), text: "Ну вот опять!")])
             
         ]
