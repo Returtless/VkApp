@@ -19,10 +19,7 @@ class ShareCounterControl: UIControl {
     
     var countOfShares : Int = 0
     var isLiked : Bool = false
-    
-    private let liked = "♥︎"
-    private let unliked = "♡"
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         setupView()
@@ -31,7 +28,7 @@ class ShareCounterControl: UIControl {
     private func setupView() {
         backgroundColor = .clear
         counterLabel.text = String(countOfShares)
-        counterLabel.font = .boldSystemFont(ofSize: CGFloat(14))
+        counterLabel.font = .systemFont(ofSize: CGFloat(20))
         
         let stack = UIStackView()
         stack.addArrangedSubview(counterLabel)
@@ -55,9 +52,6 @@ class ShareCounterControl: UIControl {
             countOfShares+=1
         }
         isLiked.toggle()
-        
-        //iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
-        //iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
         counterLabel.text = String(countOfShares)
     }
 }

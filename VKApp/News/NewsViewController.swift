@@ -42,7 +42,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.likeCounterControl.isLiked = true
         cell.likeCounterControl.countOfLikes = 10
         
-        cell.viewsCounter.text = "👁 \(UInt.random(in: 1...100))"
+        cell.viewsCounter.text = "\(UInt.random(in: 1...100))"
         
         cell.photos = currentNews.photos
         return cell
