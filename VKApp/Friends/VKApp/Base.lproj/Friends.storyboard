@@ -144,11 +144,11 @@
                                             <rect key="frame" x="15" y="15" width="130" height="130"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2m8-dT-XK1" customClass="LikeCounterControl" customModule="VKApp" customModuleProvider="target">
-                                            <rect key="frame" x="65" y="145" width="30" height="15"/>
+                                            <rect key="frame" x="55" y="135" width="50" height="25"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="15" id="Wn1-dW-V43"/>
-                                                <constraint firstAttribute="width" constant="30" id="k8R-L8-rrQ"/>
+                                                <constraint firstAttribute="height" constant="25" id="Wn1-dW-V43"/>
+                                                <constraint firstAttribute="width" constant="50" id="k8R-L8-rrQ"/>
                                             </constraints>
                                         </view>
                                     </subviews>

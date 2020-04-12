@@ -18,8 +18,10 @@ class CommentCounterControl: UIControl {
     }()
     
     var countOfComments : Int = 0
-    var isLiked : Bool = false
-
+    
+    
+    weak var delegate: CommentCounterDelegate?
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         setupView()
@@ -50,12 +52,8 @@ class CommentCounterControl: UIControl {
     }
     
     @objc private func changeCounter(_ sender: UIButton) {
-        if isLiked {
-            countOfComments-=1
-        } else {
-            countOfComments+=1
-        }
-        isLiked.toggle()
         counterLabel.text = String(countOfComments)
+        
+        delegate!.onButtonTapped()
     }
 }

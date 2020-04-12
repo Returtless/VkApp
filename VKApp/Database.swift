@@ -70,7 +70,12 @@ class Database{
                          "dog3",
                          "dog4",
                          "dog5"],
-                comments: []
+                comments: [Comment(author: User(name: "Владислав",
+                surname: "Лихачев",
+                avatar: "vladislav"), text: "Какие они все классные!"),
+                Comment(author: User(name: "Виталий",
+                surname: "Кулагин",
+                avatar: "kulagin"), text: "А у меня такая кошку сожрала!!!!")]
             ),
             News(
                 author: User(name: "Владислав",
@@ -87,7 +92,9 @@ class Database{
                          "serial8",
                          "serial9",
                          "serial10"],
-                comments: []
+                comments: [Comment(author: User(name: "Владислав",
+                surname: "Лихачев",
+                avatar: "vladislav"), text: "Сейчас ничего не смотрю!")]
             ),
             News(
                 author: User(name: "Станислав",

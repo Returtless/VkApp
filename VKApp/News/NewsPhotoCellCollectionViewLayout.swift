@@ -10,7 +10,7 @@ import UIKit
 
 class NewsPhotoCellCollectionViewLayout: UICollectionViewLayout {
     var cacheAttributes = [IndexPath: UICollectionViewLayoutAttributes]()
-
+    
     let viewHeight: CGFloat = 400
     var cellHeight: CGFloat = 400
     private var totalCellsHeight: CGFloat = 400

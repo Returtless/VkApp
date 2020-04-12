@@ -25,6 +25,8 @@
 		5234852D2430D4DE003DF0BD /* GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234852C2430D4DE003DF0BD /* GroupsController.swift */; };
 		5234852F2430DEDE003DF0BD /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234852E2430DEDE003DF0BD /* FriendsController.swift */; };
 		525B9B052442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */; };
+		525B9B07244358C500FE4E00 /* ViewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B9B06244358C500FE4E00 /* ViewPhotoViewController.swift */; };
+		525B9B092443BB3600FE4E00 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B9B082443BB3600FE4E00 /* CommentsViewController.swift */; };
 		5286D9EC243D0404008E36C6 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9EA243D0404008E36C6 /* Friends.storyboard */; };
 		5286D9EE243D0423008E36C6 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9ED243D0423008E36C6 /* Groups.storyboard */; };
 		5286D9F0243D04DA008E36C6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5286D9EF243D04DA008E36C6 /* Database.swift */; };
@@ -64,6 +66,8 @@
 		5234852C2430D4DE003DF0BD /* GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsController.swift; sourceTree = "<group>"; };
 		5234852E2430DEDE003DF0BD /* FriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPhotoCellCollectionViewLayout.swift; sourceTree = "<group>"; };
+		525B9B06244358C500FE4E00 /* ViewPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPhotoViewController.swift; sourceTree = "<group>"; };
+		525B9B082443BB3600FE4E00 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		5286D9EB243D0404008E36C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VKApp/Base.lproj/Friends.storyboard; sourceTree = "<group>"; };
 		5286D9ED243D0423008E36C6 /* Groups.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		5286D9EF243D04DA008E36C6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -175,7 +179,9 @@
 				52AAF705243E87E100191326 /* News.storyboard */,
 				52AAF6FE243E7B0D00191326 /* NewsViewController.swift */,
 				52AAF700243E7C2700191326 /* NewsTableViewCell.swift */,
+				525B9B06244358C500FE4E00 /* ViewPhotoViewController.swift */,
 				522CAC83243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift */,
+				525B9B082443BB3600FE4E00 /* CommentsViewController.swift */,
 				525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */,
 				522CAC7D243FC99B00896A14 /* CommentCounterControl.swift */,
 				522CAC7F243FCEE300896A14 /* ShareCounterControl.swift */,
@@ -259,11 +265,13 @@
 			files = (
 				5234852D2430D4DE003DF0BD /* GroupsController.swift in Sources */,
 				5234852B2430C25E003DF0BD /* TabBarViewController.swift in Sources */,
+				525B9B07244358C500FE4E00 /* ViewPhotoViewController.swift in Sources */,
 				52335DC1242A89A6002A5318 /* ViewController.swift in Sources */,
 				522CAC84243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift in Sources */,
 				528A48952435356B0063708D /* GroupTableViewCell.swift in Sources */,
 				52335DBD242A89A6002A5318 /* AppDelegate.swift in Sources */,
 				528A488B24350F420063708D /* User.swift in Sources */,
+				525B9B092443BB3600FE4E00 /* CommentsViewController.swift in Sources */,
 				522CAC80243FCEE300896A14 /* ShareCounterControl.swift in Sources */,
 				5286D9F0243D04DA008E36C6 /* Database.swift in Sources */,
 				52335DBF242A89A6002A5318 /* SceneDelegate.swift in Sources */,

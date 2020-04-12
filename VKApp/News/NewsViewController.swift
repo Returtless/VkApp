@@ -18,8 +18,6 @@ class NewsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         news = Database.getNewsData()
-
-        // Do any additional setup after loading the view.
     }
 }
 
@@ -36,15 +34,14 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         
         let formate = Date.getFormattedDate(date: currentNews.createDate, format: "dd.MM.yyyy")
         cell.createDateLabel.text = formate
-        
-        
         cell.messageLabel.text = currentNews.text
         cell.likeCounterControl.isLiked = true
         cell.likeCounterControl.countOfLikes = 10
-        
         cell.viewsCounter.text = "\(UInt.random(in: 1...100))"
-        
         cell.photos = currentNews.photos
+        cell.commentsCounter.countOfComments = currentNews.comments.count
+        
+        cell.delegate = self
         return cell
     }
 }
@@ -55,5 +52,16 @@ extension Date {
         let dateformat = DateFormatter()
         dateformat.dateFormat = format
         return dateformat.string(from: date)
+    }
+}
+
+extension NewsViewController : CommentCounterDelegate {
+    func onButtonTapped(){
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "News", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
+        resultViewController.comments = news[0].comments
+        navigationController?.pushViewController(resultViewController,
+                                                 animated: true)
     }
 }
