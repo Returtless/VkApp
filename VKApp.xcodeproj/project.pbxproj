@@ -172,11 +172,11 @@
 		52AAF702243E7C8400191326 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */,
 				52AAF705243E87E100191326 /* News.storyboard */,
-				522CAC83243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift */,
 				52AAF6FE243E7B0D00191326 /* NewsViewController.swift */,
 				52AAF700243E7C2700191326 /* NewsTableViewCell.swift */,
+				522CAC83243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift */,
+				525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */,
 				522CAC7D243FC99B00896A14 /* CommentCounterControl.swift */,
 				522CAC7F243FCEE300896A14 /* ShareCounterControl.swift */,
 			);
