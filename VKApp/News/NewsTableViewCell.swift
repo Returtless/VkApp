@@ -34,6 +34,7 @@ class NewsTableViewCell: UITableViewCell {
         messageLabel.sizeToFit()
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
+        photoCollectionView.reloadData()
 
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -62,7 +63,6 @@ extension NewsTableViewCell : UICollectionViewDataSource, UICollectionViewDelega
 extension NewsTableViewCell : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         let width = collectionView.frame.width / 2
-        
         return CGSize(width: width, height: width)
     }
 }

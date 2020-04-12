@@ -70,11 +70,8 @@ class Database{
                          "dog3",
                          "dog4",
                          "dog5"],
-                comments: [Comment(
-                    author: User(name: "Владислав",
-                                 surname: "Лихачев",
-                                 avatar: "vladislav"),
-                    text: "Ну вот опять!")]),
+                comments: []
+            ),
             News(
                 author: User(name: "Владислав",
                              surname: "Лихачев",
@@ -90,13 +87,8 @@ class Database{
                          "serial8",
                          "serial9",
                          "serial10"],
-                comments: [Comment(
-                    author: User(name: "Владислав",
-                                 surname: "Лихачев",
-                                 avatar: "vladislav"),
-                    text: "Ну вот опять!")]),
-
-            
+                comments: []
+            ),
             News(
                 author: User(name: "Станислав",
                              surname: "Белых",
@@ -105,12 +97,8 @@ class Database{
                 photos: ["cat1",
                          "cat2",
                          "cat3"],
-                comments: [Comment(
-                    author: User(name: "Владислав",
-                                 surname: "Лихачев",
-                                 avatar: "vladislav"),
-                    text: "Ну вот опять!")]),
-            
+                comments: []
+            ),
             News(
                 author: User(name: "Виталий",
                              surname: "Кулагин",
@@ -125,13 +113,24 @@ class Database{
                          "pugovka7",
                          "pugovka8",
                          "pugovka9"],
-                comments: [Comment(
-                    author: User(name: "Владислав",
-                                 surname: "Лихачев",
-                                 avatar: "vladislav"),
-                    text: "Ну вот опять!")])
-            
-            
+                comments: []
+            ),
+            News(
+                author: User(name: "Владислав",
+                             surname: "Лихачев",
+                             avatar: "vladislav"),
+                text: "Опубликовал новую фотографию",
+                photos: ["vladislav"],
+                comments: []
+            ),
+            News(
+                author: User(name: "Евгений",
+                             surname: "Елчев",
+                             avatar: "eugene"),
+                text: "Опубликовал новую фотографию",
+                photos: ["eugene"],
+                comments: []
+            )
         ]
     }
 }
