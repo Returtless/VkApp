@@ -12,18 +12,14 @@ class LikeCounterControl: UIControl {
     var counterLabel = UILabel()
     var iconButton: UIButton = {
         let iconButton = UIButton()
-        iconButton.titleLabel?.font = .systemFont(ofSize: CGFloat(15))
-        iconButton.setTitleColor(.white, for: .selected)
+        iconButton.setImage(UIImage(systemName: "heart"), for: .normal)
         iconButton.addTarget(self, action: #selector(changeCounter(_:)), for: .touchUpInside)
         return iconButton
     }()
     
     var countOfLikes : Int = 0
     var isLiked : Bool = false
-    
-    private let liked = "♥︎"
-    private let unliked = "♡"
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         setupView()
@@ -31,10 +27,11 @@ class LikeCounterControl: UIControl {
     
     private func setupView() {
         backgroundColor = .clear
-        iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
-        iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
+        iconButton.setImage(UIImage(systemName: isLiked ? "heart.fill": "heart"), for: .normal)
+        iconButton.tintColor = isLiked ? .red : .blue
+        
         counterLabel.text = String(countOfLikes)
-        counterLabel.font = .boldSystemFont(ofSize: CGFloat(9))
+        counterLabel.font = .systemFont(ofSize: CGFloat(20))
         
         let stack = UIStackView()
         stack.addArrangedSubview(counterLabel)
@@ -58,8 +55,8 @@ class LikeCounterControl: UIControl {
             countOfLikes+=1
         }
         isLiked.toggle()
-        iconButton.setTitleColor(isLiked ? .red : .black, for: .normal)
-        iconButton.setTitle(isLiked ? liked : unliked, for: .normal)
+        iconButton.setImage(UIImage(systemName: isLiked ? "heart.fill": "heart"), for: .normal)
+        iconButton.tintColor = isLiked ? .red : UIColor(named: "VK")
         counterLabel.text = String(countOfLikes)
     }
 }

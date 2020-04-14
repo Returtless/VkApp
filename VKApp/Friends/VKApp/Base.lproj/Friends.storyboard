@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qtk-es-qa8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qtk-es-qa8">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -144,11 +144,11 @@
                                             <rect key="frame" x="15" y="15" width="130" height="130"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2m8-dT-XK1" customClass="LikeCounterControl" customModule="VKApp" customModuleProvider="target">
-                                            <rect key="frame" x="65" y="145" width="30" height="15"/>
+                                            <rect key="frame" x="55" y="135" width="50" height="25"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="15" id="Wn1-dW-V43"/>
-                                                <constraint firstAttribute="width" constant="30" id="k8R-L8-rrQ"/>
+                                                <constraint firstAttribute="height" constant="25" id="Wn1-dW-V43"/>
+                                                <constraint firstAttribute="width" constant="50" id="k8R-L8-rrQ"/>
                                             </constraints>
                                         </view>
                                     </subviews>

@@ -23,7 +23,9 @@ class User {
             self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: Int.random(in: 0...100), liked: Bool.random()), count: 10)
         }
     }
-    
+    func getFullName() -> String {
+        "\(self.name) \(self.surname)"
+    }
 }
 
 struct Photo {
