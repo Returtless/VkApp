@@ -12,7 +12,6 @@ class AvatarView: UIImageView {
     var imageView = UIImageView()
     var shadowView = UIView()
     
-    
     @IBInspectable var radius: CGFloat = 10 {
         didSet {
             setNeedsDisplay()
@@ -36,6 +35,9 @@ class AvatarView: UIImageView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+                   imageView.isUserInteractionEnabled = true
+                   imageView.addGestureRecognizer(tapGestureRecognizer)
         configureShadowView()
         configureImageView()
         
@@ -72,4 +74,19 @@ class AvatarView: UIImageView {
         ])
     }
     
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        UIView.animate(withDuration: 1, animations: {
+            self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        })
+        UIView.animate(withDuration: 1,
+                       delay: 1,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 0.1,
+                       options: [],
+                       animations: {
+            self.transform = CGAffineTransform(scaleX: 1, y: 1)
+        })
+    }
 }

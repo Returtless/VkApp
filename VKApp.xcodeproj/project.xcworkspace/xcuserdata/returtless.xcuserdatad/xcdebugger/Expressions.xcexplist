@@ -30,27 +30,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SorterBarControl.letters.didset:SorterBarControl.swift">
+         contextName = "NewsPhotoCellCollectionViewLayout.prepare():NewsPhotoCellCollectionViewLayout.swift">
       </ContextState>
       <ContextState
          contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
          <PersistentStrings>
             <PersistentString
-               value = "sender.titleLabel?.text">
+               value = "stackView.frame">
             </PersistentString>
             <PersistentString
                value = "stackView">
             </PersistentString>
             <PersistentString
-               value = "stackView.frame">
+               value = "sender.titleLabel?.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "NewsPhotoCellCollectionViewLayout.prepare():NewsPhotoCellCollectionViewLayout.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SorterBarControl.setupView():SorterBarControl.swift">
+         contextName = "SorterBarControl.letters.didset:SorterBarControl.swift">
       </ContextState>
       <ContextState
          contextName = "NewsPhotoCellCollectionViewLayout.layoutAttributesForElements(in:):NewsPhotoCellCollectionViewLayout.swift">
@@ -61,7 +58,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SorterBarControl.setupView():SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DotsIndicator.configure():DotsIndicator.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dot.bounds">
+            </PersistentString>
+            <PersistentString
+               value = "dot.backgroundColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "NewsViewController.viewDidLoad():NewsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.imageTapped(tapGestureRecognizer:):AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "NewsPhotoCellCollectionViewLayout.collectionViewContentSize.getter:NewsPhotoCellCollectionViewLayout.swift">
@@ -73,6 +92,14 @@
       </ContextState>
       <ContextState
          contextName = "SorterBarControl.init(coder:):SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AvatarView.imageTapped(tapGestureRecognizer:):AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.imageView.bounds">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "SorterBarControl.letterButtons.didset:SorterBarControl.swift">
@@ -103,10 +130,10 @@
          contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
+               value = "usersBySections.map({$0.letter})">
             </PersistentString>
             <PersistentString
-               value = "usersBySections.map({$0.letter})">
+               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -125,10 +152,10 @@
          contextName = "FriendsController.awakeFromNib():FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tableView">
+               value = "tableView.centerYAnchor">
             </PersistentString>
             <PersistentString
-               value = "tableView.centerYAnchor">
+               value = "tableView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
