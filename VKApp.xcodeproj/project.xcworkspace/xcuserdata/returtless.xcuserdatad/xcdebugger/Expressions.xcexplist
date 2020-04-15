@@ -127,6 +127,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "FriendsSearchBar.searchBarCancelButtonClicked(_:):FriendsSearchBar.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "glassIcon">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FriendsSearchBar.searchWasTapped(tapGestureRecognizer:):FriendsSearchBar.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
          <PersistentStrings>
             <PersistentString
@@ -164,6 +180,17 @@
          <PersistentStrings>
             <PersistentString
                value = " cell.likeControl.countOfLikes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsSearchBar.searchWasTapped(tapGestureRecognizer:):FriendsSearchBar.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "topView.subviews">
+            </PersistentString>
+            <PersistentString
+               value = "self.value(forKey: &quot;icons&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

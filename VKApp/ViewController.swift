@@ -30,7 +30,8 @@ class ViewController: UIViewController {
             selector: #selector(keyboardWillBeHidden(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
-        
+        //нужно отключить интерактивность, чтоб кнопки не нажимались под анимацией
+        self.view.isUserInteractionEnabled = false
         dotsIndicator.configure()
         dotsIndicator.startAnimation()
         UIView.animate(withDuration: 1, delay : 3, animations: {
@@ -46,7 +47,7 @@ class ViewController: UIViewController {
         scrollView.alpha = 0
         UIView.animate(withDuration: 2, delay : 6, animations: {
             self.scrollView.alpha = 1
-        })
+        }, completion : { _ in self.view.isUserInteractionEnabled = true})
         
     }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
