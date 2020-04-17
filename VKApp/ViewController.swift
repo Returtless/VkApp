@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var scrollBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dotsIndicator: DotsIndicator!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var helloLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,25 @@ class ViewController: UIViewController {
             selector: #selector(keyboardWillBeHidden(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
+        //нужно отключить интерактивность, чтоб кнопки не нажимались под анимацией
+        self.view.isUserInteractionEnabled = false
+        dotsIndicator.configure()
+        dotsIndicator.startAnimation()
+        UIView.animate(withDuration: 1, delay : 3, animations: {
+            self.dotsIndicator.alpha = 0
+        }, completion : { _ in
+            self.dotsIndicator.stopAnimation()
+        })
+        
+        helloLabel.alpha = 0
+        UIView.animate(withDuration: 2, delay : 4, animations: {
+            self.helloLabel.alpha = 1
+        }, completion : { _ in self.helloLabel.alpha = 0})
+        scrollView.alpha = 0
+        UIView.animate(withDuration: 2, delay : 6, animations: {
+            self.scrollView.alpha = 1
+        }, completion : { _ in self.view.isUserInteractionEnabled = true})
+        
     }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {

@@ -68,7 +68,25 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
         cell.photoView.imageView.image = user.avatar
         
+        UIView.animate(
+            withDuration: 1,
+            delay: 0,
+            usingSpringWithDamping: 0.4,
+            initialSpringVelocity: 0.8,
+            options:.curveEaseInOut,
+            animations: {
+                cell.frame.origin.x+=70
+        })
+        
         return cell
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.8,
+                       animations: {
+                        cell.alpha = 1
+                        
+        })
     }
 }
 extension FriendsController: UISearchBarDelegate {

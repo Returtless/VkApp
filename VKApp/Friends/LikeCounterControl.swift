@@ -19,7 +19,7 @@ class LikeCounterControl: UIControl {
     
     var countOfLikes : Int = 0
     var isLiked : Bool = false
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         setupView()
@@ -57,6 +57,16 @@ class LikeCounterControl: UIControl {
         isLiked.toggle()
         iconButton.setImage(UIImage(systemName: isLiked ? "heart.fill": "heart"), for: .normal)
         iconButton.tintColor = isLiked ? .red : UIColor(named: "VK")
-        counterLabel.text = String(countOfLikes)
+        UIView.transition(with: counterLabel,
+                          duration: 0.75,
+                          options: .transitionFlipFromTop,
+                          animations: {
+                            //нужно отключить возможность нажатия на кнопку, пока идет анимация и вернуть после окончания
+                            self.iconButton.isUserInteractionEnabled = false
+                            self.counterLabel.text = String(self.countOfLikes)
+        }, completion : { _ in
+            self.iconButton.isUserInteractionEnabled = true
+        })
+        
     }
 }
