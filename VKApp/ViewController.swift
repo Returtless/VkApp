@@ -33,19 +33,16 @@ class ViewController: UIViewController {
         //нужно отключить интерактивность, чтоб кнопки не нажимались под анимацией
         self.view.isUserInteractionEnabled = false
         dotsIndicator.configure()
-        dotsIndicator.startAnimation()
-        UIView.animate(withDuration: 1, delay : 3, animations: {
+        UIView.animate(withDuration: 1, delay : 7, animations: {
             self.dotsIndicator.alpha = 0
-        }, completion : { _ in
-            self.dotsIndicator.stopAnimation()
         })
         
         helloLabel.alpha = 0
-        UIView.animate(withDuration: 2, delay : 4, animations: {
+        UIView.animate(withDuration: 2, delay : 8, animations: {
             self.helloLabel.alpha = 1
         }, completion : { _ in self.helloLabel.alpha = 0})
         scrollView.alpha = 0
-        UIView.animate(withDuration: 2, delay : 6, animations: {
+        UIView.animate(withDuration: 2, delay : 10, animations: {
             self.scrollView.alpha = 1
         }, completion : { _ in self.view.isUserInteractionEnabled = true})
         
