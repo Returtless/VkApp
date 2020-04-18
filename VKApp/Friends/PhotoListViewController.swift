@@ -43,13 +43,14 @@ class PhotoListImageView : UIImageView {
     
     
     @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
-        let velocity = recognizer.velocity(in: self).x > 0 ? 1 : -1
+        let swipeToLeft = recognizer.translation(in: self).x > 0 ? 1 : -1
         switch recognizer.state {
         case .began:
-            interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
+            interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear)
             interactiveAnimator.addAnimations(
                 {
-                    self.transform = CGAffineTransform(translationX: CGFloat(velocity) * (self.popupOffset), y: 0)
+                    self.transform = CGAffineTransform(translationX: CGFloat(swipeToLeft) * (self.popupOffset), y: 0)
+                    self.layoutIfNeeded()
                 }
             )
             interactiveAnimator?.startAnimation()
@@ -57,32 +58,45 @@ class PhotoListImageView : UIImageView {
             interactiveAnimator.pauseAnimation()
         case .changed:
             let translation = recognizer.translation(in: self)
-            
-            let fraction = CGFloat(velocity) * translation.x / popupOffset
-            
+            print("\(translation)   \(recognizer.velocity(in: self))")
+            self.layoutIfNeeded()
+            var fraction = CGFloat(swipeToLeft) * translation.x / popupOffset
+            if interactiveAnimator.isReversed { fraction *= -1 }
             interactiveAnimator.fractionComplete = fraction + animationProgress
         case .ended:
-            
-            interactiveAnimator.stopAnimation(true)
-            if velocity == 1 && activePhotoIndex<photos.count-1 {
-                activePhotoIndex+=1
-                image = photos[activePhotoIndex].image
+            let shouldComplete = recognizer.velocity(in: self).x > 0
+            let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos.count-1
+            let firstPhoto = swipeToLeft != 1 && activePhotoIndex==0
+            var reversedWasChanged = false
+            if ((!shouldComplete && swipeToLeft == 1) || (swipeToLeft != 1 && shouldComplete) )
+                && !interactiveAnimator.isReversed
+                || lastPhoto || firstPhoto
+                || interactiveAnimator.fractionComplete.isLess(than: 0.7) {
+                interactiveAnimator.isReversed.toggle()
+                reversedWasChanged = true
             }
-            else if velocity != 1 && activePhotoIndex>0 {
-                activePhotoIndex-=1
+            if !reversedWasChanged{
+                interactiveAnimator.stopAnimation(true)
+                if swipeToLeft == 1 && !lastPhoto {
+                    activePhotoIndex+=1
+                }
+                else if swipeToLeft != 1 && !firstPhoto {
+                    activePhotoIndex-=1
+                }
                 image = photos[activePhotoIndex].image
+                self.layer.opacity = 0
+                self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                
+                interactiveAnimator.addAnimations({
+                    self.transform = .identity
+                    self.layer.opacity = 1
+                })
+                
+                interactiveAnimator.startAnimation()
+            } else {
+                interactiveAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+                self.layoutIfNeeded()
             }
-            
-            self.layer.opacity = 0
-            self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            
-            interactiveAnimator.addAnimations({
-                self.transform = .identity
-                self.layer.opacity = 1
-            })
-            
-            interactiveAnimator.startAnimation()
-            
         default: return
         }
     }
