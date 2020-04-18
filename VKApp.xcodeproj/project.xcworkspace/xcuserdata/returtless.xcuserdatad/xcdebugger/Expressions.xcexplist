@@ -36,13 +36,13 @@
          contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
          <PersistentStrings>
             <PersistentString
-               value = "stackView.frame">
+               value = "sender.titleLabel?.text">
             </PersistentString>
             <PersistentString
                value = "stackView">
             </PersistentString>
             <PersistentString
-               value = "sender.titleLabel?.text">
+               value = "stackView.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -135,6 +135,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "PhotoListImageView.onPan(_:):PhotoListViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "recognizer.velocity(in: self).x">
+            </PersistentString>
+            <PersistentString
+               value = "self.alpha">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in FriendsSearchBar.searchWasTapped(tapGestureRecognizer:):FriendsSearchBar.swift">
          <PersistentStrings>
             <PersistentString
@@ -146,10 +157,10 @@
          contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "usersBySections.map({$0.letter})">
+               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
             </PersistentString>
             <PersistentString
-               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
+               value = "usersBySections.map({$0.letter})">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -168,10 +179,10 @@
          contextName = "FriendsController.awakeFromNib():FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tableView.centerYAnchor">
+               value = "tableView">
             </PersistentString>
             <PersistentString
-               value = "tableView">
+               value = "tableView.centerYAnchor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

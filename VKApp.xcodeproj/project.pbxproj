@@ -12,6 +12,7 @@
 		520675042439266700C76B86 /* SorterBarControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520675032439266700C76B86 /* SorterBarControl.swift */; };
 		521FA4482435384D00522D8C /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521FA4472435384D00522D8C /* AddGroupTableViewController.swift */; };
 		521FA44A24353CD300522D8C /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521FA44924353CD300522D8C /* AddGroupTableViewCell.swift */; };
+		522AF745244A4DD9004D40CA /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522AF744244A4DD9004D40CA /* PhotoListViewController.swift */; };
 		522CAC7E243FC99B00896A14 /* CommentCounterControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CAC7D243FC99B00896A14 /* CommentCounterControl.swift */; };
 		522CAC80243FCEE300896A14 /* ShareCounterControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CAC7F243FCEE300896A14 /* ShareCounterControl.swift */; };
 		522CAC84243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CAC83243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift */; };
@@ -52,6 +53,7 @@
 		520675032439266700C76B86 /* SorterBarControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorterBarControl.swift; sourceTree = "<group>"; };
 		521FA4472435384D00522D8C /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		521FA44924353CD300522D8C /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
+		522AF744244A4DD9004D40CA /* PhotoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
 		522CAC7D243FC99B00896A14 /* CommentCounterControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCounterControl.swift; sourceTree = "<group>"; };
 		522CAC7F243FCEE300896A14 /* ShareCounterControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCounterControl.swift; sourceTree = "<group>"; };
 		522CAC83243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				528A488724350CBD0063708D /* FriendTableViewCell.swift */,
 				528A488E243522B10063708D /* PhotoAlbumController.swift */,
 				528A489024352A790063708D /* PhotoCollectionViewCell.swift */,
+				522AF744244A4DD9004D40CA /* PhotoListViewController.swift */,
 				520675032439266700C76B86 /* SorterBarControl.swift */,
 				520675012438F12100C76B86 /* LikeCounterControl.swift */,
 				5286D9F3243D247A008E36C6 /* FriendsSearchBar.swift */,
@@ -295,6 +298,7 @@
 				520675002438CADC00C76B86 /* AvatarView.swift in Sources */,
 				528A488D243520820063708D /* Group.swift in Sources */,
 				5286D9F4243D247A008E36C6 /* FriendsSearchBar.swift in Sources */,
+				522AF745244A4DD9004D40CA /* PhotoListViewController.swift in Sources */,
 				5286D9F6243E6894008E36C6 /* GroupsSearchBar.swift in Sources */,
 				522CAC7E243FC99B00896A14 /* CommentCounterControl.swift in Sources */,
 			);
