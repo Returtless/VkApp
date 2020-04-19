@@ -16,20 +16,24 @@ class Database{
             User(name: "Александр", surname: "Черных", avatar: "chernih"),
             User(name: "Виталий", surname: "Кулагин", avatar: "kulagin"),
             User(name: "Карим", surname: "Султанов", avatar: "sultanov"),
-            User(name: "Сергей", surname: "Логинов", avatar: ""),
             User(name: "Станислав", surname: "Белых", avatar: "belih"),
-            User(name: "Артём", surname: "Лукашенко", avatar: ""),
-            User(name: "Чеслав", surname: "Молчанов", avatar: ""),
-            User(name: "Матвей", surname: "Козлов", avatar: ""),
-            User(name: "Шарль", surname: "Ермаков", avatar: ""),
-            User(name: "Остап", surname: "Новиков", avatar: ""),
-            User(name: "Всеволод", surname: "Сидоров", avatar: ""),
-            User(name: "Устин", surname: "Яковенко", avatar: ""),
-            User(name: "Эрик", surname: "Рымар", avatar: ""),
-            User(name: "Конрад", surname: "Самойлов", avatar: ""),
-            User(name: "Георгий", surname: "Поляков", avatar: ""),
-            User(name: "Эдуард", surname: "Громов", avatar: ""),
-            User(name: "Прохор", surname: "Сасько", avatar: "")
+            User(name: "Натали", surname: "Портман", avatar: "nataly5", photos: ["nataly1","nataly2","nataly3","nataly4","nataly5"]),
+            User(name: "Эмма", surname: "Стоун", avatar: "emma1", photos: ["emma1","emma2","emma3","emma4","emma5","emma6"]),
+            User(name: "Дженнифер", surname: "Лоуренс", avatar: "jen1", photos: ["jen1","jen2","jen3","jen4","jen5"]),
+            User(name: "Кристиан", surname: "Бейл", avatar: "kristian1", photos: ["kristian1","kristian2","kristian3","kristian4"]),
+            User(name: "Брэдли", surname: "Купер", avatar: "bradley1", photos: ["bradley1","bradley2","bradley3","bradley4","bradley5"]),
+            //            User(name: "Артём", surname: "Лукашенко", avatar: ""),
+            //            User(name: "Чеслав", surname: "Молчанов", avatar: ""),
+            //            User(name: "Матвей", surname: "Козлов", avatar: ""),
+            //            User(name: "Шарль", surname: "Ермаков", avatar: ""),
+            //            User(name: "Остап", surname: "Новиков", avatar: ""),
+            //            User(name: "Всеволод", surname: "Сидоров", avatar: ""),
+            //            User(name: "Устин", surname: "Яковенко", avatar: ""),
+            //            User(name: "Эрик", surname: "Рымар", avatar: ""),
+            //            User(name: "Конрад", surname: "Самойлов", avatar: ""),
+            //            User(name: "Георгий", surname: "Поляков", avatar: ""),
+            //            User(name: "Эдуард", surname: "Громов", avatar: ""),
+            //            User(name: "Прохор", surname: "Сасько", avatar: "")
         ]
     }
     static func getSortedUsersData() ->[(letter: String, users: [User])] {
@@ -71,11 +75,11 @@ class Database{
                          "dog4",
                          "dog5"],
                 comments: [Comment(author: User(name: "Владислав",
-                surname: "Лихачев",
-                avatar: "vladislav"), text: "Какие они все классные!"),
-                Comment(author: User(name: "Виталий",
-                surname: "Кулагин",
-                avatar: "kulagin"), text: "А у меня такая кошку сожрала!!!!")]
+                                                surname: "Лихачев",
+                                                avatar: "vladislav"), text: "Какие они все классные!"),
+                           Comment(author: User(name: "Виталий",
+                                                surname: "Кулагин",
+                                                avatar: "kulagin"), text: "А у меня такая кошку сожрала!!!!")]
             ),
             News(
                 author: User(name: "Владислав",
@@ -93,8 +97,8 @@ class Database{
                          "serial9",
                          "serial10"],
                 comments: [Comment(author: User(name: "Владислав",
-                surname: "Лихачев",
-                avatar: "vladislav"), text: "Сейчас ничего не смотрю!")]
+                                                surname: "Лихачев",
+                                                avatar: "vladislav"), text: "Сейчас ничего не смотрю!")]
             ),
             News(
                 author: User(name: "Станислав",

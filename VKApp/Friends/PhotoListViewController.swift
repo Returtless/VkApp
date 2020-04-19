@@ -10,15 +10,13 @@ import UIKit
 
 class PhotoListViewController: UIViewController {
     
-    var photos = [Photo]()
-    var activePhotoIndex = 0
+   var photos = [Photo]()
     
     @IBOutlet weak var imageView: PhotoListImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.photos = photos
         imageView.image = photos[0].image
-        
     }
 }
 
@@ -38,11 +36,11 @@ class PhotoListImageView : UIImageView {
         super.awakeFromNib()
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
         self.addGestureRecognizer(recognizer)
-        
     }
     
     
     @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
+        //направление свайпа
         let swipeToLeft = recognizer.translation(in: self).x > 0 ? 1 : -1
         switch recognizer.state {
         case .began:
@@ -50,40 +48,38 @@ class PhotoListImageView : UIImageView {
             interactiveAnimator.addAnimations(
                 {
                     self.transform = CGAffineTransform(translationX: CGFloat(swipeToLeft) * (self.popupOffset), y: 0)
-                    self.layoutIfNeeded()
                 }
             )
             interactiveAnimator?.startAnimation()
             animationProgress = interactiveAnimator.fractionComplete
             interactiveAnimator.pauseAnimation()
+            
         case .changed:
             let translation = recognizer.translation(in: self)
-            print("\(translation)   \(recognizer.velocity(in: self))")
-            self.layoutIfNeeded()
             var fraction = CGFloat(swipeToLeft) * translation.x / popupOffset
             if interactiveAnimator.isReversed { fraction *= -1 }
             interactiveAnimator.fractionComplete = fraction + animationProgress
+            
         case .ended:
             let shouldComplete = recognizer.velocity(in: self).x > 0
-            let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos.count-1
-            let firstPhoto = swipeToLeft != 1 && activePhotoIndex==0
+            let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos.count-1 //фотография последняя при свайпе вправо
+            let firstPhoto = swipeToLeft != 1 && activePhotoIndex==0 //фотография первая при свайпе влево
             var reversedWasChanged = false
-            if ((!shouldComplete && swipeToLeft == 1) || (swipeToLeft != 1 && shouldComplete) )
+            
+            if ((!shouldComplete && swipeToLeft == 1) || (swipeToLeft != 1 && shouldComplete))
                 && !interactiveAnimator.isReversed
                 || lastPhoto || firstPhoto
                 || interactiveAnimator.fractionComplete.isLess(than: 0.7) {
                 interactiveAnimator.isReversed.toggle()
                 reversedWasChanged = true
             }
+            
             if !reversedWasChanged{
                 interactiveAnimator.stopAnimation(true)
-                if swipeToLeft == 1 && !lastPhoto {
-                    activePhotoIndex+=1
-                }
-                else if swipeToLeft != 1 && !firstPhoto {
-                    activePhotoIndex-=1
-                }
+                if swipeToLeft == 1 && !lastPhoto { activePhotoIndex+=1 }
+                else if swipeToLeft != 1 && !firstPhoto { activePhotoIndex-=1 }
                 image = photos[activePhotoIndex].image
+                
                 self.layer.opacity = 0
                 self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 
@@ -97,7 +93,7 @@ class PhotoListImageView : UIImageView {
                 interactiveAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
                 self.layoutIfNeeded()
             }
-        default: return
+        default: break
         }
     }
     
