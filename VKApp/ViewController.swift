@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var scrollBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var dotsIndicator: DotsIndicator!
+
+    @IBOutlet weak var cloudIndicator: CloudIndicator!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var helloLabel: UILabel!
     
@@ -31,20 +32,20 @@ class ViewController: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
         //нужно отключить интерактивность, чтоб кнопки не нажимались под анимацией
-//        self.view.isUserInteractionEnabled = false
-//        dotsIndicator.configure()
-//        UIView.animate(withDuration: 1, delay : 7, animations: {
-//            self.dotsIndicator.alpha = 0
-//        })
-//
+        self.view.isUserInteractionEnabled = false
+        cloudIndicator.configure()
+        UIView.animate(withDuration: 1, delay : 5, animations: {
+            self.cloudIndicator.alpha = 0
+        })
+
       helloLabel.alpha = 0
-//        UIView.animate(withDuration: 2, delay : 8, animations: {
-//            self.helloLabel.alpha = 1
-//        }, completion : { _ in self.helloLabel.alpha = 0})
-//        scrollView.alpha = 0
-//        UIView.animate(withDuration: 2, delay : 10, animations: {
-//            self.scrollView.alpha = 1
-//        }, completion : { _ in self.view.isUserInteractionEnabled = true})
+        UIView.animate(withDuration: 2, delay : 6, animations: {
+            self.helloLabel.alpha = 1
+        }, completion : { _ in self.helloLabel.alpha = 0})
+        scrollView.alpha = 0
+        UIView.animate(withDuration: 2, delay : 8, animations: {
+            self.scrollView.alpha = 1
+        }, completion : { _ in self.view.isUserInteractionEnabled = true})
         
     }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
