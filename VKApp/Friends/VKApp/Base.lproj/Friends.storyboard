@@ -181,7 +181,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ilL-v9-Rjl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4091.3043478260875" y="-197.54464285714286"/>
+            <point key="canvasLocation" x="4090" y="-892"/>
         </scene>
         <!--Photo List View Controller-->
         <scene sceneID="YdO-e0-0pq">
@@ -213,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncm-wW-W1X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4091" y="471"/>
+            <point key="canvasLocation" x="4039" y="-198"/>
         </scene>
     </scenes>
 </document>

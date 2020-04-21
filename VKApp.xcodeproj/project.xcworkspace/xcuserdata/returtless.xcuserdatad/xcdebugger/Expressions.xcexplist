@@ -3,51 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "NewsTableViewCell.collectionView(_:cellForItemAt:):NewsTableViewCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cell.photoImageView">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsController.tableView(_:cellForRowAt:):FriendsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.column">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "FriendsController.prepare(for:sender:):FriendsController.swift">
       </ContextState>
       <ContextState
          contextName = "closure #2 in FriendsController.viewDidLoad():FriendsController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "LikeCounterControl.awakeFromNib():LikeCounterControl.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "iconButton">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "NewsPhotoCellCollectionViewLayout.prepare():NewsPhotoCellCollectionViewLayout.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "stackView.frame">
-            </PersistentString>
-            <PersistentString
-               value = "stackView">
-            </PersistentString>
-            <PersistentString
-               value = "sender.titleLabel?.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SorterBarControl.letters.didset:SorterBarControl.swift">
       </ContextState>
       <ContextState
          contextName = "NewsPhotoCellCollectionViewLayout.layoutAttributesForElements(in:):NewsPhotoCellCollectionViewLayout.swift">
@@ -61,51 +20,26 @@
          contextName = "SorterBarControl.setupView():SorterBarControl.swift">
       </ContextState>
       <ContextState
-         contextName = "DotsIndicator.configure():DotsIndicator.swift">
+         contextName = "FriendsSearchBar.searchBarCancelButtonClicked(_:):FriendsSearchBar.swift">
          <PersistentStrings>
             <PersistentString
-               value = "dot.bounds">
-            </PersistentString>
-            <PersistentString
-               value = "dot.backgroundColor">
+               value = "glassIcon">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "NewsViewController.viewDidLoad():NewsViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "AvatarView.imageTapped(tapGestureRecognizer:):AvatarView.swift">
+         contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.frame">
+               value = "sender.titleLabel?.text">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "NewsPhotoCellCollectionViewLayout.collectionViewContentSize.getter:NewsPhotoCellCollectionViewLayout.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "CGSize(width: collectionView?.bounds.width ?? 0,&#10;                      height: totalCellsHeight)">
+               value = "stackView">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SorterBarControl.init(coder:):SorterBarControl.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in AvatarView.imageTapped(tapGestureRecognizer:):AvatarView.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "self.imageView.bounds">
+               value = "stackView.frame">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SorterBarControl.letterButtons.didset:SorterBarControl.swift">
-      </ContextState>
-      <ContextState
-         contextName = "NewsViewController.tableView(_:cellForRowAt:):NewsViewController.swift">
       </ContextState>
       <ContextState
          contextName = "FriendsController.sorterBarWasChanged(_:):FriendsController.swift">
@@ -116,69 +50,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SorterBarControl.init(frame:):SorterBarControl.swift">
-      </ContextState>
-      <ContextState
          contextName = "TabBarViewController.setTabBarItems():TabBarViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.tabBar.items">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsSearchBar.searchBarCancelButtonClicked(_:):FriendsSearchBar.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "glassIcon">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "main:AppDelegate.swift">
-      </ContextState>
-      <ContextState
-         contextName = "PhotoListImageView.onPan(_:):PhotoListViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "interactiveAnimator.isReversed">
-            </PersistentString>
-            <PersistentString
-               value = "interactiveAnimator.fractionComplete">
-            </PersistentString>
-            <PersistentString
-               value = "recognizer.state">
-            </PersistentString>
-            <PersistentString
-               value = "photos.count">
-            </PersistentString>
-            <PersistentString
-               value = "interactiveAnimator.fractionComplete &gt; 50">
-            </PersistentString>
-            <PersistentString
-               value = "swipeToLeft == 1 &amp;&amp; activePhotoIndex==photos.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in FriendsSearchBar.searchWasTapped(tapGestureRecognizer:):FriendsSearchBar.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.frame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsController.prepare(for:sender:):FriendsController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "usersBySections.map({$0.letter})">
-            </PersistentString>
-            <PersistentString
-               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -194,32 +69,77 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FriendsController.awakeFromNib():FriendsController.swift">
+         contextName = "main:AppDelegate.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PhotoListImageView.onPan(_:):PhotoListViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tableView.centerYAnchor">
+               value = "recognizer.state">
             </PersistentString>
             <PersistentString
-               value = "tableView">
+               value = "interactiveAnimator.fractionComplete &gt; 50">
+            </PersistentString>
+            <PersistentString
+               value = "swipeToLeft == 1 &amp;&amp; activePhotoIndex==photos.count">
+            </PersistentString>
+            <PersistentString
+               value = "photos.count">
+            </PersistentString>
+            <PersistentString
+               value = "interactiveAnimator.isReversed">
+            </PersistentString>
+            <PersistentString
+               value = "interactiveAnimator.fractionComplete">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PhotoAlbumController.collectionView(_:cellForItemAt:):PhotoAlbumController.swift">
+         contextName = "closure #1 in AvatarView.imageTapped(tapGestureRecognizer:):AvatarView.swift">
          <PersistentStrings>
             <PersistentString
-               value = " cell.likeControl.countOfLikes">
+               value = "self.imageView.bounds">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FriendsSearchBar.searchWasTapped(tapGestureRecognizer:):FriendsSearchBar.swift">
+         contextName = "NewsViewController.viewDidLoad():NewsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.imageTapped(tapGestureRecognizer:):AvatarView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "topView.subviews">
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewsTableViewCell.collectionView(_:cellForItemAt:):NewsTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.photoImageView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
             </PersistentString>
             <PersistentString
-               value = "self.value(forKey: &quot;icons&quot;)">
+               value = "usersBySections.map({$0.letter})">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewsViewController.tableView(_:cellForRowAt:):NewsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LikeCounterControl.awakeFromNib():LikeCounterControl.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "iconButton">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -235,10 +155,98 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "NewsPhotoCellCollectionViewLayout.collectionViewContentSize.getter:NewsPhotoCellCollectionViewLayout.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "CGSize(width: collectionView?.bounds.width ?? 0,&#10;                      height: totalCellsHeight)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotoAlbumController.collectionView(_:cellForItemAt:):PhotoAlbumController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " cell.likeControl.countOfLikes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.tableView(_:cellForRowAt:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.column">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FriendsSearchBar.searchWasTapped(tapGestureRecognizer:):FriendsSearchBar.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewsPhotoCellCollectionViewLayout.prepare():NewsPhotoCellCollectionViewLayout.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AnimationPopController.animateTransition(using:):AnimationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "destination.view.frame.size">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.init(frame:):SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.letterButtons.didset:SorterBarControl.swift">
+      </ContextState>
+      <ContextState
          contextName = "NewsTableViewCell.collectionView(_:layout:sizeForItemAt:):NewsTableViewCell.swift">
          <PersistentStrings>
             <PersistentString
                value = "collectionView.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsSearchBar.searchWasTapped(tapGestureRecognizer:):FriendsSearchBar.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "topView.subviews">
+            </PersistentString>
+            <PersistentString
+               value = "self.value(forKey: &quot;icons&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.init(coder:):SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SorterBarControl.letters.didset:SorterBarControl.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.awakeFromNib():FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tableView">
+            </PersistentString>
+            <PersistentString
+               value = "tableView.centerYAnchor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DotsIndicator.configure():DotsIndicator.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dot.bounds">
+            </PersistentString>
+            <PersistentString
+               value = "dot.backgroundColor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
