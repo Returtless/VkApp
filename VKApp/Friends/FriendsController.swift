@@ -36,7 +36,7 @@ class FriendsController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "photoAlbumSegue" {
-            let photoAlbumVC = segue.destination as! PhotoAlbumController
+            let photoAlbumVC = segue.destination as! PhotoListViewController
             if let index = tableView.indexPathForSelectedRow {
                 let user = usersBySections[index.section].users[index.row]
                 photoAlbumVC.photos = user.photos

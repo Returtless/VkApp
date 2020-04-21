@@ -15,12 +15,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfk-L3-hWr" customClass="DotsIndicator" customModule="VKApp" customModuleProvider="target">
-                                <rect key="frame" x="107" y="423" width="200" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfk-L3-hWr" customClass="CloudIndicator" customModule="VKApp" customModuleProvider="target">
+                                <rect key="frame" x="147" y="418" width="120" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Kib-Ty-g77"/>
-                                    <constraint firstAttribute="width" constant="200" id="bqv-Sh-yRU"/>
+                                    <constraint firstAttribute="height" constant="60" id="Kib-Ty-g77"/>
+                                    <constraint firstAttribute="width" constant="120" id="bqv-Sh-yRU"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добро пожаловать!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xnb-3h-NrM">
@@ -104,7 +104,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="dotsIndicator" destination="Pfk-L3-hWr" id="iTC-cQ-Bsy"/>
+                        <outlet property="cloudIndicator" destination="Pfk-L3-hWr" id="DhZ-lo-lbe"/>
                         <outlet property="helloLabel" destination="Xnb-3h-NrM" id="x8a-Rr-0ed"/>
                         <outlet property="loginField" destination="HGb-zW-BuX" id="3a9-dU-BhH"/>
                         <outlet property="passwordField" destination="tK1-NV-2Dg" id="BD0-Gp-MhZ"/>

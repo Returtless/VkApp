@@ -23,6 +23,18 @@ class User {
             self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: Int.random(in: 0...100), liked: Bool.random()), count: 10)
         }
     }
+    init(name : String, surname : String, avatar : String, photos : [String]) {
+        self.name = name
+        self.surname = surname
+        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
+        self.avatar = img
+        for photo in photos {
+            if let unwrapped = UIImage(named: photo) {
+                self.photos.append(Photo(image: unwrapped, countOfLikes: Int.random(in: 1...100), liked: Bool.random()))
+            }
+        }
+    }
+    
     func getFullName() -> String {
         "\(self.name) \(self.surname)"
     }

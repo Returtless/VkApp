@@ -97,7 +97,7 @@
                                         <connections>
                                             <outlet property="photoView" destination="LDP-he-I0a" id="El9-DZ-2K9"/>
                                             <outlet property="userLabel" destination="f1b-w3-9r9" id="g4M-Jf-i3c"/>
-                                            <segue destination="mjJ-RJ-yWT" kind="show" identifier="photoAlbumSegue" id="5fr-UW-MoU"/>
+                                            <segue destination="6Or-il-sVS" kind="show" identifier="photoAlbumSegue" id="yTx-Nj-ER4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -122,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="3173.913043478261" y="-198.21428571428569"/>
         </scene>
-        <!--Photo Album Controller-->
+        <!--Collection View Controller-->
         <scene sceneID="JjD-nT-Ccb">
             <objects>
-                <collectionViewController id="mjJ-RJ-yWT" customClass="PhotoAlbumController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="mjJ-RJ-yWT" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="HTL-je-0Wb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,6 +182,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ilL-v9-Rjl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4091.3043478260875" y="-197.54464285714286"/>
+        </scene>
+        <!--Photo List View Controller-->
+        <scene sceneID="YdO-e0-0pq">
+            <objects>
+                <viewController id="6Or-il-sVS" customClass="PhotoListViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zLe-FF-pji">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mt4-9a-4g1" customClass="PhotoListImageView" customModule="VKApp" customModuleProvider="target">
+                                <rect key="frame" x="57" y="248" width="300" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="pV0-Kc-rzG"/>
+                                    <constraint firstAttribute="height" constant="400" id="xIx-OL-0dS"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Mt4-9a-4g1" firstAttribute="centerY" secondItem="zLe-FF-pji" secondAttribute="centerY" id="5kF-cG-vzY"/>
+                            <constraint firstItem="Mt4-9a-4g1" firstAttribute="centerX" secondItem="zLe-FF-pji" secondAttribute="centerX" id="pTS-mm-AQI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ycS-9g-Zzc"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0s5-vn-Ub9"/>
+                    <connections>
+                        <outlet property="imageView" destination="Mt4-9a-4g1" id="3K6-O9-MJg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ncm-wW-W1X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4091" y="471"/>
         </scene>
     </scenes>
 </document>
