@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsController: UIViewController {
+class FriendsController: UIViewController, UINavigationControllerDelegate {
     
     var usersBySections: [(letter: String, users: [User])] = []
     @IBOutlet weak var tableView: UITableView!
