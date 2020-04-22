@@ -31,13 +31,13 @@
          contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
          <PersistentStrings>
             <PersistentString
-               value = "sender.titleLabel?.text">
+               value = "stackView.frame">
             </PersistentString>
             <PersistentString
                value = "stackView">
             </PersistentString>
             <PersistentString
-               value = "stackView.frame">
+               value = "sender.titleLabel?.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -78,19 +78,19 @@
                value = "recognizer.state">
             </PersistentString>
             <PersistentString
-               value = "interactiveAnimator.fractionComplete &gt; 50">
+               value = "interactiveAnimator.isReversed">
             </PersistentString>
             <PersistentString
-               value = "swipeToLeft == 1 &amp;&amp; activePhotoIndex==photos.count">
+               value = "interactiveAnimator.fractionComplete">
             </PersistentString>
             <PersistentString
                value = "photos.count">
             </PersistentString>
             <PersistentString
-               value = "interactiveAnimator.isReversed">
+               value = "interactiveAnimator.fractionComplete &gt; 50">
             </PersistentString>
             <PersistentString
-               value = "interactiveAnimator.fractionComplete">
+               value = "swipeToLeft == 1 &amp;&amp; activePhotoIndex==photos.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -125,10 +125,10 @@
          contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
+               value = "usersBySections.map({$0.letter})">
             </PersistentString>
             <PersistentString
-               value = "usersBySections.map({$0.letter})">
+               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -232,10 +232,10 @@
          contextName = "FriendsController.awakeFromNib():FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tableView">
+               value = "tableView.centerYAnchor">
             </PersistentString>
             <PersistentString
-               value = "tableView.centerYAnchor">
+               value = "tableView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -247,6 +247,20 @@
             </PersistentString>
             <PersistentString
                value = "dot.backgroundColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FullPhotoAnimationController.animateTransition(using:):FullPhotoAnimationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "destination.frame">
+            </PersistentString>
+            <PersistentString
+               value = "toVC.view.frame">
+            </PersistentString>
+            <PersistentString
+               value = "transitionContext.finalFrame(for: source)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

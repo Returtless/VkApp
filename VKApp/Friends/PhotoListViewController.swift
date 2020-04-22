@@ -10,13 +10,31 @@ import UIKit
 
 class PhotoListViewController: UIViewController {
     
-   var photos = [Photo]()
+    var photos = [Photo]()
+        let photoInteractiveTransition = PhotoInteractiveTransition()
     
     @IBOutlet weak var imageView: PhotoListImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.photos = photos
         imageView.image = photos[0].image
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tap)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.transitioningDelegate = self
+        if segue.identifier == "openFullPhotoOnViewSegue" {
+            let photoVC = segue.destination as! FullPhotoViewController
+            photoVC.photo = photos[imageView.activePhotoIndex]
+            photoVC.transitioningDelegate = self
+             self.photoInteractiveTransition.viewController = photoVC
+        }
+    }
+    
+    @objc func onTap(_ recognizer: UIPanGestureRecognizer) {
+        performSegue(withIdentifier: "openFullPhotoOnViewSegue", sender: self)
     }
 }
 
@@ -36,6 +54,8 @@ class PhotoListImageView : UIImageView {
         super.awakeFromNib()
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
         self.addGestureRecognizer(recognizer)
+        
+        
     }
     //направление свайпа
     var swipeToLeft = 0
@@ -51,7 +71,7 @@ class PhotoListImageView : UIImageView {
             interactiveAnimator.fractionComplete = fraction + animationProgress
             print("\(recognizer.translation(in: self).x)   \(recognizer.velocity(in: self).x)  \(swipeToLeft)  \(fraction)")
         case .ended:
-
+            
             let shouldComplete = recognizer.velocity(in: self).x > 0
             let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos.count-1 //фотография последняя при свайпе вправо
             let firstPhoto = swipeToLeft != 1 && activePhotoIndex==0 //фотография первая при свайпе влево
@@ -90,6 +110,8 @@ class PhotoListImageView : UIImageView {
         }
     }
     
+    
+    
     func initAnimator(_ swipeToLeft : CGFloat){
         interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear)
         interactiveAnimator.addAnimations(
@@ -102,3 +124,15 @@ class PhotoListImageView : UIImageView {
         interactiveAnimator.pauseAnimation()
     }
 }
+
+extension PhotoListViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return FullPhotoAnimationDismissController(endFrame: imageView.frame)
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return FullPhotoAnimationController(originFrame: imageView.frame)
+    }
+}
+
+

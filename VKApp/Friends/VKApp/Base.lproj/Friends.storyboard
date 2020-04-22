@@ -209,11 +209,43 @@
                     <navigationItem key="navigationItem" id="0s5-vn-Ub9"/>
                     <connections>
                         <outlet property="imageView" destination="Mt4-9a-4g1" id="3K6-O9-MJg"/>
+                        <segue destination="6Hu-bq-Nvt" kind="modal" identifier="openFullPhotoOnViewSegue" id="mAA-zH-OdW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncm-wW-W1X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4039" y="-198"/>
+        </scene>
+        <!--Full Photo View Controller-->
+        <scene sceneID="pCg-6D-4uL">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="6Hu-bq-Nvt" customClass="FullPhotoViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lqd-Js-XRP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rjs-ye-Fjs">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Rjs-ye-Fjs" firstAttribute="leading" secondItem="kYx-z6-lk2" secondAttribute="leading" id="2pD-fW-K2h"/>
+                            <constraint firstItem="Rjs-ye-Fjs" firstAttribute="top" secondItem="kYx-z6-lk2" secondAttribute="top" id="7dB-Go-cuh"/>
+                            <constraint firstItem="kYx-z6-lk2" firstAttribute="trailing" secondItem="Rjs-ye-Fjs" secondAttribute="trailing" id="AAY-1a-9aB"/>
+                            <constraint firstItem="kYx-z6-lk2" firstAttribute="bottom" secondItem="Rjs-ye-Fjs" secondAttribute="bottom" id="NLV-6O-Gel"/>
+                            <constraint firstItem="Rjs-ye-Fjs" firstAttribute="centerX" secondItem="Lqd-Js-XRP" secondAttribute="centerX" id="Ou0-pr-atN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kYx-z6-lk2"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kp8-ni-tGz"/>
+                    <connections>
+                        <outlet property="imageView" destination="Rjs-ye-Fjs" id="u0n-WT-BZr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nDK-b8-qgk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5207" y="-198"/>
         </scene>
     </scenes>
 </document>

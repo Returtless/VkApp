@@ -15,8 +15,8 @@ class CustomNavigationController: UINavigationController, UINavigationController
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-  }
-
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .white
@@ -33,16 +33,16 @@ class CustomNavigationController: UINavigationController, UINavigationController
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-            if operation == .push {
+        if operation == .push {
+            self.interactiveTransition.viewController = toVC
+            return AnimationPushController()
+        } else if operation == .pop {
+            if navigationController.viewControllers.first != toVC {
                 self.interactiveTransition.viewController = toVC
-                return AnimationPushController()
-            } else if operation == .pop {
-                if navigationController.viewControllers.first != toVC {
-                    self.interactiveTransition.viewController = toVC
-                }
-                return AnimationPopController()
             }
-            return nil
+            return AnimationPopController()
+        }
+        return nil
     }
     
     public static func transform(frame : CGRect, on rotation : CGFloat) -> CGAffineTransform {

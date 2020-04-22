@@ -21,6 +21,7 @@ class AnimationPushController: NSObject, UIViewControllerAnimatedTransitioning {
         
         destination.view.transform = CustomNavigationController.transform(frame: destination.view.frame, on: .pi*3/2)
         
+        //почему то без кейфрейма не сработало
         UIView.animateKeyframes(withDuration: self.transitionDuration(using: transitionContext),
                                 delay: 0,
                                 options: .calculationModePaced,
@@ -58,23 +59,17 @@ class AnimationPopController: NSObject, UIViewControllerAnimatedTransitioning {
         
         destination.view.frame = source.view.frame
         destination.view.transform = CustomNavigationController.transform(frame: destination.view.frame, on: .pi/2)
-        UIView.animateKeyframes(withDuration: self.transitionDuration(using: transitionContext),
-                                delay: 0,
-                                options: .calculationModePaced,
-                                animations: {
-                                    UIView.addKeyframe(withRelativeStartTime: 0,
-                                                       relativeDuration: 1,
-                                                       animations: {
-                                                        source.view.transform = CustomNavigationController.transform(frame: source.view.frame, on: -.pi/2)
-                                                        destination.view.transform = .identity
-                                    })
-        }) { finished in
+        UIView.animate(withDuration: 1, animations: {
+            source.view.transform = CustomNavigationController.transform(frame: source.view.frame, on: -.pi/2)
+            destination.view.transform = .identity
+        }, completion: { finished in
             if finished && !transitionContext.transitionWasCancelled {
                 source.removeFromParent()
             } else if transitionContext.transitionWasCancelled {
                 destination.view.transform = .identity
             }
             transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
-        }
+        })
+        
     }
 }
