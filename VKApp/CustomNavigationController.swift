@@ -33,16 +33,18 @@ class CustomNavigationController: UINavigationController, UINavigationController
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .push {
+        switch operation {
+        case .push:
             self.interactiveTransition.viewController = toVC
             return AnimationPushController()
-        } else if operation == .pop {
+        case .pop:
             if navigationController.viewControllers.first != toVC {
                 self.interactiveTransition.viewController = toVC
             }
             return AnimationPopController()
+        default:
+            return nil
         }
-        return nil
     }
     
     public static func transform(frame : CGRect, on rotation : CGFloat) -> CGAffineTransform {

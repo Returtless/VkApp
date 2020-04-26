@@ -54,11 +54,10 @@ class PhotoListImageView : UIImageView {
         super.awakeFromNib()
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
         self.addGestureRecognizer(recognizer)
-        
-        
     }
     //направление свайпа
     var swipeToLeft = 0
+    
     @objc func onPan(_ recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
@@ -69,12 +68,23 @@ class PhotoListImageView : UIImageView {
             var fraction = CGFloat(swipeToLeft) * translation.x / popupOffset
             if interactiveAnimator.isReversed { fraction *= -1 }
             interactiveAnimator.fractionComplete = fraction + animationProgress
-            print("\(recognizer.translation(in: self).x)   \(recognizer.velocity(in: self).x)  \(swipeToLeft)  \(fraction)")
-        case .ended:
             
+            //если направление свайпа изменилось, то нужно пересоздать аниматор в другое направление
+            let curreantSwipe = translation.x > 0 ? 1 : -1
+            if (curreantSwipe != swipeToLeft){
+                interactiveAnimator.stopAnimation(true)
+                interactiveAnimator.finishAnimation(at: .current)
+                self.transform = .identity
+                initAnimator(CGFloat(curreantSwipe))
+                
+                swipeToLeft = curreantSwipe
+            }
+            
+        case .ended:
             let shouldComplete = recognizer.velocity(in: self).x > 0
             let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos.count-1 //фотография последняя при свайпе вправо
             let firstPhoto = swipeToLeft != 1 && activePhotoIndex==0 //фотография первая при свайпе влево
+            //флаг того, что изменилось направление
             var reversedWasChanged = false
             
             //если мы вдруг начинаем вести пальцем в другую сторону от изначального направления
@@ -82,7 +92,7 @@ class PhotoListImageView : UIImageView {
             if ((!shouldComplete && swipeToLeft == 1) || (swipeToLeft != 1 && shouldComplete))
                 && !interactiveAnimator.isReversed
                 || lastPhoto || firstPhoto
-                || interactiveAnimator.fractionComplete.isLess(than: 0.6) {
+                || interactiveAnimator.fractionComplete.isLess(than: 0.4) {
                 interactiveAnimator.isReversed.toggle()
                 reversedWasChanged = true
             }
