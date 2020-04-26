@@ -11,7 +11,10 @@ import UIKit
 class FullPhotoViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
-    let animator = FullPhotoAnimationDismissController(endFrame: CGRect(x: 0, y: 0, width: 300, height: 400))
+    let animator = FullPhotoAnimationDismissController(endFrame: CGRect(x: 0,
+                                                                        y: 0,
+                                                                        width: 300,
+                                                                        height: 400))
     let photoInteractiveTransition = PhotoInteractiveTransition()
     
     var photo = Photo()
@@ -21,7 +24,11 @@ class FullPhotoViewController: UIViewController {
         view.backgroundColor = .clear
         imageView.isUserInteractionEnabled = true
         imageView.image = photo.image
-        //transitioningDelegate = self
+        let height = self.view.frame.width * 4 / 3
+        imageView.frame = CGRect(x: 0,
+                                 y: self.view.frame.height / 2 - height / 2,
+                                 width: self.view.frame.width,
+                                 height: height)
     }
 }
 
@@ -33,34 +40,60 @@ class PhotoInteractiveTransition: UIPercentDrivenInteractiveTransition {
             viewController?.view.addGestureRecognizer(recognizer)
         }
     }
+    var interactiveAnimator: UIViewPropertyAnimator!
     
-    
-    var hasStarted: Bool = false
-    var shouldFinish: Bool = false
+    private var animationProgress: CGFloat = 0
     
     @objc func handleScreenEdgeGesture(_ recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
-            self.hasStarted = true
-            self.viewController?.dismiss(animated: true)
+            initAnimator()
         case .changed:
             let translation = recognizer.translation(in: recognizer.view)
-            let relativeTranslation = translation.y / (recognizer.view?.bounds.height ?? 1)
-            let progress = max(0, min(1, relativeTranslation))
+            var fraction = translation.y / (self.viewController?.imageView.frame.height)!
             
-            self.shouldFinish = progress > 0.33
+            if interactiveAnimator.isReversed { fraction *= -1 }//смена направления если анимация стала реверсивная
             
-            self.update(progress)
+            interactiveAnimator.fractionComplete = fraction + animationProgress
+            
+            //завершаем анимацию, если комплит больше 50%
+            if (!interactiveAnimator.fractionComplete.isLess(than: 0.5)){
+                recognizer.state = .ended
+            }
         case .ended:
-            self.hasStarted = false
-            self.shouldFinish ? self.finish() : self.cancel()
+            var reversedWasChanged = false // флаг для понимания вернулась анимация в начало или нужно закончить
+            if recognizer.velocity(in: recognizer.view).y <= 0 && !interactiveAnimator.isReversed
+            {
+                interactiveAnimator.isReversed.toggle()
+                reversedWasChanged.toggle()
+            }
+            if (!reversedWasChanged){
+                interactiveAnimator.stopAnimation(true)
+                interactiveAnimator.finishAnimation(at: .current)
+                self.viewController?.dismiss(animated: true)
+                self.finish()
+            } else {
+                interactiveAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+                self.cancel()
+            }
         case .cancelled:
-            self.hasStarted = false
             self.cancel()
         default: return
         }
     }
-    
+    func initAnimator(){
+        interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+        interactiveAnimator.addAnimations(
+            {
+                self.viewController?.imageView.transform = CGAffineTransform(
+                    translationX: 0,
+                    y: (self.viewController?.imageView.frame.height)!)
+            }
+        )
+        interactiveAnimator?.startAnimation()
+        animationProgress = interactiveAnimator.fractionComplete
+        interactiveAnimator.pauseAnimation()
+    }
 }
 
 

@@ -24,7 +24,7 @@ class PhotoListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        segue.destination.transitioningDelegate = self
+        
         if segue.identifier == "openFullPhotoOnViewSegue" {
             let photoVC = segue.destination as! FullPhotoViewController
             photoVC.photo = photos[imageView.activePhotoIndex]
