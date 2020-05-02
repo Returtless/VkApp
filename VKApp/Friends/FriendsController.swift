@@ -31,7 +31,6 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
             sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*sorterControl.letters.count)), sorterControl.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
             sorterControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -49,6 +48,13 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         let indexPath = IndexPath(row: 0, section: usersBySections.firstIndex(where: {$0.letter == sender.choosedLetter}) ?? 0)
         self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
 

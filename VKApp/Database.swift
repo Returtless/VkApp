@@ -16,7 +16,7 @@ class Database{
             User(name: "Александр", surname: "Черных", avatar: "chernih"),
             User(name: "Виталий", surname: "Кулагин", avatar: "kulagin"),
             User(name: "Карим", surname: "Султанов", avatar: "sultanov"),
-            User(name: "Станислав", surname: "Белых", avatar: "belih"),
+           // User(name: "Станислав", surname: "Белых", avatar: "belih"),
             User(name: "Натали", surname: "Портман", avatar: "nataly5", photos: ["nataly1","nataly2","nataly3","nataly4","nataly5"]),
             User(name: "Эмма", surname: "Стоун", avatar: "emma1", photos: ["emma1","emma2","emma3","emma4","emma5","emma6"]),
             User(name: "Дженнифер", surname: "Лоуренс", avatar: "jen1", photos: ["jen1","jen2","jen3","jen4","jen5"]),

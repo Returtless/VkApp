@@ -31,13 +31,13 @@
          contextName = "SorterBarControl.selectLetter(_:):SorterBarControl.swift">
          <PersistentStrings>
             <PersistentString
-               value = "stackView.frame">
+               value = "sender.titleLabel?.text">
             </PersistentString>
             <PersistentString
                value = "stackView">
             </PersistentString>
             <PersistentString
-               value = "sender.titleLabel?.text">
+               value = "stackView.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -78,19 +78,19 @@
                value = "recognizer.state">
             </PersistentString>
             <PersistentString
-               value = "interactiveAnimator.isReversed">
+               value = "interactiveAnimator.fractionComplete &gt; 50">
             </PersistentString>
             <PersistentString
-               value = "interactiveAnimator.fractionComplete">
+               value = "swipeToLeft == 1 &amp;&amp; activePhotoIndex==photos.count">
             </PersistentString>
             <PersistentString
                value = "photos.count">
             </PersistentString>
             <PersistentString
-               value = "interactiveAnimator.fractionComplete &gt; 50">
+               value = "interactiveAnimator.isReversed">
             </PersistentString>
             <PersistentString
-               value = "swipeToLeft == 1 &amp;&amp; activePhotoIndex==photos.count">
+               value = "interactiveAnimator.fractionComplete">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -99,6 +99,17 @@
          <PersistentStrings>
             <PersistentString
                value = "self.imageView.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotoInteractiveTransition.handleScreenEdgeGesture(_:):FullPhotoViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "interactiveAnimator.fractionComplete">
+            </PersistentString>
+            <PersistentString
+               value = "recognizer.translation(in: recognizer.view)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -125,10 +136,10 @@
          contextName = "FriendsController.searchBar(_:textDidChange:):FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "usersBySections.map({$0.letter})">
+               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
             </PersistentString>
             <PersistentString
-               value = "&quot;&#x415;&#x43b;&#x447;&#x435;&#x432;&quot;.range(of:  searchText, options: .caseInsensitive)">
+               value = "usersBySections.map({$0.letter})">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -201,6 +212,23 @@
          contextName = "SorterBarControl.init(frame:):SorterBarControl.swift">
       </ContextState>
       <ContextState
+         contextName = "FullPhotoAnimationDismissController.animateTransition(using:):FullPhotoAnimationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(transitionContext.viewController(forKey: .from)!.children.first">
+            </PersistentString>
+            <PersistentString
+               value = "(transitionContext.viewController(forKey: .to)!.children.first as? CustomNavigationController)?.children">
+            </PersistentString>
+            <PersistentString
+               value = "source.imageView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "snapshot.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SorterBarControl.letterButtons.didset:SorterBarControl.swift">
       </ContextState>
       <ContextState
@@ -232,10 +260,10 @@
          contextName = "FriendsController.awakeFromNib():FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tableView.centerYAnchor">
+               value = "tableView">
             </PersistentString>
             <PersistentString
-               value = "tableView">
+               value = "tableView.centerYAnchor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -254,13 +282,22 @@
          contextName = "FullPhotoAnimationController.animateTransition(using:):FullPhotoAnimationController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "destination.frame">
+               value = "(transitionContext.viewController(forKey: .from)!.children.first as? CustomNavigationController)?.children.last as? PhotoListViewController ">
+            </PersistentString>
+            <PersistentString
+               value = "transitionContext.viewController(forKey: .from)">
             </PersistentString>
             <PersistentString
                value = "toVC.view.frame">
             </PersistentString>
             <PersistentString
+               value = "destination.frame">
+            </PersistentString>
+            <PersistentString
                value = "transitionContext.finalFrame(for: source)">
+            </PersistentString>
+            <PersistentString
+               value = "transitionContext.viewController(forKey: .init(rawValue: &quot;PhotoListViewController&quot;))">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
