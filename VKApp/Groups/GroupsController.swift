@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import WebKit
+import Alamofire
 
 class GroupsController: UITableViewController {
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
@@ -15,7 +17,18 @@ class GroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        groups = Database.getGroupsData()
+        //groups = Database.getGroupsData()
+        var params = Parameters()
+        params["extended"] = "1"
+        VKServerFactory.getServerData(
+            method: VKServerFactory.Methods.getUserGroups,
+            with: params,
+            completion: {
+                [weak self] array in
+                self?.groups = array as! [Group]
+                self?.tableView.reloadData()
+            }
+        )
         tableView.rowHeight = CGFloat(70)
     }
     
@@ -29,8 +42,9 @@ class GroupsController: UITableViewController {
         
         let group = groups[indexPath.row]
         cell.groupNameLabel.text = group.name
-        cell.avatarImageView.imageView.image = group.avatar
-        
+        if let image = UIImage.getImage(from: group.photo100) {
+            cell.avatarImageView.imageView.image = image
+        }
         return cell
     }
     
@@ -47,10 +61,10 @@ class GroupsController: UITableViewController {
             guard let addGroupController = segue.source as? AddGroupTableViewController else { return }
             if let indexPath = addGroupController.tableView.indexPathForSelectedRow {
                 let group = addGroupController.newGroups[indexPath.row]
-                if !groups.contains(group) {
-                    groups.append(group)
-                    tableView.reloadData()
-                }
+                //                if !groups.contains(group) {
+                //                    groups.append(group)
+                //                    tableView.reloadData()
+                //                }
             }
         }
     }
@@ -60,7 +74,7 @@ class GroupsController: UITableViewController {
 
 extension GroupsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        groups = Database.getGroupsData()
+        // groups = Database.getGroupsData()
         if (!searchText.isEmpty){
             groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
         }

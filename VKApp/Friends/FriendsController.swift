@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 
 class FriendsController: UIViewController, UINavigationControllerDelegate {
     
     var usersBySections: [(letter: String, users: [User])] = []
+    var users : [Friend] = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var friendSearchBar: FriendsSearchBar!
     
@@ -21,9 +23,24 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = CGFloat(70)
+        let params: Parameters = [
+            "fields": "nickname, domain, sex"
+        ]
+        VKServerFactory.getServerData(
+            method: VKServerFactory.Methods.getFriends,
+            with: params,
+            completion: {
+                [weak self] array in
+                self?.users = array as! [Friend]
+                self?.tableView.reloadData()
+            }
+        )
+        
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
+        
+        
         usersBySections = Database.getSortedUsersData()
         sorterControl.letters = usersBySections.map({$0.letter})
         sorterControl.translatesAutoresizingMaskIntoConstraints = false

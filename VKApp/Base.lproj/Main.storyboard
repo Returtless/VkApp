@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfk-L3-hWr" customClass="CloudIndicator" customModule="VKApp" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfk-L3-hWr" customClass="CloudIndicator" customModule="VKApp" customModuleProvider="target">
                                 <rect key="frame" x="147" y="418" width="120" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -32,7 +32,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="6hG-5D-dBO">
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="6hG-5D-dBO">
                                 <rect key="frame" x="0.0" y="44" width="414" height="868"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kuE-qU-U39">
@@ -89,17 +89,30 @@
                                     <constraint firstItem="kuE-qU-U39" firstAttribute="centerX" secondItem="6hG-5D-dBO" secondAttribute="centerX" id="s0A-1V-02M"/>
                                 </constraints>
                             </scrollView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-wu-BhM">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" red="0.32156862745098036" green="0.46274509803921571" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="1u1-wu-BhM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="26f-d0-Btl"/>
                             <constraint firstItem="6hG-5D-dBO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2X5-mW-WIO"/>
                             <constraint firstItem="6hG-5D-dBO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="9Hb-nm-L4N"/>
                             <constraint firstItem="6hG-5D-dBO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9tp-AN-JRp"/>
                             <constraint firstItem="6hG-5D-dBO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="50" id="Bkb-HE-fqN"/>
+                            <constraint firstItem="1u1-wu-BhM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="GIn-MH-e82"/>
                             <constraint firstItem="Pfk-L3-hWr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LAW-lJ-L9o"/>
                             <constraint firstItem="Xnb-3h-NrM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Si9-kM-VTC"/>
                             <constraint firstItem="Xnb-3h-NrM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="V8n-vl-Pea"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1u1-wu-BhM" secondAttribute="trailing" id="W11-eV-8np"/>
                             <constraint firstItem="Pfk-L3-hWr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="n7J-5C-s6p"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1u1-wu-BhM" secondAttribute="bottom" id="osc-Xc-Fur"/>
+                            <constraint firstItem="1u1-wu-BhM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="woE-Md-0to"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -110,6 +123,7 @@
                         <outlet property="passwordField" destination="tK1-NV-2Dg" id="BD0-Gp-MhZ"/>
                         <outlet property="scrollBottomConstraint" destination="Bkb-HE-fqN" id="bcP-vD-EB4"/>
                         <outlet property="scrollView" destination="6hG-5D-dBO" id="Qcr-yF-rde"/>
+                        <outlet property="webView" destination="1u1-wu-BhM" id="LM1-Xn-vmC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -40,27 +40,27 @@ class Database{
         let usersByLetter = Dictionary(grouping: self.getUsersData(), by: { $0.surname.first! })
         return usersByLetter.map({(letter:String($0.key),users: $0.value)}).sorted(by: {$0.letter < $1.letter})
     }
-    static func getGroupsData() -> [Group] {
-        [
-            Group(name: "GeekBrains", avatar: "geekbrains"),
-            Group(name: "Youtube", avatar: ""),
-            Group(name: "Yandex", avatar: ""),
-            Group(name: "Google", avatar: ""),
-            Group(name: "Kavabanga", avatar: ""),
-            Group(name: "Gogogo", avatar: ""),
-            Group(name: "MDK", avatar: ""),
-            Group(name: "Dodo pizza", avatar: "dodo")
-        ]
-    }
-    
-    static func getNewGroupsData() -> [Group] {
-        [
-            Group(name: "Dodo pizza Belgorod", avatar: "dodo"),
-            Group(name: "Dodo pizza Saint Petersburg", avatar: "dodo"),
-            Group(name: "Dodo pizza Moskow", avatar: "dodo"),
-            Group(name: "Dodo pizza Samara", avatar: "dodo")
-        ]
-    }
+//    static func getGroupsData() -> [Group] {
+//        [
+//            Group(name: "GeekBrains", avatar: "geekbrains"),
+//            Group(name: "Youtube", avatar: ""),
+//            Group(name: "Yandex", avatar: ""),
+//            Group(name: "Google", avatar: ""),
+//            Group(name: "Kavabanga", avatar: ""),
+//            Group(name: "Gogogo", avatar: ""),
+//            Group(name: "MDK", avatar: ""),
+//            Group(name: "Dodo pizza", avatar: "dodo")
+//        ]
+//    }
+//    
+//    static func getNewGroupsData() -> [Group] {
+//        [
+//            Group(name: "Dodo pizza Belgorod", avatar: "dodo"),
+//            Group(name: "Dodo pizza Saint Petersburg", avatar: "dodo"),
+//            Group(name: "Dodo pizza Moskow", avatar: "dodo"),
+//            Group(name: "Dodo pizza Samara", avatar: "dodo")
+//        ]
+//    }
     
     static func getNewsData() -> [News] {
         [
