@@ -34,7 +34,7 @@ class VKServerFactory {
                 case .getFriends :
                     let res = try JSONDecoder().decode(ResponseUsers.self, from: data)
                     array = res.response.items
-                case .getUserGroups, .getSearchGroups :
+                case .getUserGroups, .getSearchGroups, .getGroupById :
                     let res = try JSONDecoder().decode(ResponseGroups.self, from: data)
                     array = res.response.items
                 case .getAllPhotos :
@@ -81,5 +81,7 @@ class VKServerFactory {
         case getAllPhotos = "photos.getAll"
         case getUserGroups = "groups.get"
         case getSearchGroups = "groups.search"
+        case getGroupById = "groups.getById"
+        case getNews = "newsfeed.get"
     }
 }

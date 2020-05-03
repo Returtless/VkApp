@@ -30,15 +30,15 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
         let currentNews = news[indexPath.row]
        // cell.avatarView.imageView.image = currentNews.author.avatar
-        cell.authorNameLabel.text = currentNews.author.getFullName()
+        cell.authorNameLabel.text = currentNews.text
         
-        let formate = Date.getFormattedDate(date: currentNews.createDate, format: "dd.MM.yyyy")
-        cell.createDateLabel.text = formate
+        //let formate = Date.getFormattedDate(date: currentNews.date, format: "dd.MM.yyyy")
+        //cell.createDateLabel.text = formate
         cell.messageLabel.text = currentNews.text
         cell.likeCounterControl.isLiked = true
         cell.likeCounterControl.countOfLikes = 10
         cell.viewsCounter.text = "\(UInt.random(in: 1...100))"
-        cell.photos = currentNews.photos
+        cell.photos = [UIImage.getImage(from: currentNews.attachments[0].photo.sizes[0].url)!]
         cell.commentsCounter.countOfComments = currentNews.comments.count
         
         cell.delegate = self
@@ -60,7 +60,7 @@ extension NewsViewController : CommentCounterDelegate {
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "News", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
-        resultViewController.comments = news[0].comments
+        //resultViewController.comments = news[0].comments
         navigationController?.pushViewController(resultViewController,
                                                  animated: true)
     }
