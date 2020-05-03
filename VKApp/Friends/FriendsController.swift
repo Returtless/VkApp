@@ -23,14 +23,13 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = CGFloat(70)
-        let params: Parameters = [
-            "fields": "nickname, domain, sex, photo_100"
-        ]
-        
-        
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
+        
+        let params: Parameters = [
+            "fields": "nickname, domain, sex, photo_100"
+        ]
         
         VKServerFactory.getServerData(
             method: VKServerFactory.Methods.getFriends,

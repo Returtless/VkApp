@@ -18,15 +18,16 @@ class GroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //groups = Database.getGroupsData()
-        var params = Parameters()
-        params["extended"] = "1"
+        let params: Parameters = [
+            "extended": "1"
+        ]
         VKServerFactory.getServerData(
             method: VKServerFactory.Methods.getUserGroups,
             with: params,
             completion: {
                 [weak self] array in
                 self?.groups = array as! [Group]
-                 self?.userGroups = self!.groups
+                self?.userGroups = self!.groups
                 self?.tableView.reloadData()
             }
         )
@@ -58,16 +59,16 @@ class GroupsController: UITableViewController {
     
     
     @IBAction func addNewGroup(segue: UIStoryboardSegue) {
-        if segue.identifier == "addNewGroup" {
-            guard let addGroupController = segue.source as? AddGroupTableViewController else { return }
-            if let indexPath = addGroupController.tableView.indexPathForSelectedRow {
-                let group = addGroupController.newGroups[indexPath.row]
-                //                if !groups.contains(group) {
-                //                    groups.append(group)
-                //                    tableView.reloadData()
-                //                }
-            }
-        }
+        //        if segue.identifier == "addNewGroup" {
+        //            guard let addGroupController = segue.source as? AddGroupTableViewController else { return }
+        //            if let indexPath = addGroupController.tableView.indexPathForSelectedRow {
+        //               // let group = addGroupController.newGroups[indexPath.row]
+        //                //                if !groups.contains(group) {
+        //                //                    groups.append(group)
+        //                //                    tableView.reloadData()
+        //                //                }
+        //            }
+        //        }
     }
     
     
@@ -77,9 +78,25 @@ extension GroupsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         groups = userGroups
         if (!searchText.isEmpty){
-            groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
+            let params: Parameters = [
+                "q": searchText,
+                "count" : 100
+            ]
+            VKServerFactory.getServerData(
+                method: VKServerFactory.Methods.getSearchGroups,
+                with: params,
+                completion: {
+                    [weak self] array in
+                    self?.groups = array as! [Group]
+                    self?.tableView.reloadData()
+                }
+            )
+            //groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
+        } else {
+            groups = userGroups
+            tableView.reloadData()
         }
-        tableView.reloadData()
+        
     }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

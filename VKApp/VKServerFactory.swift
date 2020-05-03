@@ -15,7 +15,7 @@ class VKServerFactory {
     static func getServerData(method : Methods,
                               with parameters: Parameters,
                               completion: @escaping (_ array : Array<Any>?) -> Void
-    ) -> Array<Any>? {
+    ) {
         
         
         var array = Array<Any>()
@@ -34,7 +34,7 @@ class VKServerFactory {
                 case .getFriends :
                     let res = try JSONDecoder().decode(ResponseUsers.self, from: data)
                     array = res.response.items
-                case .getUserGroups :
+                case .getUserGroups, .getSearchGroups :
                     let res = try JSONDecoder().decode(ResponseGroups.self, from: data)
                     array = res.response.items
                 case .getAllPhotos :
@@ -59,7 +59,7 @@ class VKServerFactory {
                 print("error: ", error)
             }
         }
-        return array
+        //return array
     }
     
     static func getFullParameters(_ params : Parameters) -> Parameters {
