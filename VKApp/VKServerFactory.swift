@@ -16,12 +16,10 @@ class VKServerFactory {
                              with parameters: Parameters,
                              completion: @escaping (_ array : Array<Any>?) -> Void
    ) -> Array<Any>? {
-        var params = parameters
-        params["access_token"] = Session.instance.token
-        params["v"] = "5.103"
+        
         
         var array = Array<Any>()
-        AF.request("https://api.vk.com/method/\(method.rawValue)", parameters: params).responseJSON{ response in
+        AF.request("https://api.vk.com/method/\(method.rawValue)", parameters: getFullParameters(parameters)).responseJSON{ response in
             
             guard let data = response.data else { return }
             
@@ -34,7 +32,7 @@ class VKServerFactory {
                 }
                 switch method {
                 case .getFriends :
-                    let res = try JSONDecoder().decode(ResponseFriends.self, from: data)
+                    let res = try JSONDecoder().decode(ResponseUsers.self, from: data)
                     array = res.response.items
                 case .getUserGroups :
                     
@@ -61,6 +59,14 @@ class VKServerFactory {
         }
         return array
     }
+    
+    static func getFullParameters(_ params : Parameters) -> Parameters {
+        var parameters = params
+        parameters["access_token"] = Session.instance.token
+        parameters["v"] = "5.103"
+        return parameters
+    }
+    
     
     enum RequestTypes: String {
         case auth

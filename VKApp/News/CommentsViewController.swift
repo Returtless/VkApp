@@ -30,9 +30,9 @@ class CommentsViewController: UIViewController {
     }
     
     @IBAction func buttonIsTapped(_ sender: Any) {
-        self.comments.append(Comment(author: User(name: "Владислав",
-                                                  surname: "Лихачев",
-                                                  avatar: "vladislav"), text: newCommentTextField.text!))
+//        self.comments.append(Comment(author: User(name: "Владислав",
+//                                                  surname: "Лихачев",
+//                                                  avatar: "vladislav"), text: newCommentTextField.text!))
         
         self.commentsTableView.beginUpdates()
         self.commentsTableView.insertRows(at: [IndexPath.init(row: self.comments.count-1, section: 0)], with: .automatic)

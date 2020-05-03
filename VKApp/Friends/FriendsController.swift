@@ -12,7 +12,7 @@ import Alamofire
 class FriendsController: UIViewController, UINavigationControllerDelegate {
     
     var usersBySections: [(letter: String, users: [User])] = []
-    var users : [Friend] = []
+    var users : [User] = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var friendSearchBar: FriendsSearchBar!
     
@@ -24,30 +24,32 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         tableView.delegate = self
         tableView.rowHeight = CGFloat(70)
         let params: Parameters = [
-            "fields": "nickname, domain, sex"
+            "fields": "nickname, domain, sex, photo_100"
         ]
-        VKServerFactory.getServerData(
-            method: VKServerFactory.Methods.getFriends,
-            with: params,
-            completion: {
-                [weak self] array in
-                self?.users = array as! [Friend]
-                self?.tableView.reloadData()
-            }
-        )
+       
         
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
         
+        VKServerFactory.getServerData(
+                   method: VKServerFactory.Methods.getFriends,
+                   with: params,
+                   completion: {
+                       [weak self] array in
+                       self?.users = array as! [User]
+                       self?.usersBySections = Database.getSortedUsersData(self!.users)
+                       self?.sorterControl.letters = self!.usersBySections.map({$0.letter})
+                       self?.sorterControl.translatesAutoresizingMaskIntoConstraints = false
+                       NSLayoutConstraint.activate([
+                          self!.sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      self!.sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*self!.sorterControl.letters.count)), self!.sorterControl.centerYAnchor.constraint(equalTo: self!.tableView.centerYAnchor),
+                          self!.sorterControl.trailingAnchor.constraint(equalTo: self!.view.trailingAnchor)
+                       ])
+                       self?.tableView.reloadData()
+                   }
+               )
         
-        usersBySections = Database.getSortedUsersData()
-        sorterControl.letters = usersBySections.map({$0.letter})
-        sorterControl.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*sorterControl.letters.count)), sorterControl.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
-            sorterControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,8 +57,8 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
             let photoAlbumVC = segue.destination as! PhotoListViewController
             if let index = tableView.indexPathForSelectedRow {
                 let user = usersBySections[index.section].users[index.row]
-                photoAlbumVC.photos = user.photos
-                photoAlbumVC.title = "\(user.name) \(user.surname)"
+                //photoAlbumVC.photos = user.photos
+                photoAlbumVC.title = "\(user.firstName) \(user.lastName)"
             }
         }
     }
@@ -87,9 +89,11 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
         let user = usersBySections[indexPath.section].users[indexPath.row]
-        cell.userLabel.text = "\(user.name) \(user.surname)"
+        cell.userLabel.text = "\(user.firstName) \(user.lastName)"
         cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
-        cell.photoView.imageView.image = user.avatar
+        if let image = UIImage.getImage(from: user.photo100) {
+                   cell.photoView.imageView.image = image
+               }
         
         UIView.animate(
             withDuration: 1,
@@ -114,10 +118,10 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
 }
 extension FriendsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        usersBySections = Database.getSortedUsersData()
+        usersBySections = Database.getSortedUsersData(users)
         if (!searchText.isEmpty){
             for i in 0..<usersBySections.count {
-                usersBySections[i].users = usersBySections[i].users.filter({$0.surname.range(of:  searchText, options: .caseInsensitive) != nil || $0.name.range(of:  searchText, options: .caseInsensitive) != nil })
+                usersBySections[i].users = usersBySections[i].users.filter({$0.lastName.range(of:  searchText, options: .caseInsensitive) != nil || $0.firstName.range(of:  searchText, options: .caseInsensitive) != nil })
             }
             usersBySections.removeAll(where: {$0.users.isEmpty})
         }

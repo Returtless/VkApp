@@ -51,7 +51,6 @@
 		52AAF707243E87E100191326 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52AAF705243E87E100191326 /* News.storyboard */; };
 		52B13C36245D6AB000AA02C8 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C35245D6AB000AA02C8 /* Session.swift */; };
 		52B13C38245D742600AA02C8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B13C37245D742600AA02C8 /* WebKit.framework */; };
-		52B13C3A245D836800AA02C8 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C39245D836800AA02C8 /* Friend.swift */; };
 		52B13C3C245DBA2100AA02C8 /* VKServerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C3B245DBA2100AA02C8 /* VKServerFactory.swift */; };
 		52B2B6AF2450B44F00DDBE36 /* FullPhotoAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */; };
 		52DA5341244FC13000DEF4E7 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */; };
@@ -105,7 +104,6 @@
 		52AAF706243E87E100191326 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VKApp/Base.lproj/News.storyboard; sourceTree = "<group>"; };
 		52B13C35245D6AB000AA02C8 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		52B13C37245D742600AA02C8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		52B13C39245D836800AA02C8 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		52B13C3B245DBA2100AA02C8 /* VKServerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKServerFactory.swift; sourceTree = "<group>"; };
 		52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoAnimationController.swift; sourceTree = "<group>"; };
 		52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 				528A488A24350F420063708D /* User.swift */,
 				52AAF703243E7CBC00191326 /* News.swift */,
 				52B13C35245D6AB000AA02C8 /* Session.swift */,
-				52B13C39245D836800AA02C8 /* Friend.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -390,7 +387,6 @@
 				520675042439266700C76B86 /* SorterBarControl.swift in Sources */,
 				528A488824350CBD0063708D /* FriendTableViewCell.swift in Sources */,
 				528A488F243522B10063708D /* PhotoAlbumController.swift in Sources */,
-				52B13C3A245D836800AA02C8 /* Friend.swift in Sources */,
 				528A489124352A790063708D /* PhotoCollectionViewCell.swift in Sources */,
 				52AAF6FF243E7B0D00191326 /* NewsViewController.swift in Sources */,
 				525F8A00244F7D170052F8F3 /* AnimationController.swift in Sources */,

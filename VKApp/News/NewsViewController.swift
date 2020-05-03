@@ -17,7 +17,7 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        news = Database.getNewsData()
+        //news = Database.getNewsData()
     }
 }
 
@@ -29,7 +29,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
         let currentNews = news[indexPath.row]
-        cell.avatarView.imageView.image = currentNews.author.avatar
+       // cell.avatarView.imageView.image = currentNews.author.avatar
         cell.authorNameLabel.text = currentNews.author.getFullName()
         
         let formate = Date.getFormattedDate(date: currentNews.createDate, format: "dd.MM.yyyy")

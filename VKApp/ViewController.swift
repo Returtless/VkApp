@@ -147,7 +147,7 @@ extension ViewController: WKNavigationDelegate {
         if let unwrappedToken = token, let unwrappedId = params["user_id"] {
             let session = Session.instance
             session.token = unwrappedToken
-            session.iserId = Int(unwrappedId)!
+            session.userId = Int(unwrappedId)!
             print(unwrappedToken)
             print(unwrappedId)
         }

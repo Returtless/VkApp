@@ -8,36 +8,53 @@
 
 import UIKit
 
-class User {
-    var name : String
-    var surname : String
-    var avatar : UIImage?
-    var photos : [Photo] = []
+class User: Decodable {
+    var canAccessClosed: Bool = true
+    var domain: String = ""
+    var firstName: String = ""
+    var id: Int64 = 0
+    var isClosed: Bool = true
+    var lastName:  String = ""
+    var nickname: String = ""
+    var online: Int64 = 0
+    var photo100 = "photo_100"
+    var sex: Int64 = 0
+    var trackCode: String = ""
     
-    init(name : String, surname : String, avatar : String) {
-        self.name = name
-        self.surname = surname
-        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
-        self.avatar = img
-        if let unwrappedImage = img {
-            self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: Int.random(in: 0...100), liked: Bool.random()), count: 10)
-        }
-    }
-    init(name : String, surname : String, avatar : String, photos : [String]) {
-        self.name = name
-        self.surname = surname
-        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
-        self.avatar = img
-        for photo in photos {
-            if let unwrapped = UIImage(named: photo) {
-                self.photos.append(Photo(image: unwrapped, countOfLikes: Int.random(in: 1...100), liked: Bool.random()))
-            }
-        }
+    enum CodingKeys: String, CodingKey {
+        case canAccessClosed = "can_access_closed"
+        case domain
+        case firstName = "first_name"
+        case id
+        case isClosed = "is_closed"
+        case lastName = "last_name"
+        case photo100 = "photo_100"
+        case nickname, online
+        case sex
+        case trackCode = "track_code"
     }
     
     func getFullName() -> String {
-        "\(self.name) \(self.surname)"
+        "\(self.firstName) \(self.lastName)"
     }
+}
+
+class UserItems : Decodable {
+    
+    private enum CodingKeys: String, CodingKey { case count
+        case items = "items" }
+    
+    var count : Int64 = 0
+    var items : [User] = []
+}
+
+
+class ResponseUsers : Decodable {
+    
+    private enum CodingKeys: String, CodingKey {
+        case response }
+    
+    var response : UserItems = UserItems()
 }
 
 struct Photo {
