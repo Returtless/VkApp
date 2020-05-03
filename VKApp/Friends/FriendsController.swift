@@ -26,29 +26,28 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         let params: Parameters = [
             "fields": "nickname, domain, sex, photo_100"
         ]
-       
+        
         
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
         
         VKServerFactory.getServerData(
-                   method: VKServerFactory.Methods.getFriends,
-                   with: params,
-                   completion: {
-                       [weak self] array in
-                       self?.users = array as! [User]
-                       self?.usersBySections = Database.getSortedUsersData(self!.users)
-                       self?.sorterControl.letters = self!.usersBySections.map({$0.letter})
-                       self?.sorterControl.translatesAutoresizingMaskIntoConstraints = false
-                       NSLayoutConstraint.activate([
-                          self!.sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      self!.sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*self!.sorterControl.letters.count)), self!.sorterControl.centerYAnchor.constraint(equalTo: self!.tableView.centerYAnchor),
-                          self!.sorterControl.trailingAnchor.constraint(equalTo: self!.view.trailingAnchor)
-                       ])
-                       self?.tableView.reloadData()
-                   }
-               )
-        
+            method: VKServerFactory.Methods.getFriends,
+            with: params,
+            completion: {
+                [weak self] array in
+                self?.users = array as! [User]
+                self?.usersBySections = Database.getSortedUsersData(self!.users)
+                self?.sorterControl.letters = self!.usersBySections.map({$0.letter})
+                self?.sorterControl.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    self!.sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      self!.sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*self!.sorterControl.letters.count)), self!.sorterControl.centerYAnchor.constraint(equalTo: self!.tableView.centerYAnchor),
+                    self!.sorterControl.trailingAnchor.constraint(equalTo: self!.view.trailingAnchor)
+                ])
+                self?.tableView.reloadData()
+            }
+        )
         
     }
     
@@ -57,7 +56,8 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
             let photoAlbumVC = segue.destination as! PhotoListViewController
             if let index = tableView.indexPathForSelectedRow {
                 let user = usersBySections[index.section].users[index.row]
-                //photoAlbumVC.photos = user.photos
+                
+                photoAlbumVC.userId = user.id
                 photoAlbumVC.title = "\(user.firstName) \(user.lastName)"
             }
         }
@@ -92,8 +92,8 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         cell.userLabel.text = "\(user.firstName) \(user.lastName)"
         cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
         if let image = UIImage.getImage(from: user.photo100) {
-                   cell.photoView.imageView.image = image
-               }
+            cell.photoView.imageView.image = image
+        }
         
         UIView.animate(
             withDuration: 1,

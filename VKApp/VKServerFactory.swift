@@ -12,10 +12,10 @@ import Alamofire
 
 class VKServerFactory {
     
-   static func getServerData(method : Methods,
-                             with parameters: Parameters,
-                             completion: @escaping (_ array : Array<Any>?) -> Void
-   ) -> Array<Any>? {
+    static func getServerData(method : Methods,
+                              with parameters: Parameters,
+                              completion: @escaping (_ array : Array<Any>?) -> Void
+    ) -> Array<Any>? {
         
         
         var array = Array<Any>()
@@ -24,19 +24,21 @@ class VKServerFactory {
             guard let data = response.data else { return }
             
             do {
-                    do {
+                do {
                     let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions())
                     print(json)
                 } catch {
-                  print(error)
+                    print(error)
                 }
                 switch method {
                 case .getFriends :
                     let res = try JSONDecoder().decode(ResponseUsers.self, from: data)
                     array = res.response.items
                 case .getUserGroups :
-                    
                     let res = try JSONDecoder().decode(ResponseGroups.self, from: data)
+                    array = res.response.items
+                case .getAllPhotos :
+                    let res = try JSONDecoder().decode(ResponsePhotos.self, from: data)
                     array = res.response.items
                 default :
                     return
@@ -78,5 +80,6 @@ class VKServerFactory {
         case authorize
         case getAllPhotos = "photos.getAll"
         case getUserGroups = "groups.get"
+        case getSearchGroups = "groups.search"
     }
 }

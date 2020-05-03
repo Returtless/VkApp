@@ -7,17 +7,33 @@
 //
 
 import UIKit
+import Alamofire
 
 class PhotoListViewController: UIViewController {
-    
+    var userId = 0
     var photos = [Photo]()
-        let photoInteractiveTransition = PhotoInteractiveTransition()
+    let photoInteractiveTransition = PhotoInteractiveTransition()
     
     @IBOutlet weak var imageView: PhotoListImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.photos = photos
-        imageView.image = photos[0].image
+        let params: Parameters = [
+            "extended": "1",
+            "owner_id" : userId
+        ]
+        VKServerFactory.getServerData(
+            method: VKServerFactory.Methods.getAllPhotos,
+            with: params,
+            completion: {
+                [weak self] array in
+                self?.photos = array as! [Photo]
+                self?.imageView.photos = self!.photos
+                if let photo = self?.photos[0].getPhotoBigSize() {
+                    self?.imageView.image = photo
+                }
+            }
+        )
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tap)
@@ -29,7 +45,7 @@ class PhotoListViewController: UIViewController {
             let photoVC = segue.destination as! FullPhotoViewController
             photoVC.photo = photos[imageView.activePhotoIndex]
             photoVC.transitioningDelegate = self
-             self.photoInteractiveTransition.viewController = photoVC
+            self.photoInteractiveTransition.viewController = photoVC
         }
     }
     
@@ -102,8 +118,9 @@ class PhotoListImageView : UIImageView {
                 if swipeToLeft == 1 && !lastPhoto { activePhotoIndex+=1 }
                 else if swipeToLeft != 1 && !firstPhoto { activePhotoIndex-=1 }
                 
-                image = photos[activePhotoIndex].image
-                
+                if let photo = photos[activePhotoIndex].getPhotoBigSize() {
+                    image = photo
+                }
                 self.layer.opacity = 0
                 self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 

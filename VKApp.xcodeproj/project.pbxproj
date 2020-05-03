@@ -52,6 +52,7 @@
 		52B13C36245D6AB000AA02C8 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C35245D6AB000AA02C8 /* Session.swift */; };
 		52B13C38245D742600AA02C8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B13C37245D742600AA02C8 /* WebKit.framework */; };
 		52B13C3C245DBA2100AA02C8 /* VKServerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C3B245DBA2100AA02C8 /* VKServerFactory.swift */; };
+		52B13C3E245ED6B300AA02C8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C3D245ED6B300AA02C8 /* Photo.swift */; };
 		52B2B6AF2450B44F00DDBE36 /* FullPhotoAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */; };
 		52DA5341244FC13000DEF4E7 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		52B13C35245D6AB000AA02C8 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		52B13C37245D742600AA02C8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		52B13C3B245DBA2100AA02C8 /* VKServerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKServerFactory.swift; sourceTree = "<group>"; };
+		52B13C3D245ED6B300AA02C8 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoAnimationController.swift; sourceTree = "<group>"; };
 		52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
 		FE30255A9F92F6BA9F37D6D6 /* Pods_VKApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				528A488C243520820063708D /* Group.swift */,
+				52B13C3D245ED6B300AA02C8 /* Photo.swift */,
 				528A488A24350F420063708D /* User.swift */,
 				52AAF703243E7CBC00191326 /* News.swift */,
 				52B13C35245D6AB000AA02C8 /* Session.swift */,
@@ -386,6 +389,7 @@
 				520675022438F12100C76B86 /* LikeCounterControl.swift in Sources */,
 				520675042439266700C76B86 /* SorterBarControl.swift in Sources */,
 				528A488824350CBD0063708D /* FriendTableViewCell.swift in Sources */,
+				52B13C3E245ED6B300AA02C8 /* Photo.swift in Sources */,
 				528A488F243522B10063708D /* PhotoAlbumController.swift in Sources */,
 				528A489124352A790063708D /* PhotoCollectionViewCell.swift in Sources */,
 				52AAF6FF243E7B0D00191326 /* NewsViewController.swift in Sources */,

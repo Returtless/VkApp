@@ -12,13 +12,13 @@ class User: Decodable {
     var canAccessClosed: Bool = true
     var domain: String = ""
     var firstName: String = ""
-    var id: Int64 = 0
+    var id: Int = 0
     var isClosed: Bool = true
     var lastName:  String = ""
     var nickname: String = ""
-    var online: Int64 = 0
+    var online: Int = 0
     var photo100 = "photo_100"
-    var sex: Int64 = 0
+    var sex: Int = 0
     var trackCode: String = ""
     
     enum CodingKeys: String, CodingKey {
@@ -44,7 +44,7 @@ class UserItems : Decodable {
     private enum CodingKeys: String, CodingKey { case count
         case items = "items" }
     
-    var count : Int64 = 0
+    var count : Int = 0
     var items : [User] = []
 }
 
@@ -55,10 +55,4 @@ class ResponseUsers : Decodable {
         case response }
     
     var response : UserItems = UserItems()
-}
-
-struct Photo {
-    var image = UIImage()
-    var countOfLikes = 0
-    var liked = false
 }

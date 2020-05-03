@@ -17,13 +17,13 @@ class FullPhotoViewController: UIViewController {
                                                                         height: 400))
     let photoInteractiveTransition = PhotoInteractiveTransition()
     
-    var photo = Photo()
+    var photo : Photo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
         imageView.isUserInteractionEnabled = true
-        imageView.image = photo.image
+        imageView.image = photo?.getPhotoBigSize()
         let height = self.view.frame.width * 4 / 3
         imageView.frame = CGRect(x: 0,
                                  y: self.view.frame.height / 2 - height / 2,

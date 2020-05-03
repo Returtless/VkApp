@@ -14,7 +14,7 @@ class GroupsController: UITableViewController {
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     
     var groups : [Group] = []
-    
+    var userGroups : [Group] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         //groups = Database.getGroupsData()
@@ -26,6 +26,7 @@ class GroupsController: UITableViewController {
             completion: {
                 [weak self] array in
                 self?.groups = array as! [Group]
+                 self?.userGroups = self!.groups
                 self?.tableView.reloadData()
             }
         )
@@ -74,7 +75,7 @@ class GroupsController: UITableViewController {
 
 extension GroupsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // groups = Database.getGroupsData()
+        groups = userGroups
         if (!searchText.isEmpty){
             groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
         }
