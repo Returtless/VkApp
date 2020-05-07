@@ -7,33 +7,15 @@
 //
 
 import UIKit
+import RealmSwift
 
-//class Group {
-//    var name : String
-//    var avatar : UIImage?
-//    var countOfPeoples : Int = 100
-//
-//    init(name : String, avatar : String) {
-//        self.name = name
-//        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
-//        self.avatar = img
-//    }
-//
-//}
-//
-//extension Group : Equatable {
-//    static func == (lhs: Group, rhs: Group) -> Bool {
-//        lhs.name == rhs.name && lhs.avatar == rhs.avatar
-//    }
-//}
-
-class Group: Codable {
-    let id: Int
-    let name, screenName: String
-    let isClosed: Int
-    let type: String
-    let isAdmin, isMember, isAdvertiser: Int
-    let photo50, photo100, photo200: String
+class Group: Object, Codable {
+    @objc dynamic var id: Int
+    @objc dynamic var name, screenName: String
+    @objc dynamic var isClosed: Int
+    @objc dynamic var type: String
+    @objc dynamic var isAdmin, isMember, isAdvertiser: Int
+    @objc dynamic var photo50, photo100, photo200: String
     
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -46,6 +28,10 @@ class Group: Codable {
         case photo50 = "photo_50"
         case photo100 = "photo_100"
         case photo200 = "photo_200"
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }
 

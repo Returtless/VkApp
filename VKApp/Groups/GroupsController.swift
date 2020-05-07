@@ -23,7 +23,7 @@ class GroupsController: UITableViewController {
         ]
         VKServerFactory.getServerData(
             method: VKServerFactory.Methods.getUserGroups,
-            with: params,
+            with: params, typeName: Group.self,
             completion: {
                 [weak self] array in
                 self?.groups = array as! [Group]
@@ -84,14 +84,13 @@ extension GroupsController: UISearchBarDelegate {
             ]
             VKServerFactory.getServerData(
                 method: VKServerFactory.Methods.getSearchGroups,
-                with: params,
+                with: params, typeName: Group.self,
                 completion: {
                     [weak self] array in
                     self?.groups = array as! [Group]
                     self?.tableView.reloadData()
                 }
             )
-            //groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
         } else {
             groups = userGroups
             tableView.reloadData()

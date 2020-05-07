@@ -9,27 +9,24 @@
 import UIKit
 import WebKit
 import Alamofire
+import RealmSwift
 
 class VKServerFactory {
     
-    static func getServerData(method : Methods,
-                              with parameters: Parameters,
-                              completion: @escaping (_ array : Array<Any>?) -> Void
-    ) {
+    static func getServerData<T : Object>(method : Methods,
+                                          with parameters: Parameters,
+                                          typeName : T.Type,
+                                          completion: @escaping (_ array : Array<Any>?) -> Void
+    ){
         
-        
+        let dataFromRealm : [T] = getDataFromRealm()
+        if dataFromRealm.isEmpty{
         var array = Array<Any>()
         AF.request("https://api.vk.com/method/\(method.rawValue)", parameters: getFullParameters(parameters)).responseJSON{ response in
             
             guard let data = response.data else { return }
             
             do {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions())
-                    print(json)
-                } catch {
-                    print(error)
-                }
                 switch method {
                 case .getFriends :
                     let res = try JSONDecoder().decode(ResponseUsers.self, from: data)
@@ -43,7 +40,6 @@ class VKServerFactory {
                 default :
                     return
                 }
-                completion(array)
             } catch let DecodingError.dataCorrupted(context) {
                 print(context)
             } catch let DecodingError.keyNotFound(key, context) {
@@ -59,7 +55,36 @@ class VKServerFactory {
                 print("error: ", error)
             }
         }
-        //return array
+        } else {
+            completion(dataFromRealm)
+        }
+        
+    }
+    
+    static func saveDataToRealm<T : Object>(_ array: [T]) {
+        do {
+            Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm()
+            print(realm.configuration.fileURL)
+            let oldData = realm.objects(T.self)
+            realm.beginWrite()
+            realm.delete(oldData)
+            realm.add(array)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
+    }
+    
+    static func getDataFromRealm<T : Object>() -> [T]{
+        do {
+            let realm = try Realm()
+            let data = realm.objects(T.self)
+            return Array(data.map({$0 as T}))
+        } catch {
+            print(error)
+        }
+        return Array()
     }
     
     static func getFullParameters(_ params : Parameters) -> Parameters {

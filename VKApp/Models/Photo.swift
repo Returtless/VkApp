@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 // MARK: - Group
 class ResponsePhotos: Decodable {
@@ -20,13 +21,15 @@ class PhotoItems: Decodable {
 }
 
 // MARK: - Item
-class Photo: Decodable {
-    var id, albumID, ownerID: Int
-    var sizes: [Size]
-    var text: String
-    var date: Int
-    var likes: Likes
-    var reposts: Reposts
+class Photo: Object, Decodable {
+    @objc dynamic var id = 0
+    @objc dynamic var albumID = 0
+    @objc dynamic var ownerID = 0
+     var sizes = List<Size>()
+    @objc dynamic var text: String = ""
+    @objc dynamic var date: Int = 0
+    @objc dynamic var likes: Likes?
+    @objc dynamic var reposts: Reposts?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -34,6 +37,34 @@ class Photo: Decodable {
         case ownerID = "owner_id"
         case sizes, text, date
         case likes, reposts
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    required init(){
+        
+    }
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(Int.self, forKey: .id)
+        self.albumID = try container.decode(Int.self, forKey: .albumID)
+        self.ownerID = try container.decode(Int.self, forKey: .ownerID)
+        self.text = try container.decode(String.self, forKey: .text)
+        self.date = try container.decode(Int.self, forKey: .date)
+        self.likes = try container.decode(Likes.self, forKey: .likes)
+        self.reposts = try container.decode(Reposts.self, forKey: .reposts)
+       if let arr = try container.decodeIfPresent(Array<Size>.self, forKey: .sizes) {
+            // arr is now an array of Place
+        self.sizes.append(objectsIn: arr)// make a List from `arr`, however one does that
+        } else {
+            self.sizes = List()
+        }
+        
+        
     }
     
     func getPhotoBigSize() -> UIImage? {
@@ -44,16 +75,16 @@ class Photo: Decodable {
     }
     
     func getLikesCount() -> Int {
-        return likes.count
+        return likes!.count
     }
     
     func getUserLike() -> Bool {
-        return likes.userLikes > 0 ? true : false
+        return likes!.userLikes > 0 ? true : false
     }
 }
 // MARK: - Likes
-class Likes: Codable {
-    var userLikes, count: Int
+class Likes: Object, Decodable {
+    @objc dynamic var userLikes, count: Int
 
     enum CodingKeys: String, CodingKey {
         case userLikes = "user_likes"
@@ -62,13 +93,13 @@ class Likes: Codable {
 }
 
 // MARK: - Reposts
-class Reposts: Codable {
-    var count: Int
+class Reposts: Object, Decodable {
+    @objc dynamic var count: Int
 }
 
 // MARK: - Size
-class Size: Decodable {
-    var type: String
-    var url: String
-    var width, height: Int
+class Size: Object, Decodable {
+    @objc dynamic var type: String
+    @objc dynamic var url: String
+    @objc dynamic var width, height: Int
 }

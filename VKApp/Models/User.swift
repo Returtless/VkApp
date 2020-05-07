@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import RealmSwift
 
-class User: Decodable {
-    var canAccessClosed: Bool = true
-    var domain: String = ""
-    var firstName: String = ""
-    var id: Int = 0
-    var isClosed: Bool = true
-    var lastName:  String = ""
-    var nickname: String = ""
-    var online: Int = 0
-    var photo100 = "photo_100"
-    var sex: Int = 0
-    var trackCode: String = ""
+class User: Object, Decodable {
+    @objc dynamic var canAccessClosed: Bool = true
+    @objc dynamic var domain: String = ""
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var id: Int = 0
+    @objc dynamic var isClosed: Bool = true
+    @objc dynamic var lastName:  String = ""
+    @objc dynamic var nickname: String = ""
+    @objc dynamic var online: Int = 0
+    @objc dynamic var photo100 = "photo_100"
+    @objc dynamic var sex: Int = 0
+    @objc dynamic var trackCode: String = ""
     
     enum CodingKeys: String, CodingKey {
         case canAccessClosed = "can_access_closed"
@@ -37,6 +38,11 @@ class User: Decodable {
     func getFullName() -> String {
         "\(self.firstName) \(self.lastName)"
     }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+
 }
 
 class UserItems : Decodable {

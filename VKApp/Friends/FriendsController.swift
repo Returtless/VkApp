@@ -33,7 +33,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         
         VKServerFactory.getServerData(
             method: VKServerFactory.Methods.getFriends,
-            with: params,
+            with: params, typeName: User.self,
             completion: {
                 [weak self] array in
                 self?.users = array as! [User]

@@ -23,7 +23,7 @@ class PhotoListViewController: UIViewController {
         ]
         VKServerFactory.getServerData(
             method: VKServerFactory.Methods.getAllPhotos,
-            with: params,
+            with: params, typeName: Photo.self,
             completion: {
                 [weak self] array in
                 self?.photos = array as! [Photo]

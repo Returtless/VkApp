@@ -107,6 +107,7 @@ class News: Decodable {
         VKServerFactory.getServerData(
             method: VKServerFactory.Methods.getGroupById,
             with: params,
+            typeName: Group.self,
             completion: {
                 array in
                 group = (array as! [Group])[0]
