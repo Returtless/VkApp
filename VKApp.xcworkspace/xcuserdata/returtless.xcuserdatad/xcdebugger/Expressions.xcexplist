@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "static VKServerFactory.saveDataToRealm&lt;A&gt;(_:withoutDelete:):VKServerFactory.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "!objects.isEmpty">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Friend.__allocating_init(from:):Friend.swift">
          <PersistentStrings>
             <PersistentString
@@ -51,7 +59,7 @@
          contextName = "static VKServerFactory.getServerData&lt;A&gt;(method:with:typeName:completion:):VKServerFactory.swift">
          <PersistentStrings>
             <PersistentString
-               value = "parameters.filter({$0.key==&quot;owner_id&quot;})">
+               value = "parameters.filter(&#10;                {&#10;                    let x = $0.key&#10;                    return self.filterParams.contains(where: {$0.key == x})&#10;                }&#10;            )">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -62,7 +70,25 @@
          contextName = "static VKServerFactory.getDataFromRealm&lt;A&gt;(params:):VKServerFactory.swift">
          <PersistentStrings>
             <PersistentString
-               value = "realm.objects(T.self)">
+               value = "String(describing: Photo.CodingKeys(rawValue: String(params.first!.key)))">
+            </PersistentString>
+            <PersistentString
+               value = "T.self is Group">
+            </PersistentString>
+            <PersistentString
+               value = "T.self is Group.Type">
+            </PersistentString>
+            <PersistentString
+               value = "params.first!.key">
+            </PersistentString>
+            <PersistentString
+               value = "params">
+            </PersistentString>
+            <PersistentString
+               value = "T.self">
+            </PersistentString>
+            <PersistentString
+               value = "String(describing: o)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

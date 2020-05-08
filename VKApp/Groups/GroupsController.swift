@@ -13,13 +13,14 @@ import Alamofire
 class GroupsController: UITableViewController {
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     
-    var groups : [Group] = []
-    var userGroups : [Group] = []
+    var groups : [Group] = [] //список отображаемых групп
+    var userGroups : [Group] = [] //список групп пользователя
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //groups = Database.getGroupsData()
         let params: Parameters = [
-            "extended": "1"
+            "extended": "1",
+            "isMember" : 1
         ]
         VKServerFactory.getServerData(
             method: VKServerFactory.Methods.getUserGroups,
@@ -80,7 +81,8 @@ extension GroupsController: UISearchBarDelegate {
         if (!searchText.isEmpty){
             let params: Parameters = [
                 "q": searchText,
-                "count" : 100
+                "count" : 100,
+                Constants.useOnlyServerData.rawValue : false
             ]
             VKServerFactory.getServerData(
                 method: VKServerFactory.Methods.getSearchGroups,
