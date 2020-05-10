@@ -3,12 +3,60 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #2 in closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.allUserLastNameFirstLetters">
+            </PersistentString>
+            <PersistentString
+               value = "path.row">
+            </PersistentString>
+            <PersistentString
+               value = "self.sectionNames[sec!]">
+            </PersistentString>
+            <PersistentString
+               value = "changes">
+            </PersistentString>
+            <PersistentString
+               value = "path.section">
+            </PersistentString>
+            <PersistentString
+               value = "self.usersBySections[path.section].users">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in FriendsController.getSectionNumber(for:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "usersArray[18].lastName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "users[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static VKServerFactory.saveDataToRealm&lt;A&gt;(_:withoutDelete:):VKServerFactory.swift">
          <PersistentStrings>
             <PersistentString
                value = "!objects.isEmpty">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.getNumber(num:):FriendsController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static VKServerFactory.saveUsersData(_:):VKServerFactory.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.webView(_:decidePolicyFor:decisionHandler:):ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "Friend.__allocating_init(from:):Friend.swift">
@@ -21,6 +69,68 @@
             </PersistentString>
             <PersistentString
                value = "try values.decode(Int.self, forKey: .id)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static VKServerFactory.getDataFromRealm&lt;A&gt;(params:):VKServerFactory.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "params">
+            </PersistentString>
+            <PersistentString
+               value = "T.self is Group">
+            </PersistentString>
+            <PersistentString
+               value = "String(describing: Photo.CodingKeys(rawValue: String(params.first!.key)))">
+            </PersistentString>
+            <PersistentString
+               value = "params.first!.key">
+            </PersistentString>
+            <PersistentString
+               value = "T.self">
+            </PersistentString>
+            <PersistentString
+               value = "T.self is Group.Type">
+            </PersistentString>
+            <PersistentString
+               value = "String(describing: o)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static ObjectUtil.getSwiftProperties(_:):Object.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.users.didset:FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Array(letters)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "main:AppDelegate.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in static ObjectUtil.getSwiftProperties(_:):Object.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.configuration.fileURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(firstLetterOfNewUser())">
+            </PersistentString>
+            <PersistentString
+               value = "IndexPath(row: x, section: self.getSectionNumber(for: (self.users?[x])!)!) })">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -39,6 +149,52 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Realm.init():Realm.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.configuration.fileURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static VKServerFactory.getServerData&lt;A&gt;(method:with:typeName:completion:):VKServerFactory.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "parameters.filter(&#10;                {&#10;                    let x = $0.key&#10;                    return self.filterParams.contains(where: {$0.key == x})&#10;                }&#10;            )">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ResponsePhotos.__allocating_init(from:):Photo.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "decoder.singleValueContainer()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in FriendsController.users.didset:FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "users">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.numberOfSections(in:):FriendsController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FriendsController.getSectionNumber(for:):FriendsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "users as! [User]">
+            </PersistentString>
+            <PersistentString
+               value = "users![row-1].lastName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in Session.getFriendsList():Session.swift">
          <PersistentStrings>
             <PersistentString
@@ -52,76 +208,6 @@
             </PersistentString>
             <PersistentString
                value = "decoder.decode(Root.self, from: response.data!)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static VKServerFactory.getServerData&lt;A&gt;(method:with:typeName:completion:):VKServerFactory.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "parameters.filter(&#10;                {&#10;                    let x = $0.key&#10;                    return self.filterParams.contains(where: {$0.key == x})&#10;                }&#10;            )">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.webView(_:decidePolicyFor:decisionHandler:):ViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "static VKServerFactory.getDataFromRealm&lt;A&gt;(params:):VKServerFactory.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "String(describing: Photo.CodingKeys(rawValue: String(params.first!.key)))">
-            </PersistentString>
-            <PersistentString
-               value = "T.self is Group">
-            </PersistentString>
-            <PersistentString
-               value = "T.self is Group.Type">
-            </PersistentString>
-            <PersistentString
-               value = "params.first!.key">
-            </PersistentString>
-            <PersistentString
-               value = "params">
-            </PersistentString>
-            <PersistentString
-               value = "T.self">
-            </PersistentString>
-            <PersistentString
-               value = "String(describing: o)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "main:AppDelegate.swift">
-      </ContextState>
-      <ContextState
-         contextName = "static VKServerFactory.saveUsersData(_:):VKServerFactory.swift">
-      </ContextState>
-      <ContextState
-         contextName = "static ObjectUtil.getSwiftProperties(_:):Object.swift">
-      </ContextState>
-      <ContextState
-         contextName = "Realm.init():Realm.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.configuration.fileURL">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ResponsePhotos.__allocating_init(from:):Photo.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "decoder.singleValueContainer()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in static ObjectUtil.getSwiftProperties(_:):Object.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.configuration.fileURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
