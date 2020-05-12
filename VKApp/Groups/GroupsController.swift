@@ -84,30 +84,6 @@ class GroupsController: UITableViewController {
             }
         }
     }
-    
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        //        if editingStyle == .delete {
-        //            groups.remove(at: indexPath.row)
-        //            tableView.deleteRows(at: [indexPath], with: .fade)
-        //        }
-    }
-    
-    
-    @IBAction func addNewGroup(segue: UIStoryboardSegue) {
-        //        if segue.identifier == "addNewGroup" {
-        //            guard let addGroupController = segue.source as? AddGroupTableViewController else { return }
-        //            if let indexPath = addGroupController.tableView.indexPathForSelectedRow {
-        //               // let group = addGroupController.newGroups[indexPath.row]
-        //                //                if !groups.contains(group) {
-        //                //                    groups.append(group)
-        //                //                    tableView.reloadData()
-        //                //                }
-        //            }
-        //        }
-    }
-    
-    
 }
 
 extension GroupsController: UISearchBarDelegate {
