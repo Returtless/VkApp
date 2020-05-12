@@ -42,23 +42,15 @@ class User: Object, Decodable {
     override static func primaryKey() -> String? {
         return "id"
     }
-
+    
 }
 
 class UserItems : Decodable {
-    
-    private enum CodingKeys: String, CodingKey { case count
-        case items = "items" }
-    
     var count : Int = 0
     var items : [User] = []
 }
 
 
 class ResponseUsers : Decodable {
-    
-    private enum CodingKeys: String, CodingKey {
-        case response }
-    
     var response : UserItems = UserItems()
 }

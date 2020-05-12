@@ -142,8 +142,8 @@
             filePath = "VKApp/Models/Photo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "Photo"
             landmarkType = "3">
          </BreakpointContent>
@@ -190,9 +190,9 @@
             filePath = "VKApp/Models/Photo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "init(from:)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

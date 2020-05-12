@@ -21,28 +21,11 @@ class FriendsSearchBar: UISearchBar {
      */
     override func awakeFromNib() {
         super.awakeFromNib()
-        //если указать делегатом самого себя то поиск ломается, но будет работать searchBarShouldBeginEditing для тапа по бару,
-        //чтобы обойти использовал невидимую  view для тапа
-        //self.delegate = self
         addHiddenViewForTap()
-        
     }
     
     @objc func searchWasTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        
-        // не удалось анимировать полученную imageView с лупой
-        //    if let textfield = self.value(forKey: "searchField") as? UITextField {
-        
-        //        if let glassIconView = textfield.leftView as? UIImageView {
-        //            let animation = CASpringAnimation(keyPath: "position.x")
-        //            animation.fromValue = self.frame.width / 2
-        //            animation.toValue = 10
-        //            animation.duration = 3
-        //            animation.fillMode = .forwards
-        //            glassIconView.layer.add(animation, forKey: nil)
-        //        }
-        //    }
         self.setPositionAdjustment(.init(horizontal: 0, vertical: 0), for: .search)
         self.setShowsCancelButton(true, animated: true)
         //на кнопку отмены добавил гестуру для сброса бара в начальное положение
@@ -76,25 +59,3 @@ class FriendsSearchBar: UISearchBar {
         addHiddenViewForTap()
     }
 }
-
-//extension FriendsSearchBar : UISearchBarDelegate {
-//    func cancelButtonWasTapped(_ searchBar: UISearchBar) {
-//        searchBar.text = ""
-//        self.setShowsCancelButton(false, animated: true)
-//        searchBar.endEditing(true)
-//        self.setPositionAdjustment(.init(horizontal: self.frame.width / 2, vertical: 0), for: .search)
-//        addHiddenViewForTap()
-//    }
-//
-//    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-//        searchBar.setShowsCancelButton(true, animated: true)
-//        UIView.animate(
-//            withDuration: 1,
-//            animations: {
-//
-//                self.setPositionAdjustment(.init(horizontal: 0, vertical: 0), for: .search)
-//
-//        })
-//        return true
-//    }
-//}

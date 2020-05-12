@@ -25,12 +25,12 @@ class Photo: Object, Decodable {
     @objc dynamic var id = 0
     @objc dynamic var albumID = 0
     @objc dynamic var ownerID = 0
-     var sizes = List<Size>()
+    var sizes = List<Size>()
     @objc dynamic var text: String = ""
     @objc dynamic var date: Int = 0
     @objc dynamic var likes: Likes?
     @objc dynamic var reposts: Reposts?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case albumID = "album_id"
@@ -43,9 +43,6 @@ class Photo: Object, Decodable {
         return "id"
     }
     
-    required init(){
-        
-    }
     required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -57,14 +54,11 @@ class Photo: Object, Decodable {
         self.date = try container.decode(Int.self, forKey: .date)
         self.likes = try container.decode(Likes.self, forKey: .likes)
         self.reposts = try container.decode(Reposts.self, forKey: .reposts)
-       if let arr = try container.decodeIfPresent(Array<Size>.self, forKey: .sizes) {
-            // arr is now an array of Place
-        self.sizes.append(objectsIn: arr)// make a List from `arr`, however one does that
+        if let arr = try container.decodeIfPresent(Array<Size>.self, forKey: .sizes) {
+            self.sizes.append(objectsIn: arr)
         } else {
             self.sizes = List()
         }
-        
-        
     }
     
     func getPhotoBigSize() -> UIImage? {
@@ -85,7 +79,7 @@ class Photo: Object, Decodable {
 // MARK: - Likes
 class Likes: Object, Decodable {
     @objc dynamic var userLikes, count: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case userLikes = "user_likes"
         case count

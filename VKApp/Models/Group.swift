@@ -36,19 +36,11 @@ class Group: Object, Codable {
 }
 
 class GroupItems : Decodable {
-    
-    private enum CodingKeys: String, CodingKey { case count
-        case items }
-    
-    var count : Int64 = 0
+    var count : Int = 0
     var items : [Group] = []
 }
 
 
 class ResponseGroups : Decodable {
-    
-    private enum CodingKeys: String, CodingKey {
-        case response }
-    
     var response : GroupItems = GroupItems()
 }
