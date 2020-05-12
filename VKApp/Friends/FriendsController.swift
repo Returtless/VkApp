@@ -104,6 +104,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     func pairTableAndRealm() {
         guard (try? Realm()) != nil else { return }
         users = VKServerFactory.getDataFromRealm()?.sorted(byKeyPath: "lastName")
+        print("\(User.self)s получены из Realm")
         usersToken = users!.observe { (changes: RealmCollectionChange) in
             guard let tableView = self.tableView else { return }
             switch changes {

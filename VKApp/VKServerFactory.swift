@@ -24,7 +24,7 @@ class VKServerFactory {
         if dataFromRealm!.isEmpty || useOnlyServerData  {
             var array = Array<Any>()
             AF.request("https://api.vk.com/method/\(method.rawValue)", parameters: getFullParameters(parameters)).responseJSON{ response in
-                
+                print("\(typeName) получены с сервера ВК")
                 guard let data = response.data else { return }
                 
                 do {
@@ -59,19 +59,17 @@ class VKServerFactory {
                 }
             }
         } else {
+            print("Данные получены из Realm")
             completion(dataFromRealm)
         }
         
     }
     
-    
-
-    
     static func saveDataToRealm<T : Object>(_ array: [T], withoutDelete : Bool = false) {
         do {
             Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
             let realm = try Realm()
-            print(realm.configuration.fileURL)
+            //print(realm.configuration.fileURL)
             realm.beginWrite()
             let objects = realm.objects(T.self)
             if !objects.isEmpty && !withoutDelete{
@@ -84,11 +82,12 @@ class VKServerFactory {
         }
     }
     
-    static func getDataFromRealm<T : Object>(params : Parameters = Parameters()) -> [T]{
+    static func getDataFromRealm<T : Object>(params : Parameters = Parameters()) -> Results<T>?{
         let filteredFields : [String : (String,String, String)] = [
             "owner_id" : ("ownerID", "==", "Int"),
             "q" : ("name", "CONTAINS[c]", "String"),
-            "isMember" : ("isMember", "==", "Int")
+            "isMember" : ("isMember", "==", "Int"),
+            "lastName" : ("lastName", "CONTAINS[c]", "String")
         ]
         do {
             let realm = try Realm()
@@ -106,42 +105,12 @@ class VKServerFactory {
                 }
             }
             let data = realm.objects(T.self).filter(predicate)
-            return Array(data.map({$0 as T}))
+            return data
         } catch {
             print(error)
         }
-        return Array()
+        return nil
     }
-    
-    static func getDataFromRealm<T : Object>(params : Parameters = Parameters()) -> Results<T>?{
-           let filteredFields : [String : (String,String, String)] = [
-               "owner_id" : ("ownerID", "==", "Int"),
-               "q" : ("name", "CONTAINS[c]", "String"),
-               "isMember" : ("isMember", "==", "Int"),
-               "lastName" : ("lastName", "CONTAINS[c]", "String")
-           ]
-           do {
-               let realm = try Realm()
-               var predicate = NSPredicate(value: true)
-               let filteredParams = params.filter({
-                   filteredFields[$0.key] != nil
-               })
-               //Составление предиката для выборки данных из БД
-               if let filterParam = filteredParams.first, let filterTuple = filteredFields[filterParam.key] {
-                   switch filterTuple.2 {
-                   case "Int":
-                       predicate = NSPredicate(format: "\(filterTuple.0) \(filterTuple.1) %@", NSNumber(value: filterParam.value as! Int))
-                   default:
-                       predicate = NSPredicate(format: "\(filterTuple.0) \(filterTuple.1) %@", filterParam.value as! String)
-                   }
-               }
-               let data = realm.objects(T.self).filter(predicate)
-               return data
-           } catch {
-               print(error)
-           }
-           return nil
-       }
     
     static func getFullParameters(_ params : Parameters) -> Parameters {
         var parameters = params

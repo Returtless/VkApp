@@ -8,10 +8,11 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class PhotoListViewController: UIViewController {
     var userId = 0
-    var photos = [Photo]()
+    var photos : Results<Photo>?
     let photoInteractiveTransition = PhotoInteractiveTransition()
     
     @IBOutlet weak var imageView: PhotoListImageView!
@@ -26,9 +27,9 @@ class PhotoListViewController: UIViewController {
             with: params, typeName: Photo.self,
             completion: {
                 [weak self] array in
-                self?.photos = array as! [Photo]
-                self?.imageView.photos = self!.photos
-                if let photo = self?.photos[0].getPhotoBigSize() {
+                self?.photos = array
+                self?.imageView.photos = array
+                if let photo = array![0].getPhotoBigSize() {
                     self?.imageView.image = photo
                 }
             }
@@ -43,7 +44,7 @@ class PhotoListViewController: UIViewController {
         
         if segue.identifier == "openFullPhotoOnViewSegue" {
             let photoVC = segue.destination as! FullPhotoViewController
-            photoVC.photo = photos[imageView.activePhotoIndex]
+            photoVC.photo = photos![imageView.activePhotoIndex]
             photoVC.transitioningDelegate = self
             self.photoInteractiveTransition.viewController = photoVC
         }
@@ -55,7 +56,7 @@ class PhotoListViewController: UIViewController {
 }
 
 class PhotoListImageView : UIImageView {
-    var photos = [Photo]()
+    var photos : Results<Photo>?
     private var popupOffset: CGFloat {
         return self.frame.width + 100
     }
@@ -98,7 +99,7 @@ class PhotoListImageView : UIImageView {
             
         case .ended:
             let shouldComplete = recognizer.velocity(in: self).x > 0
-            let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos.count-1 //фотография последняя при свайпе вправо
+            let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos!.count-1 //фотография последняя при свайпе вправо
             let firstPhoto = swipeToLeft != 1 && activePhotoIndex==0 //фотография первая при свайпе влево
             //флаг того, что изменилось направление
             var reversedWasChanged = false
@@ -118,7 +119,7 @@ class PhotoListImageView : UIImageView {
                 if swipeToLeft == 1 && !lastPhoto { activePhotoIndex+=1 }
                 else if swipeToLeft != 1 && !firstPhoto { activePhotoIndex-=1 }
                 
-                if let photo = photos[activePhotoIndex].getPhotoBigSize() {
+                if let photo = photos![activePhotoIndex].getPhotoBigSize() {
                     image = photo
                 }
                 self.layer.opacity = 0
