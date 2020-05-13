@@ -24,7 +24,7 @@ class VKServerFactory {
         if dataFromRealm!.isEmpty || useOnlyServerData  {
             var array = Array<Any>()
             AF.request("https://api.vk.com/method/\(method.rawValue)", parameters: getFullParameters(parameters)).responseJSON{ response in
-                print("\(typeName) получены с сервера ВК")
+                print("\(typeName)s получены с сервера ВК")
                 guard let data = response.data else { return }
                 
                 do {
@@ -59,7 +59,7 @@ class VKServerFactory {
                 }
             }
         } else {
-            print("Данные получены из Realm")
+            print("\(typeName)s получены из Realm")
             completion(dataFromRealm)
         }
         

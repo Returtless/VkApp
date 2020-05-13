@@ -13,7 +13,7 @@ import RealmSwift
 typealias ResultsForUser = Results<User>
 
 class FriendsController: UIViewController, UINavigationControllerDelegate {
-    let onlyRealm = true
+    let onlyRealm = false
     
     var sectionNames : [String] = [] //массив с буквами для секций
     var allUserLastNameFirstLetters : [String] = [] //массив первых букв всех юзеров для отслеживания изменений
@@ -38,24 +38,21 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
-        //флаг всегда true, так как получаем данные из реалма
-        if onlyRealm {
-            pairTableAndRealm()
-        } else {
-            let params: Parameters = [
-                "fields": "nickname, domain, sex, photo_100"
-            ]
-            VKServerFactory.getServerData(
-                method: VKServerFactory.Methods.getFriends,
-                with: params, typeName: User.self,
-                completion: {
-                    [weak self] array in
-                    self?.users = array
-                    self?.initSorterControl()
-                    self?.tableView.reloadData()
-                }
-            )
-        }
+        let params: Parameters = [
+            "fields": "nickname, domain, sex, photo_100"
+        ]
+        VKServerFactory.getServerData(
+            method: VKServerFactory.Methods.getFriends,
+            with: params, typeName: User.self,
+            completion: {
+                [weak self] array in
+                self?.users = array!.sorted(byKeyPath: "lastName")
+                self?.pairTableAndRealm()
+                self?.initSorterControl()
+                self?.tableView.reloadData()
+            }
+        )
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,9 +100,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     
     func pairTableAndRealm() {
         guard (try? Realm()) != nil else { return }
-        users = VKServerFactory.getDataFromRealm()?.sorted(byKeyPath: "lastName")
-        print("\(User.self)s получены из Realm")
-        usersToken = users!.observe { (changes: RealmCollectionChange) in
+        usersToken = users?.observe { (changes: RealmCollectionChange) in
             guard let tableView = self.tableView else { return }
             switch changes {
             case .initial:

@@ -56,21 +56,7 @@ class ViewController: UIViewController {
             selector: #selector(keyboardWillBeHidden(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
-        //нужно отключить интерактивность, чтоб кнопки не нажимались под анимацией
-        // self.view.isUserInteractionEnabled = false
-        //        cloudIndicator.configure()
-        //        UIView.animate(withDuration: 1, delay : 5, animations: {
-        //            self.cloudIndicator.alpha = 0
-        //        })
-        
         helloLabel.alpha = 0
-        //        UIView.animate(withDuration: 2, delay : 6, animations: {
-        //            self.helloLabel.alpha = 1
-        //        }, completion : { _ in self.helloLabel.alpha = 0})
-        //        scrollView.alpha = 0
-        //        UIView.animate(withDuration: 2, delay : 8, animations: {
-        //            self.scrollView.alpha = 1
-        //        }, completion : { _ in self.view.isUserInteractionEnabled = true})
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -143,8 +129,7 @@ extension ViewController: WKNavigationDelegate {
                 return dict
         }
         
-        let token = params["access_token"]
-        if let unwrappedToken = token, let unwrappedId = params["user_id"] {
+        if let unwrappedToken = params["access_token"], let unwrappedId = params["user_id"] {
             let session = Session.instance
             session.token = unwrappedToken
             session.userId = Int(unwrappedId)!

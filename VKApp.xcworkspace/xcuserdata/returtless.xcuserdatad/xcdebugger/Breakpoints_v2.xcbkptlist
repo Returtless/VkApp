@@ -14,8 +14,8 @@
             filePath = "VKApp/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "webView(_:decidePolicyFor:decisionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "VKApp/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -97,22 +97,6 @@
             startingLineNumber = "28"
             endingLineNumber = "28"
             landmarkName = "getServerData(method:with:typeName:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BB5042A0-6CE2-445B-894B-493312B9F6B8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VKApp/Groups/GroupsController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -302,8 +286,8 @@
             filePath = "VKApp/Groups/GroupsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "searchBar(_:textDidChange:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -343,54 +327,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A3726871-B96D-41D6-8C78-364161221F03"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VKApp/Friends/FriendsController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "pairTableAndRealm()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A3726871-B96D-41D6-8C78-364161221F03 - 31e21dbe58d509bc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VKApp.FriendsController.pairTableAndRealm() -&gt; ()"
-                  moduleName = "VKApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "1095">
-               </Location>
-               <Location
-                  uuid = "A3726871-B96D-41D6-8C78-364161221F03 - d8eb166fb6d8f3e5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (RealmSwift.RealmCollectionChange&lt;RealmSwift.Results&lt;VKApp.User&gt;&gt;) -&gt; () in VKApp.FriendsController.pairTableAndRealm() -&gt; ()"
-                  moduleName = "VKApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "59">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "AD2F2388-85D8-4490-ABC9-03D0357605CA"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -398,8 +334,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "pairTableAndRealm()"
             landmarkType = "7">
             <Locations>
@@ -446,8 +382,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "FriendsController"
             landmarkType = "21">
          </BreakpointContent>
@@ -462,8 +398,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "pairTableAndRealm()"
             landmarkType = "7">
             <Locations>
@@ -478,8 +414,8 @@
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
                   offsetFromSymbolStart = "1282">
                </Location>
                <Location
@@ -493,8 +429,8 @@
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "121"
-                  endingLineNumber = "121"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
                   offsetFromSymbolStart = "169">
                </Location>
             </Locations>
@@ -510,8 +446,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "pairTableAndRealm()"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,8 +462,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,8 +478,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "pairTableAndRealm()"
             landmarkType = "7">
             <Locations>
@@ -558,8 +494,8 @@
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
                   offsetFromSymbolStart = "1282">
                </Location>
                <Location
@@ -573,8 +509,8 @@
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "121"
-                  endingLineNumber = "121"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
                   offsetFromSymbolStart = "169">
                </Location>
             </Locations>
@@ -590,8 +526,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "pairTableAndRealm()"
             landmarkType = "7">
          </BreakpointContent>
@@ -606,8 +542,8 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "pairTableAndRealm()"
             landmarkType = "7">
             <Locations>
@@ -622,8 +558,8 @@
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
                   offsetFromSymbolStart = "445">
                </Location>
                <Location
@@ -637,8 +573,8 @@
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Friends/FriendsController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
                   offsetFromSymbolStart = "34">
                </Location>
             </Locations>

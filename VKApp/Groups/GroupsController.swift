@@ -14,30 +14,29 @@ import RealmSwift
 class GroupsController: UITableViewController {
     
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
-    let onlyRealm = true
+    
     var groups : Results<Group>?//список отображаемых групп
     var userGroups : Results<Group>?//список групп пользователя
     var groupsToken : NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (onlyRealm){
-            pairTableAndRealm()
-        } else {
-            let params: Parameters = [
-                "extended": "1",
-                "isMember" : 1
-            ]
-            VKServerFactory.getServerData(
-                method: VKServerFactory.Methods.getUserGroups,
-                with: params, typeName: Group.self,
-                completion: {
-                    [weak self] array in
-                    self?.groups = array
-                    self?.userGroups = self!.groups
-                    self?.tableView.reloadData()
-                }
-            )
-        }
+        let params: Parameters = [
+            "extended": "1",
+            "isMember" : 1
+        ]
+        VKServerFactory.getServerData(
+            method: VKServerFactory.Methods.getUserGroups,
+            with: params, typeName: Group.self,
+            completion: {
+                [weak self] array in
+                self?.groups = array?.sorted(byKeyPath: "name")
+                self?.userGroups = self!.groups
+                self?.pairTableAndRealm()
+                self?.tableView.reloadData()
+            }
+        )
+        
         tableView.rowHeight = CGFloat(70)
     }
     
@@ -58,14 +57,8 @@ class GroupsController: UITableViewController {
     }
     
     func pairTableAndRealm() {
-        let params: Parameters = [
-            "extended": "1",
-            "isMember" : 1
-        ]
-        groups = VKServerFactory.getDataFromRealm(params: params)?.sorted(byKeyPath: "name")
-        print("\(Group.self)s получены из Realm")
         userGroups = groups
-        groupsToken = groups!.observe { [weak self] (changes: RealmCollectionChange) in
+        groupsToken = groups?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
             switch changes {
             case .initial:
