@@ -38,12 +38,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
-        let params: Parameters = [
-            "fields": "nickname, domain, sex, photo_100"
-        ]
-        VKServerFactory.getServerData(
-            method: VKServerFactory.Methods.getFriends,
-            with: params, typeName: User.self,
+        DataService.getAllFriends(
             completion: {
                 [weak self] array in
                 self?.users = array!.sorted(byKeyPath: "lastName")
@@ -52,7 +47,6 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
                 self?.tableView.reloadData()
             }
         )
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -79,6 +73,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     }
     
     func initUserArrays(){
+        //инициализация всех дополнительных массивов и сортера
         allUserLastNameFirstLetters = users!.map({
             if let first = $0.lastName.first {
                 return String(first)
@@ -135,7 +130,9 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         
     }
     func calculateIndexPath(for x: Int) -> IndexPath {
+        //получаем номер секции из которой удалили/изменили юзера. Так как в основном массиве запись ищменилась на лету, используем доп массив с буквами фамилий для вычисления по индексу
         let sec = self.sectionNames.firstIndex(where: {$0 ==  self.allUserLastNameFirstLetters[x]})
+        //рассчитываем номер строки в секции
         var row = x
         for i in (0..<x).reversed() {
             if self.allUserLastNameFirstLetters[i] == self.allUserLastNameFirstLetters[x]{
@@ -149,12 +146,14 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     }
     
     func calculateIndexPathInTableViewWithUpdateData(for insertedRow : Int) -> IndexPath{
+        //получаем первую букву фамилии нового юзера
         let firstLetterOfNewUser = { () -> String in
             if let first = self.users![insertedRow].lastName.first {
                 return String(first)
             } else {
                 return ""
             }}
+        //ищем секцию по букве фамилии
         let nameSection = self.sectionNames.first(where: {$0 == firstLetterOfNewUser()})
         self.initUserArrays()
         let path = self.calculateIndexPath(for: insertedRow)
@@ -164,8 +163,10 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         }
         return path
     }
+    
     func calculateIndexPathInTableViewWithUpdateData(from deletedRow : Int) -> IndexPath{
         let path = self.calculateIndexPath(for: deletedRow)
+        //при удалении юзера нужно удалить запись и из доп массива и из массива секций, если секция пустая
         self.allUserLastNameFirstLetters.remove(at: deletedRow)
         if (self.allUserLastNameFirstLetters.filter({$0 == self.sectionNames[path.section]}).isEmpty){
             self.sectionNames.remove(at: path.section)
@@ -226,9 +227,9 @@ extension FriendsController: UISearchBarDelegate {
             let params : Parameters = [
                 "lastName" : searchText
             ]
-            users = VKServerFactory.getDataFromRealm(params: params)?.sorted(byKeyPath: "lastName")
+            users = DataService.getDataFromRealm(params: params)?.sorted(byKeyPath: "lastName")
         } else {
-            users = VKServerFactory.getDataFromRealm()?.sorted(byKeyPath: "lastName")
+            users = DataService.getDataFromRealm()?.sorted(byKeyPath: "lastName")
         }
         initUserArrays()
         tableView.reloadData()

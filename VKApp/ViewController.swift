@@ -59,36 +59,6 @@ class ViewController: UIViewController {
         helloLabel.alpha = 0
         
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "loginSegue" {
-            
-        }
-    }
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        switch identifier {
-        case "loginSegue":
-            
-            let isAuth = login()
-            
-            if !isAuth {
-                loginField.text = nil
-                passwordField.text = nil
-                createDialogWindow(title: "Внимание!", message: "Вы ввели неверную комбинацию логин/пароль")
-            }
-            
-            return isAuth
-        default:
-            return true
-        }
-    }
-    
-    func login() -> Bool {
-        let login = loginField.text!
-        let password = passwordField.text!
-        
-        return login == "admin" && password == "123456"
-    }
-    
     
     @objc func keyboardWasShown(notification: Notification) {
         
@@ -100,13 +70,6 @@ class ViewController: UIViewController {
     
     @objc func keyboardWillBeHidden(notification: Notification) {
         scrollBottomConstraint.constant = 0
-    }
-    
-    func createDialogWindow(title ttl : String, message msg : String){
-        let alert = UIAlertController(title: ttl, message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true, completion: nil)
-        
     }
 }
 
@@ -134,8 +97,11 @@ extension ViewController: WKNavigationDelegate {
             Session.instance.userId = Int(unwrappedId)!
             print(unwrappedToken)
             print(unwrappedId)
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
         }
-        decisionHandler(.cancel)
+        
         performSegue(withIdentifier: "loginSegue", sender: self)
     }
 }

@@ -21,13 +21,7 @@ class GroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let params: Parameters = [
-            "extended": "1",
-            "isMember" : 1
-        ]
-        VKServerFactory.getServerData(
-            method: VKServerFactory.Methods.getUserGroups,
-            with: params, typeName: Group.self,
+        DataService.getAllGroups(
             completion: {
                 [weak self] array in
                 self?.groups = array?.sorted(byKeyPath: "name")
@@ -83,14 +77,8 @@ extension GroupsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         groups = userGroups
         if (!searchText.isEmpty){
-            let params: Parameters = [
-                "q": searchText,
-                "count" : 100,
-                Constants.useOnlyServerData.rawValue : false
-            ]
-            VKServerFactory.getServerData(
-                method: VKServerFactory.Methods.getSearchGroups,
-                with: params, typeName: Group.self,
+            DataService.getSearchedGroups(
+                searchText: searchText,
                 completion: {
                     [weak self] array in
                     self?.groups = array

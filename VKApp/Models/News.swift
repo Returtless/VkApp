@@ -99,21 +99,22 @@ class News: Decodable {
         self.postID = postID
     }
     
-    func getAuthorInfo() -> Group{
-        let params: Parameters = [
-            "group_id": abs(self.sourceID)
-        ]
-        var group : Group? = nil
-        VKServerFactory.getServerData(
-            method: VKServerFactory.Methods.getGroupById,
-            with: params,
-            typeName: Group.self,
-            completion: {
-                array in
-                group = (array as! [Group])[0]
-            }
-        )
-        return group!
+    func getAuthorInfo() -> Group?{
+//        let params: Parameters = [
+//            "group_id": abs(self.sourceID)
+//        ]
+//        var group : Group? = nil
+//        DataService.getServerData(
+//            method: DataService.Methods.getGroupById,
+//            with: params,
+//            typeName: Group.self,
+//            completion: {
+//                array in
+//                group = (array as! [Group])[0]
+//            }
+//        )
+//        return group!
+        return nil
     }
 }
 

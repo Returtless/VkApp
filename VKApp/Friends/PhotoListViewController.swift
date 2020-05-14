@@ -18,13 +18,7 @@ class PhotoListViewController: UIViewController {
     @IBOutlet weak var imageView: PhotoListImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let params: Parameters = [
-            "extended": "1",
-            "owner_id" : userId
-        ]
-        VKServerFactory.getServerData(
-            method: VKServerFactory.Methods.getAllPhotos,
-            with: params, typeName: Photo.self,
+        DataService.getAllPhotosForUser(userId: userId,
             completion: {
                 [weak self] array in
                 self?.photos = array
