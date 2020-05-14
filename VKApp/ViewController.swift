@@ -130,9 +130,8 @@ extension ViewController: WKNavigationDelegate {
         }
         
         if let unwrappedToken = params["access_token"], let unwrappedId = params["user_id"] {
-            let session = Session.instance
-            session.token = unwrappedToken
-            session.userId = Int(unwrappedId)!
+            Session.instance.token = unwrappedToken
+            Session.instance.userId = Int(unwrappedId)!
             print(unwrappedToken)
             print(unwrappedId)
         }
@@ -148,7 +147,7 @@ extension UIImage {
                 print("Unable to create URL")
                 return nil
         }
-
+        
         var image: UIImage? = nil
         do {
             let data = try Data(contentsOf: url, options: [])
