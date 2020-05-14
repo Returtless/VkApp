@@ -34,13 +34,3 @@ class Group: Object, Codable {
         return "id"
     }
 }
-
-class GroupItems : Decodable {
-    var count : Int = 0
-    var items : [Group] = []
-}
-
-
-class ResponseGroups : Decodable {
-    var response : GroupItems = GroupItems()
-}

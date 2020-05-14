@@ -52,34 +52,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "2479804A-F3A4-43EF-8CFC-BBF4CE5B5870 - 23c033507c2d5174"
+                  uuid = "2479804A-F3A4-43EF-8CFC-BBF4CE5B5870 - f6e17f6b69d703ba"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static VKApp.VKServerFactory.getServerData(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;Swift.Array&lt;Any&gt;&gt;"
+                  symbolName = "static VKApp.VKServerFactory.getServerData&lt;A where A: RealmSwift.Object, A: Swift.Decodable&gt;(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;, typeName: A.Type, completion: (Swift.Optional&lt;RealmSwift.Results&lt;A&gt;&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "VKApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/VKServerFactory.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "589">
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "1378">
                </Location>
                <Location
-                  uuid = "2479804A-F3A4-43EF-8CFC-BBF4CE5B5870 - 16d8b9e8b4a47db3"
+                  uuid = "2479804A-F3A4-43EF-8CFC-BBF4CE5B5870 - 33ae778b29ec45e6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in static VKApp.VKServerFactory.getServerData(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;Swift.Array&lt;Any&gt;&gt;"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in static VKApp.VKServerFactory.getServerData&lt;A where A: RealmSwift.Object, A: Swift.Decodable&gt;(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;, typeName: A.Type, completion: (Swift.Optional&lt;RealmSwift.Results&lt;A&gt;&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "VKApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/returtless/Repository/VkApp/VKApp/VKServerFactory.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "278">
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "385">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "VKApp/Models/Photo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "Photo"
             landmarkType = "3">
          </BreakpointContent>
@@ -174,58 +174,10 @@
             filePath = "VKApp/Models/Photo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "init()"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "init(from:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "99283655-7CFC-4280-B792-E2FC765395E2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VKApp/VKServerFactory.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "getServerData(method:with:typeName:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "99283655-7CFC-4280-B792-E2FC765395E2 - 42b6845401653241"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static VKApp.VKServerFactory.getServerData&lt;A where A: RealmSwift.Object&gt;(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;, typeName: A.Type, completion: (Swift.Optional&lt;Swift.Array&lt;Any&gt;&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "VKApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/VKServerFactory.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "526">
-               </Location>
-               <Location
-                  uuid = "99283655-7CFC-4280-B792-E2FC765395E2 - f4ab71d86a35470f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in static VKApp.VKServerFactory.getServerData&lt;A where A: RealmSwift.Object&gt;(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;, typeName: A.Type, completion: (Swift.Optional&lt;Swift.Array&lt;Any&gt;&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "VKApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/VKServerFactory.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "323">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -576,6 +528,166 @@
                   startingLineNumber = "110"
                   endingLineNumber = "110"
                   offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59EDAA8D-2F60-4813-BD2C-5335D0A678DB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/VKServerFactory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "getServerData(method:with:typeName:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3E74A020-A0B4-4E4F-BE46-0682489140E6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/Models/Photo.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "getPhotoBigSize()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3E74A020-A0B4-4E4F-BE46-0682489140E6 - ab35b00e0ec592fe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VKApp.Photo.getPhotoBigSize() -&gt; Swift.Optional&lt;__C.UIImage&gt;"
+                  moduleName = "VKApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Models/Photo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "3E74A020-A0B4-4E4F-BE46-0682489140E6 - e2c659ed2226f716"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (VKApp.Size) -&gt; Swift.Bool in VKApp.Photo.getPhotoBigSize() -&gt; Swift.Optional&lt;__C.UIImage&gt;"
+                  moduleName = "VKApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/Models/Photo.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9B9AB746-D547-48D7-A01F-FFD9BB3ECA7C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/Models/Photo.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "getPhotoBigSize()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "925F3D15-4680-48E9-8508-262F3D0EA183"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/Models/Photo.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "getPhotoBigSize()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9AFA7AF7-10B1-49BE-B1A2-A2F48DDD425D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/Friends/PhotoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F818290-358A-4F0E-95AB-DE75DBB8A249"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/VKServerFactory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "getServerData(method:with:typeName:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2F818290-358A-4F0E-95AB-DE75DBB8A249 - f6e17f6b69d703ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static VKApp.VKServerFactory.getServerData&lt;A where A: RealmSwift.Object, A: Swift.Decodable&gt;(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;, typeName: A.Type, completion: (Swift.Optional&lt;RealmSwift.Results&lt;A&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "VKApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/VKServerFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "1345">
+               </Location>
+               <Location
+                  uuid = "2F818290-358A-4F0E-95AB-DE75DBB8A249 - 33ae778b29ec45e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in static VKApp.VKServerFactory.getServerData&lt;A where A: RealmSwift.Object, A: Swift.Decodable&gt;(method: VKApp.VKServerFactory.Methods, with: Swift.Dictionary&lt;Swift.String, Any&gt;, typeName: A.Type, completion: (Swift.Optional&lt;RealmSwift.Results&lt;A&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "VKApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/returtless/Repository/VkApp/VKApp/VKServerFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "385">
                </Location>
             </Locations>
          </BreakpointContent>

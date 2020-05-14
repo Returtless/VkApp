@@ -13,10 +13,10 @@ import RealmSwift
 
 class VKServerFactory {
     
-    static func getServerData<T : Object>(method : Methods,
-                                          with parameters: Parameters,
-                                          typeName : T.Type,
-                                          completion: @escaping (_ array : Results<T>?) -> Void){
+    static func getServerData<T : Object & Decodable>(method : Methods,
+                                                      with parameters: Parameters,
+                                                      typeName : T.Type,
+                                                      completion: @escaping (_ array : Results<T>?) -> Void){
         let dataFromRealm : Results<T>? = getDataFromRealm(params: parameters)
         let useOnlyServerData : Bool = parameters[Constants.useOnlyServerData.rawValue] as? Bool ?? false
         //если данные есть в БД, то берем их оттуда, иначе делаем запрос к серверу
@@ -28,19 +28,18 @@ class VKServerFactory {
                 guard let data = response.data else { return }
                 
                 do {
+                    let res : Any?
                     switch method {
                     case .getFriends :
-                        let res = try JSONDecoder().decode(ResponseUsers.self, from: data)
-                        array = res.response.items
+                        res = try JSONDecoder().decode(Response<User>.self, from: data)
                     case .getUserGroups, .getSearchGroups, .getGroupById :
-                        let res = try JSONDecoder().decode(ResponseGroups.self, from: data)
-                        array = res.response.items
+                        res = try JSONDecoder().decode(Response<Group>.self, from: data)
                     case .getAllPhotos :
-                        let res = try JSONDecoder().decode(ResponsePhotos.self, from: data)
-                        array = res.response.items
+                        res = try JSONDecoder().decode(Response<Photo>.self, from: data)
                     default :
                         return
                     }
+                    array = (res! as! Response<T>).response.items
                     saveDataToRealm(array as! [T], withoutDelete : !useOnlyServerData)
                     completion(getDataFromRealm(params: parameters))
                 } catch let DecodingError.dataCorrupted(context) {
@@ -58,6 +57,7 @@ class VKServerFactory {
                     print("error: ", error)
                 }
             }
+            
         } else {
             print("\(typeName)s получены из Realm")
             completion(dataFromRealm)

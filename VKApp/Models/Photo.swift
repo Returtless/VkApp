@@ -9,18 +9,6 @@
 import UIKit
 import RealmSwift
 
-// MARK: - Group
-class ResponsePhotos: Decodable {
-    var response: PhotoItems
-}
-
-// MARK: - Response
-class PhotoItems: Decodable {
-    var count: Int
-    var items: [Photo]
-}
-
-// MARK: - Item
 class Photo: Object, Decodable {
     @objc dynamic var id = 0
     @objc dynamic var albumID = 0

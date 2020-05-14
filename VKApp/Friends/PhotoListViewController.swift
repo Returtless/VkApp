@@ -29,8 +29,10 @@ class PhotoListViewController: UIViewController {
                 [weak self] array in
                 self?.photos = array
                 self?.imageView.photos = array
-                if let photo = array![0].getPhotoBigSize() {
-                    self?.imageView.image = photo
+                if let unwrappedArray = array, !unwrappedArray.isEmpty{
+                    if let photo = unwrappedArray[0].getPhotoBigSize() {
+                        self?.imageView.image = photo
+                    }
                 }
             }
         )

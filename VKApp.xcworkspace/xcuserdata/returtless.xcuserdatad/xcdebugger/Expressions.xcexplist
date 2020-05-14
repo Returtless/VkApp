@@ -6,22 +6,22 @@
          contextName = "closure #2 in closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.allUserLastNameFirstLetters">
+               value = "self.usersBySections[path.section].users">
             </PersistentString>
             <PersistentString
                value = "path.row">
             </PersistentString>
             <PersistentString
-               value = "self.sectionNames[sec!]">
-            </PersistentString>
-            <PersistentString
                value = "changes">
             </PersistentString>
             <PersistentString
-               value = "path.section">
+               value = "self.sectionNames[sec!]">
             </PersistentString>
             <PersistentString
-               value = "self.usersBySections[path.section].users">
+               value = "self.allUserLastNameFirstLetters">
+            </PersistentString>
+            <PersistentString
+               value = "path.section">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -34,10 +34,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
+         contextName = "closure #1 in Session.getFriendsList():Session.swift">
          <PersistentStrings>
             <PersistentString
-               value = "users[0]">
+               value = "decoder.decode(Root.self, from: response.data!)">
+            </PersistentString>
+            <PersistentString
+               value = "response.data">
+            </PersistentString>
+            <PersistentString
+               value = "context">
+            </PersistentString>
+            <PersistentString
+               value = "friend?.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -50,13 +59,36 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FriendsController.getNumber(num:):FriendsController.swift">
+         contextName = "ViewController.webView(_:decidePolicyFor:decisionHandler:):ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "static VKServerFactory.saveUsersData(_:):VKServerFactory.swift">
       </ContextState>
       <ContextState
-         contextName = "ViewController.webView(_:decidePolicyFor:decisionHandler:):ViewController.swift">
+         contextName = "static VKServerFactory.getDataFromRealm&lt;A&gt;(params:):VKServerFactory.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "T.self">
+            </PersistentString>
+            <PersistentString
+               value = "T.self is Group.Type">
+            </PersistentString>
+            <PersistentString
+               value = "String(describing: o)">
+            </PersistentString>
+            <PersistentString
+               value = "params.first!.key">
+            </PersistentString>
+            <PersistentString
+               value = "params">
+            </PersistentString>
+            <PersistentString
+               value = "T.self is Group">
+            </PersistentString>
+            <PersistentString
+               value = "String(describing: Photo.CodingKeys(rawValue: String(params.first!.key)))">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "Friend.__allocating_init(from:):Friend.swift">
@@ -73,30 +105,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "static VKServerFactory.getDataFromRealm&lt;A&gt;(params:):VKServerFactory.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "params">
-            </PersistentString>
-            <PersistentString
-               value = "T.self is Group">
-            </PersistentString>
-            <PersistentString
-               value = "String(describing: Photo.CodingKeys(rawValue: String(params.first!.key)))">
-            </PersistentString>
-            <PersistentString
-               value = "params.first!.key">
-            </PersistentString>
-            <PersistentString
-               value = "T.self">
-            </PersistentString>
-            <PersistentString
-               value = "T.self is Group.Type">
-            </PersistentString>
-            <PersistentString
-               value = "String(describing: o)">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "FriendsController.getNumber(num:):FriendsController.swift">
       </ContextState>
       <ContextState
          contextName = "static ObjectUtil.getSwiftProperties(_:):Object.swift">
@@ -124,13 +133,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
+         contextName = "closure #2 in FriendsController.users.didset:FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(firstLetterOfNewUser())">
-            </PersistentString>
-            <PersistentString
-               value = "IndexPath(row: x, section: self.getSectionNumber(for: (self.users?[x])!)!) })">
+               value = "users">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -149,10 +155,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Realm.init():Realm.swift">
+         contextName = "closure #1 in closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.configuration.fileURL">
+               value = "IndexPath(row: x, section: self.getSectionNumber(for: (self.users?[x])!)!) })">
+            </PersistentString>
+            <PersistentString
+               value = "print(firstLetterOfNewUser())">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -165,18 +174,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ResponsePhotos.__allocating_init(from:):Photo.swift">
+         contextName = "Realm.init():Realm.swift">
          <PersistentStrings>
             <PersistentString
-               value = "decoder.singleValueContainer()">
+               value = "self.configuration.fileURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in FriendsController.users.didset:FriendsController.swift">
+         contextName = "ResponsePhotos.__allocating_init(from:):Photo.swift">
          <PersistentStrings>
             <PersistentString
-               value = "users">
+               value = "decoder.singleValueContainer()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -195,19 +204,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in Session.getFriendsList():Session.swift">
+         contextName = "closure #1 in PhotoListViewController.viewDidLoad():PhotoListViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "friend?.count">
+               value = "unwrappedArray[0]">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FriendsController.pairTableAndRealm():FriendsController.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "response.data">
-            </PersistentString>
-            <PersistentString
-               value = "context">
-            </PersistentString>
-            <PersistentString
-               value = "decoder.decode(Root.self, from: response.data!)">
+               value = "users[0]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

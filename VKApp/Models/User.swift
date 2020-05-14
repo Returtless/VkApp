@@ -45,12 +45,12 @@ class User: Object, Decodable {
     
 }
 
-class UserItems : Decodable {
+class Items<T:Decodable>  : Decodable {
     var count : Int = 0
-    var items : [User] = []
+    var items : [T] = []
 }
 
 
-class ResponseUsers : Decodable {
-    var response : UserItems = UserItems()
+class Response<T:Decodable> : Decodable {
+    var response : Items<T>
 }
