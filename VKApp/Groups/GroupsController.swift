@@ -30,7 +30,10 @@ class GroupsController: UITableViewController {
                 self?.tableView.reloadData()
             }
         )
-        
+        let alert = UIAlertController(title: "Важно!", message: "В новой версии появилась возможность вступать и выходить из групп в РЕАЛЬНОМ ВК! Для вступления поиском находим группу и при свайпе влево по ячейке есть кнопка для вступления", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true, completion: nil)
+
         tableView.rowHeight = CGFloat(70)
     }
     
@@ -71,6 +74,39 @@ class GroupsController: UITableViewController {
             }
         }
     }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+          
+        let joinButton = UIContextualAction(style: .normal, title: "Вступить") {  (contextualAction, view, boolValue) in
+            let item = self.groups![indexPath.row]
+            //возвращаем наши группы в список
+            self.groups = self.userGroups
+            tableView.reloadData()
+            //добавляем группы в рилм и на сервер ВК
+            DataService.postDataToServer(for: item, method: .joinGroup)
+            //чистим серчбар
+            self.groupsSearchBar.searchTextField.text = nil
+            self.groupsSearchBar.endEditing(true)
+            boolValue(true)
+        }
+          let leaveButton = UIContextualAction(style: .normal, title: "Выйти") {  (contextualAction, view, boolValue) in
+               let item = self.groups![indexPath.row]
+              //возвращаем наши группы в список
+              self.groups = self.userGroups
+              tableView.reloadData()
+              //добавляем группы на сервер ВК and isMember = 0
+               DataService.postDataToServer(for: item, method: .leaveGroup)
+              //чистим серчбар
+              self.groupsSearchBar.searchTextField.text = nil
+              self.groupsSearchBar.endEditing(true)
+              boolValue(true)
+          }
+          joinButton.backgroundColor = .green
+          leaveButton.backgroundColor = .red
+          let swipeActions = UISwipeActionsConfiguration(actions: [leaveButton, joinButton])
+          
+          return swipeActions
+      }
 }
 
 extension GroupsController: UISearchBarDelegate {

@@ -53,7 +53,7 @@ class DataService {
     }
     
     static func getSearchedGroups(searchText : String,
-                                    completion: @escaping (_ array : Results<Group>?) -> Void) {
+                                  completion: @escaping (_ array : Results<Group>?) -> Void) {
         let params: Parameters = [
             "q": searchText,
             "count" : 100,
@@ -64,6 +64,29 @@ class DataService {
             with: params, typeName: Group.self,
             completion: completion
         )
+    }
+    
+    static func postDataToServer<T: Object & Codable>(for item: T, method : Methods){
+        switch method {
+        case .joinGroup, .leaveGroup:
+            let params: Parameters = ["group_id" : (item as! Group).id]
+            AF.request("https://api.vk.com/method/" + method.rawValue, method: .post,
+                       parameters: getFullParameters(params)).responseJSON(completionHandler:  {
+                        response in
+                        print(response.result)
+                       })
+            let realm = try! Realm()
+            do {
+                realm.beginWrite()
+                (item as! Group).isMember = method == .joinGroup ? 1 : 0
+                realm.add(item)
+                try realm.commitWrite()
+            } catch let e {
+                print(e)
+            }
+        default:
+            return
+        }
     }
     
     static func getDataFromRealm<T : Object>(params : Parameters = Parameters()) -> Results<T>?{
@@ -97,9 +120,9 @@ class DataService {
     }
     
     private static func getServerData<T : Decodable & Object>(method : Methods,
-                                                      with parameters: Parameters,
-                                                      typeName : T.Type,
-                                                      completion: @escaping (_ array : Results<T>?) -> Void){
+                                                              with parameters: Parameters,
+                                                              typeName : T.Type,
+                                                              completion: @escaping (_ array : Results<T>?) -> Void){
         let dataFromRealm : Results<T>? = getDataFromRealm(params: parameters)
         let useOnlyServerData : Bool = parameters[Constants.useOnlyServerData.rawValue] as? Bool ?? false
         //если данные есть в БД, то берем их оттуда, иначе делаем запрос к серверу
@@ -125,8 +148,9 @@ class DataService {
         }
         
     }
+    
     private static func decodeRequestData<T : Object & Decodable>(method : Methods,
-                                                          data: Data) -> [T]? {
+                                                                  data: Data) -> [T]? {
         var array = Array<Any>()
         do {
             let res : Any?
@@ -158,7 +182,7 @@ class DataService {
         return array as? [T]
     }
     
-   private static func saveDataToRealm<T : Object>(_ array: [T], withoutDelete : Bool = false) {
+    private static func saveDataToRealm<T : Object>(_ array: [T], withoutDelete : Bool = false) {
         do {
             Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
             let realm = try Realm()
@@ -177,7 +201,7 @@ class DataService {
     
     
     
-   private static func getFullParameters(_ params : Parameters) -> Parameters {
+    private static func getFullParameters(_ params : Parameters) -> Parameters {
         var parameters = params
         parameters.removeValue(forKey: Constants.useOnlyServerData.rawValue)
         parameters["access_token"] = Session.instance.token
@@ -186,12 +210,12 @@ class DataService {
     }
     
     
-   private enum RequestTypes: String {
+    private enum RequestTypes: String {
         case auth
         case method
     }
     
-   private enum Methods: String {
+    enum Methods: String {
         case getFriends = "friends.get"
         case authorize
         case getAllPhotos = "photos.getAll"
@@ -199,6 +223,8 @@ class DataService {
         case getSearchGroups = "groups.search"
         case getGroupById = "groups.getById"
         case getNews = "newsfeed.get"
+        case joinGroup = "groups.join"
+        case leaveGroup = "groups.leave"
     }
     
 }
