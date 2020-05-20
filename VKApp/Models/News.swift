@@ -58,8 +58,8 @@ class News: Decodable {
     var attachments: [Attachment] = []
     var photos: Items<Photo>?
     var comments: Comments?
-    var likesNews: LikesNews?
-    var repostsNews: RepostsNews?
+    var likesNews: Likes?
+    var repostsNews: Reposts?
     var views: Views?
     var isFavorite: Bool = false
     var postID: Int = 0
@@ -72,7 +72,7 @@ class News: Decodable {
         sourceID = try container.decode(Int.self, forKey: .sourceID)
         date = try container.decode(Int.self, forKey: .date)
         type = try container.decode(String.self, forKey: .type)
-        if let arr = try container.decodeIfPresent(LikesNews.self, forKey: .likesNews) {
+        if let arr = try container.decodeIfPresent(Likes.self, forKey: .likesNews) {
             self.likesNews = arr
         } else {
             self.likesNews = nil
@@ -82,7 +82,7 @@ class News: Decodable {
         } else {
             self.comments = nil
         }
-        if let arr = try container.decodeIfPresent(RepostsNews.self, forKey: .repostsNews) {
+        if let arr = try container.decodeIfPresent(Reposts.self, forKey: .repostsNews) {
             self.repostsNews = arr
         } else {
             self.repostsNews = nil
@@ -137,25 +137,6 @@ class News: Decodable {
         return (likes.count, likes.userLikes>0)
     }
     
-    
-    
-    func getAuthorInfo() -> Group?{
-        //        let params: Parameters = [
-        //            "group_id": abs(self.sourceID)
-        //        ]
-        //        var group : Group? = nil
-        //        DataService.getServerData(
-        //            method: DataService.Methods.getGroupById,
-        //            with: params,
-        //            typeName: Group.self,
-        //            completion: {
-        //                array in
-        //                group = (array as! [Group])[0]
-        //            }
-        //        )
-        //        return group!
-        return nil
-    }
 }
 
 // MARK: - Attachment
@@ -294,36 +275,6 @@ class FirstFrame: Decodable {
     }
 }
 
-// MARK: - Photo
-class PhotoNews: Decodable {
-    var id, albumID, ownerID, userID: Int
-    var sizes: [Size]
-    var text: String
-    var date: Int
-    var accessKey: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case albumID = "album_id"
-        case ownerID = "owner_id"
-        case userID = "user_id"
-        case sizes, text, date
-        case accessKey = "access_key"
-    }
-    
-    init(id: Int, albumID: Int, ownerID: Int, userID: Int, sizes: [Size], text: String, date: Int,  accessKey: String) {
-        self.id = id
-        self.albumID = albumID
-        self.ownerID = ownerID
-        self.userID = userID
-        self.sizes = sizes
-        self.text = text
-        self.date = date
-        self.accessKey = accessKey
-    }
-}
-
-
 // MARK: - Comments
 class Comments: Decodable {
     var count, canPost: Int
@@ -336,40 +287,6 @@ class Comments: Decodable {
     init(count: Int, canPost: Int) {
         self.count = count
         self.canPost = canPost
-    }
-}
-
-// MARK: - LikesNews
-class LikesNews: Decodable {
-    var count, userLikes, canLike, canPublish: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case count
-        case userLikes = "user_likes"
-        case canLike = "can_like"
-        case canPublish = "can_publish"
-    }
-    
-    init(count: Int, userLikes: Int, canLike: Int, canPublish: Int) {
-        self.count = count
-        self.userLikes = userLikes
-        self.canLike = canLike
-        self.canPublish = canPublish
-    }
-}
-
-// MARK: - RepostsNews
-class RepostsNews: Decodable {
-    var count, userReposted: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case count
-        case userReposted = "user_reposted"
-    }
-    
-    init(count: Int, userReposted: Int) {
-        self.count = count
-        self.userReposted = userReposted
     }
 }
 
@@ -403,34 +320,3 @@ class OnlineInfo: Decodable {
         self.isMobile = isMobile
     }
 }
-
-//class News1{
-//
-//    var author : User
-//    var createDate : Date
-//    var text : String
-//    var photos : [UIImage]
-//    var comments : [Comment]
-//    var likesCount : Int
-//    var viewsCount : Int
-//
-//    init(author : User, text : String, photos : [String], comments : [Comment]) {
-//        self.author = author
-//        self.createDate = Date.init()
-//        self.text = text
-//        self.photos = photos.map({UIImage(named: $0)!})
-//        self.comments = comments
-//        self.likesCount = Int.random(in: 1...100)
-//        self.viewsCount = Int.random(in: 1...1000)
-//    }
-//}
-//
-//class Comment1 {
-//    var text : String
-//    var author : User
-//
-//    init(author : User, text : String) {
-//        self.author = author
-//        self.text = text
-//    }
-//}

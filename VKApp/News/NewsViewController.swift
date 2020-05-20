@@ -18,12 +18,12 @@ class NewsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         DataService.getNewsfeed(
-                   completion: {
-                       [weak self] array in
-                       self?.news = array
-                       self?.tableView.reloadData()
-                   }
-               )
+            completion: {
+                [weak self] array in
+                self?.news = array
+                self?.tableView.reloadData()
+            }
+        )
         //news = Database.getNewsData()
     }
 }
@@ -43,7 +43,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         let currentNews = newsItems.items[indexPath.row]
-       // cell.avatarView.imageView.image = currentNews.author.avatar
+        // cell.avatarView.imageView.image = currentNews.author.avatar
         let id = currentNews.sourceID
         var authorName = ""
         var authorImage : UIImage?
@@ -81,7 +81,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
                 } else if let link = currentNews.attachments[0].link, let photo = link.photo, let bigPhoto = photo.getPhotoBigSize() {
                     cell.photos.append(bigPhoto)
                 } else if currentNews.attachments[0].video != nil{
-                    cell.photos = [UIImage(systemName: "message")!]
+                    cell.photos = [UIImage(systemName: "arrowtriangle.right.circle")!]
                 }
             }
         } else if currentNews.photos != nil{
@@ -91,16 +91,16 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
             }
             
         }
-        //cell.commentsCounter.countOfComments = currentNews.comments.count
+
         cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
-               guard let newsItems = news, !newsItems.items.isEmpty else {
-                   return
-               }
-         let currentNews = newsItems.items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
+        guard let newsItems = news, !newsItems.items.isEmpty else {
+            return
+        }
+        let currentNews = newsItems.items[indexPath.row]
         cell.likeCounterControl.countOfLikes = currentNews.getLikesInfo().0
         cell.reloadInputViews()
     }
@@ -126,11 +126,11 @@ extension NewsViewController : CommentCounterDelegate {
     }
 }
 extension TimeInterval {
-
+    
     func toRelativeDateTime() -> String {
-
+        
         let time = NSInteger(self)
-
+        
         let seconds = time % 60
         let minutes = (time / 60) % 60
         let hours = (time / 3600)
