@@ -19,7 +19,7 @@ import Foundation
 // MARK: - News
 class ResponseNews: Decodable {
     var response: NewsItems
-
+    
     init(response: NewsItems) {
         self.response = response
     }
@@ -28,18 +28,20 @@ class ResponseNews: Decodable {
 // MARK: - Response
 class NewsItems: Decodable {
     var items: [News]
-    var Users: [User]
+    var profiles: [User]
     var groups: [Group]
     var nextFrom: String
-
+    
     enum CodingKeys: String, CodingKey {
-        case items, Users, groups
+        case items
+        case profiles
+        case groups
         case nextFrom = "next_from"
     }
-
-    init(items: [News], Users: [User], groups: [Group], nextFrom: String) {
+    
+    init(items: [News], profiles: [User], groups: [Group], nextFrom: String) {
         self.items = items
-        self.Users = Users
+        self.profiles = profiles
         self.groups = groups
         self.nextFrom = nextFrom
     }
@@ -48,84 +50,247 @@ class NewsItems: Decodable {
 
 // MARK: - Item
 class News: Decodable {
-    var canDoubtCategory, canSetCategory: Bool
-    var type: String
-    var sourceID, date: Int
-    var postType, text: String
-    var signerID, markedAsAds: Int
-    var attachments: [Attachment]
-    var postSource: PostSource
-    var comments: Comments
-    var LikesNews: LikesNews
-    var RepostsNews: RepostsNews
-    var views: Views
-    var isFavorite: Bool
-    var postID: Int
-
+    var type: String = ""
+    var sourceID = 0
+    var date: Int = 0
+    var postType = ""
+    var text: String = ""
+    var attachments: [Attachment] = []
+    var photos: Items<Photo>?
+    var comments: Comments?
+    var likesNews: LikesNews?
+    var repostsNews: RepostsNews?
+    var views: Views?
+    var isFavorite: Bool = false
+    var postID: Int = 0
+    
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        postID = try container.decode(Int.self, forKey: .postID)
+        sourceID = try container.decode(Int.self, forKey: .sourceID)
+        date = try container.decode(Int.self, forKey: .date)
+        type = try container.decode(String.self, forKey: .type)
+        if let arr = try container.decodeIfPresent(LikesNews.self, forKey: .likesNews) {
+            self.likesNews = arr
+        } else {
+            self.likesNews = nil
+        }
+        if let arr = try container.decodeIfPresent(Comments.self, forKey: .comments) {
+            self.comments = arr
+        } else {
+            self.comments = nil
+        }
+        if let arr = try container.decodeIfPresent(RepostsNews.self, forKey: .repostsNews) {
+            self.repostsNews = arr
+        } else {
+            self.repostsNews = nil
+        }
+        if let arr = try container.decodeIfPresent(Views.self, forKey: .views) {
+            self.views = arr
+        } else {
+            self.views = nil
+        }
+        if let postType = try container.decodeIfPresent(String.self, forKey: .postType) {
+            self.postType = postType
+        } else {
+            self.postType = ""
+        }
+        if let text = try container.decodeIfPresent(String.self, forKey: .text) {
+            self.text = text
+        } else {
+            self.text = ""
+        }
+        if let arr = try container.decodeIfPresent(Items<Photo>.self, forKey: .photos) {
+            self.photos = arr
+        } else {
+            self.photos = nil
+        }
+        if let arr = try container.decodeIfPresent(Array<Attachment>.self, forKey: .attachments) {
+            self.attachments = arr
+        } else {
+            self.attachments = []
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
-        case canDoubtCategory = "can_doubt_category"
-        case canSetCategory = "can_set_category"
         case type
         case sourceID = "source_id"
         case date
         case postType = "post_type"
         case text
-        case signerID = "signer_id"
-        case markedAsAds = "marked_as_ads"
         case attachments
-        case postSource = "post_source"
-        case comments, LikesNews, RepostsNews, views
+        case photos
+        case comments
+        case likesNews = "likes"
+        case repostsNews = "reposts"
+        case views
         case isFavorite = "is_favorite"
         case postID = "post_id"
     }
-
-    init(canDoubtCategory: Bool, canSetCategory: Bool, type: String, sourceID: Int, date: Int, postType: String, text: String, signerID: Int, markedAsAds: Int, attachments: [Attachment], postSource: PostSource, comments: Comments, LikesNews: LikesNews, RepostsNews: RepostsNews, views: Views, isFavorite: Bool, postID: Int) {
-        self.canDoubtCategory = canDoubtCategory
-        self.canSetCategory = canSetCategory
-        self.type = type
-        self.sourceID = sourceID
-        self.date = date
-        self.postType = postType
-        self.text = text
-        self.signerID = signerID
-        self.markedAsAds = markedAsAds
-        self.attachments = attachments
-        self.postSource = postSource
-        self.comments = comments
-        self.LikesNews = LikesNews
-        self.RepostsNews = RepostsNews
-        self.views = views
-        self.isFavorite = isFavorite
-        self.postID = postID
+    
+    func getLikesInfo() -> (Int,Bool) {
+        guard let likes = likesNews else {
+            return (0,false)
+        }
+        return (likes.count, likes.userLikes>0)
     }
     
+    
+    
     func getAuthorInfo() -> Group?{
-//        let params: Parameters = [
-//            "group_id": abs(self.sourceID)
-//        ]
-//        var group : Group? = nil
-//        DataService.getServerData(
-//            method: DataService.Methods.getGroupById,
-//            with: params,
-//            typeName: Group.self,
-//            completion: {
-//                array in
-//                group = (array as! [Group])[0]
-//            }
-//        )
-//        return group!
+        //        let params: Parameters = [
+        //            "group_id": abs(self.sourceID)
+        //        ]
+        //        var group : Group? = nil
+        //        DataService.getServerData(
+        //            method: DataService.Methods.getGroupById,
+        //            with: params,
+        //            typeName: Group.self,
+        //            completion: {
+        //                array in
+        //                group = (array as! [Group])[0]
+        //            }
+        //        )
+        //        return group!
         return nil
     }
 }
 
 // MARK: - Attachment
 class Attachment: Decodable {
-    var type: String
-    var photo: PhotoNews
+    var type: String = ""
+    var photo: Photo?
+    var link: Link?
+    var video: Video?
+    
+    enum CodingKeys: String, CodingKey {
+        case type
+        case photo
+        case link
+        case video
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try container.decode(String.self, forKey: .type)
+        if let arr = try container.decodeIfPresent(Photo.self, forKey: .photo) {
+            self.photo = arr
+        } else {
+            self.photo = nil
+        }
+        if let arr = try container.decodeIfPresent(Link.self, forKey: .link) {
+            self.link = arr
+        } else {
+            self.link = nil
+        }
+        if let arr = try container.decodeIfPresent(Video.self, forKey: .video) {
+            self.video = arr
+        } else {
+            self.video = nil
+        }
+    }
+    
+}
 
-    init(type: String, photo: PhotoNews) {
-        self.type = type
-        self.photo = photo
+// MARK: - Link
+class Link: Decodable {
+    var url: String = ""
+    var title = ""
+    var caption: String = ""
+    var photo : Photo?
+    
+    enum CodingKeys: String, CodingKey {
+        case url, title, caption, photo
+    }
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        url = try container.decode(String.self, forKey: .url)
+        title = try container.decode(String.self, forKey: .title)
+        if let caption = try container.decodeIfPresent(String.self, forKey: .caption) {
+            self.caption = caption
+        } else {
+            self.caption = ""
+        }
+        if let arr = try container.decodeIfPresent(Photo.self, forKey: .photo) {
+            self.photo = arr
+        } else {
+            self.photo = nil
+        }
+    }
+}
+
+// MARK: - Video
+class Video: Decodable {
+    var accessKey: String = ""
+    var canComment = 0
+    var canLike = 0
+    var canRepost = 0
+    var canSubscribe = 0
+    var canAddToFaves = 0
+    var canAdd = 0
+    var comments = 0
+    var date = 0
+    var videoDescription: String = ""
+    var duration: Int = 0
+    var image: [FirstFrame] = []
+    var firstFrame: [FirstFrame] = []
+    var width = 0
+    var height = 0
+    var id = 0
+    var ownerID = 0
+    var title = ""
+    var trackCode = ""
+    var type: String = ""
+    var views: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case accessKey = "access_key"
+        case canComment = "can_comment"
+        case canLike = "can_like"
+        case canRepost = "can_repost"
+        case canSubscribe = "can_subscribe"
+        case canAddToFaves = "can_add_to_faves"
+        case canAdd = "can_add"
+        case comments, date
+        case videoDescription = "description"
+        case duration, image
+        case firstFrame = "first_frame"
+        case width, height, id
+        case ownerID = "owner_id"
+        case title
+        case trackCode = "track_code"
+        case type, views
+    }
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(Int.self, forKey: .id)
+    }
+}
+
+// MARK: - FirstFrame
+class FirstFrame: Decodable {
+    var height: Int
+    var url: String
+    var width: Int
+    var withPadding: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case height, url, width
+        case withPadding = "with_padding"
+    }
+    
+    init(height: Int, url: String, width: Int, withPadding: Int?) {
+        self.height = height
+        self.url = url
+        self.width = width
+        self.withPadding = withPadding
     }
 }
 
@@ -135,19 +300,18 @@ class PhotoNews: Decodable {
     var sizes: [Size]
     var text: String
     var date: Int
-    var lat, long: Double
     var accessKey: String
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case albumID = "album_id"
         case ownerID = "owner_id"
         case userID = "user_id"
-        case sizes, text, date, lat, long
+        case sizes, text, date
         case accessKey = "access_key"
     }
-
-    init(id: Int, albumID: Int, ownerID: Int, userID: Int, sizes: [Size], text: String, date: Int, lat: Double, long: Double, accessKey: String) {
+    
+    init(id: Int, albumID: Int, ownerID: Int, userID: Int, sizes: [Size], text: String, date: Int,  accessKey: String) {
         self.id = id
         self.albumID = albumID
         self.ownerID = ownerID
@@ -155,8 +319,6 @@ class PhotoNews: Decodable {
         self.sizes = sizes
         self.text = text
         self.date = date
-        self.lat = lat
-        self.long = long
         self.accessKey = accessKey
     }
 }
@@ -165,12 +327,12 @@ class PhotoNews: Decodable {
 // MARK: - Comments
 class Comments: Decodable {
     var count, canPost: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case count
         case canPost = "can_post"
     }
-
+    
     init(count: Int, canPost: Int) {
         self.count = count
         self.canPost = canPost
@@ -180,14 +342,14 @@ class Comments: Decodable {
 // MARK: - LikesNews
 class LikesNews: Decodable {
     var count, userLikes, canLike, canPublish: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case count
         case userLikes = "user_likes"
         case canLike = "can_like"
         case canPublish = "can_publish"
     }
-
+    
     init(count: Int, userLikes: Int, canLike: Int, canPublish: Int) {
         self.count = count
         self.userLikes = userLikes
@@ -196,25 +358,15 @@ class LikesNews: Decodable {
     }
 }
 
-// MARK: - PostSource
-class PostSource: Decodable {
-    var type, platform: String
-
-    init(type: String, platform: String) {
-        self.type = type
-        self.platform = platform
-    }
-}
-
 // MARK: - RepostsNews
 class RepostsNews: Decodable {
     var count, userReposted: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case count
         case userReposted = "user_reposted"
     }
-
+    
     init(count: Int, userReposted: Int) {
         self.count = count
         self.userReposted = userReposted
@@ -224,7 +376,7 @@ class RepostsNews: Decodable {
 // MARK: - Views
 class Views: Decodable {
     var count: Int
-
+    
     init(count: Int) {
         self.count = count
     }
@@ -236,14 +388,14 @@ class OnlineInfo: Decodable {
     var isOnline: Bool?
     var appID: Int?
     var isMobile: Bool?
-
+    
     enum CodingKeys: String, CodingKey {
         case visible
         case isOnline = "is_online"
         case appID = "app_id"
         case isMobile = "is_mobile"
     }
-
+    
     init(visible: Bool, isOnline: Bool?, appID: Int?, isMobile: Bool?) {
         self.visible = visible
         self.isOnline = isOnline

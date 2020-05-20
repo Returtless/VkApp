@@ -10,29 +10,38 @@ import UIKit
 import RealmSwift
 
 class User: Object, Decodable {
-    @objc dynamic var canAccessClosed: Bool = true
-    @objc dynamic var domain: String = ""
     @objc dynamic var firstName: String = ""
     @objc dynamic var id: Int = 0
-    @objc dynamic var isClosed: Bool = true
     @objc dynamic var lastName:  String = ""
     @objc dynamic var nickname: String = ""
     @objc dynamic var online: Int = 0
     @objc dynamic var photo100 = "photo_100"
     @objc dynamic var sex: Int = 0
-    @objc dynamic var trackCode: String = ""
+    
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.online = try container.decode(Int.self, forKey: .online)
+        self.firstName = try container.decode(String.self, forKey: .firstName)
+        self.lastName = try container.decode(String.self, forKey: .lastName)
+        self.photo100 = try container.decode(String.self, forKey: .photo100)
+        self.sex = try container.decode(Int.self, forKey: .sex)
+        if let nickname = try container.decodeIfPresent(String.self, forKey: .nickname) {
+            self.nickname = nickname
+        } else {
+            self.nickname = ""
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
-        case canAccessClosed = "can_access_closed"
-        case domain
         case firstName = "first_name"
         case id
-        case isClosed = "is_closed"
         case lastName = "last_name"
         case photo100 = "photo_100"
         case nickname, online
         case sex
-        case trackCode = "track_code"
     }
     
     func getFullName() -> String {
@@ -46,7 +55,6 @@ class User: Object, Decodable {
 }
 
 class Items<T:Decodable>  : Decodable {
-    var count : Int = 0
     var items : [T] = []
 }
 
