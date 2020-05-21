@@ -40,16 +40,8 @@ class Photo: Object, Decodable {
         self.ownerID = try container.decode(Int.self, forKey: .ownerID)
         self.text = try container.decode(String.self, forKey: .text)
         self.date = try container.decode(Int.self, forKey: .date)
-        if let arr = try container.decodeIfPresent(Likes.self, forKey: .likes) {
-                   self.likes = arr
-               } else {
-                   self.likes = nil
-               }
-        if let arr = try container.decodeIfPresent(Reposts.self, forKey: .reposts) {
-            self.reposts = arr
-        } else {
-            self.reposts = nil
-        }
+        self.likes = try? container.decodeIfPresent(Likes.self, forKey: .likes) 
+        self.reposts = try? container.decodeIfPresent(Reposts.self, forKey: .reposts)
         if let arr = try container.decodeIfPresent(Array<Size>.self, forKey: .sizes) {
             self.sizes.append(objectsIn: arr)
         } else {

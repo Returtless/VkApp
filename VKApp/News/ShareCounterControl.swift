@@ -17,9 +17,13 @@ class ShareCounterControl: UIControl {
         return iconButton
     }()
     
-    var countOfShares : Int = 0
+    var countOfShares : Int = 0 {
+        didSet{
+            counterLabel.text = String(countOfShares)
+        }
+    }
     var isLiked : Bool = false
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         setupView()
@@ -27,7 +31,6 @@ class ShareCounterControl: UIControl {
     
     private func setupView() {
         backgroundColor = .clear
-        counterLabel.text = String(countOfShares)
         counterLabel.font = .systemFont(ofSize: CGFloat(20))
         
         let stack = UIStackView()

@@ -72,46 +72,14 @@ class News: Decodable {
         sourceID = try container.decode(Int.self, forKey: .sourceID)
         date = try container.decode(Int.self, forKey: .date)
         type = try container.decode(String.self, forKey: .type)
-        if let arr = try container.decodeIfPresent(Likes.self, forKey: .likesNews) {
-            self.likesNews = arr
-        } else {
-            self.likesNews = nil
-        }
-        if let arr = try container.decodeIfPresent(Comments.self, forKey: .comments) {
-            self.comments = arr
-        } else {
-            self.comments = nil
-        }
-        if let arr = try container.decodeIfPresent(Reposts.self, forKey: .repostsNews) {
-            self.repostsNews = arr
-        } else {
-            self.repostsNews = nil
-        }
-        if let arr = try container.decodeIfPresent(Views.self, forKey: .views) {
-            self.views = arr
-        } else {
-            self.views = nil
-        }
-        if let postType = try container.decodeIfPresent(String.self, forKey: .postType) {
-            self.postType = postType
-        } else {
-            self.postType = ""
-        }
-        if let text = try container.decodeIfPresent(String.self, forKey: .text) {
-            self.text = text
-        } else {
-            self.text = ""
-        }
-        if let arr = try container.decodeIfPresent(Items<Photo>.self, forKey: .photos) {
-            self.photos = arr
-        } else {
-            self.photos = nil
-        }
-        if let arr = try container.decodeIfPresent(Array<Attachment>.self, forKey: .attachments) {
-            self.attachments = arr
-        } else {
-            self.attachments = []
-        }
+        likesNews = try? container.decodeIfPresent(Likes.self, forKey: .likesNews)
+        comments = try? container.decodeIfPresent(Comments.self, forKey: .comments)
+        repostsNews = try? container.decodeIfPresent(Reposts.self, forKey: .repostsNews)
+        views = try? container.decodeIfPresent(Views.self, forKey: .views)
+        photos = try? container.decodeIfPresent(Items<Photo>.self, forKey: .photos)
+        postType = (try? container.decodeIfPresent(String.self, forKey: .postType)) ?? ""
+        text = (try? container.decodeIfPresent(String.self, forKey: .text)) ?? ""
+        attachments = (try? container.decodeIfPresent(Array<Attachment>.self, forKey: .attachments)) ?? []
     }
     
     enum CodingKeys: String, CodingKey {
@@ -157,21 +125,9 @@ class Attachment: Decodable {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(String.self, forKey: .type)
-        if let arr = try container.decodeIfPresent(Photo.self, forKey: .photo) {
-            self.photo = arr
-        } else {
-            self.photo = nil
-        }
-        if let arr = try container.decodeIfPresent(Link.self, forKey: .link) {
-            self.link = arr
-        } else {
-            self.link = nil
-        }
-        if let arr = try container.decodeIfPresent(Video.self, forKey: .video) {
-            self.video = arr
-        } else {
-            self.video = nil
-        }
+        photo = try? container.decodeIfPresent(Photo.self, forKey: .photo)
+        link = try? container.decodeIfPresent(Link.self, forKey: .link)
+        video = try? container.decodeIfPresent(Video.self, forKey: .video)
     }
     
 }
@@ -192,16 +148,8 @@ class Link: Decodable {
         
         url = try container.decode(String.self, forKey: .url)
         title = try container.decode(String.self, forKey: .title)
-        if let caption = try container.decodeIfPresent(String.self, forKey: .caption) {
-            self.caption = caption
-        } else {
-            self.caption = ""
-        }
-        if let arr = try container.decodeIfPresent(Photo.self, forKey: .photo) {
-            self.photo = arr
-        } else {
-            self.photo = nil
-        }
+        photo = try? container.decodeIfPresent(Photo.self, forKey: .photo)
+        caption = (try? container.decodeIfPresent(String.self, forKey: .caption)) ?? ""
     }
 }
 

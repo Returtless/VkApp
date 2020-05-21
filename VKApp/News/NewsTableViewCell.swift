@@ -23,6 +23,7 @@ class NewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var commentsCounter: CommentCounterControl!
     
+    @IBOutlet weak var heightCollectionConstraint: NSLayoutConstraint!
     var photos = [UIImage]()
     
     weak var delegate: CommentCounterDelegate?
@@ -37,7 +38,7 @@ class NewsTableViewCell: UITableViewCell {
         
         commentsCounter.delegate = self
         if photos.isEmpty {
-            photoCollectionView.isHidden = true
+            heightCollectionConstraint.constant = 0
         }
     }
     

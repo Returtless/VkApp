@@ -28,11 +28,7 @@ class User: Object, Decodable {
         self.lastName = try container.decode(String.self, forKey: .lastName)
         self.photo100 = try container.decode(String.self, forKey: .photo100)
         self.sex = try container.decode(Int.self, forKey: .sex)
-        if let nickname = try container.decodeIfPresent(String.self, forKey: .nickname) {
-            self.nickname = nickname
-        } else {
-            self.nickname = ""
-        }
+        self.nickname = (try? container.decodeIfPresent(String.self, forKey: .nickname)) ?? ""
     }
     
     enum CodingKeys: String, CodingKey {

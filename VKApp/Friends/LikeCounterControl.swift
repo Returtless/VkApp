@@ -17,7 +17,11 @@ class LikeCounterControl: UIControl {
         return iconButton
     }()
     
-    var countOfLikes : Int = 0
+    var countOfLikes : Int = 0 {
+        didSet{
+            counterLabel.text = String(countOfLikes)
+        }
+    }
     var isLiked : Bool = false
     
     override func layoutSubviews() {
@@ -30,7 +34,7 @@ class LikeCounterControl: UIControl {
         iconButton.setImage(UIImage(systemName: isLiked ? "heart.fill": "heart"), for: .normal)
         iconButton.tintColor = isLiked ? .red : .blue
         
-        counterLabel.text = String(countOfLikes)
+        
         counterLabel.adjustsFontSizeToFitWidth = true
         counterLabel.minimumScaleFactor = 0.5
         //counterLabel.font = .systemFont(ofSize: CGFloat(20))

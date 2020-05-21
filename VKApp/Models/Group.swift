@@ -36,11 +36,7 @@ class Group: Object, Codable {
         name = try container.decode(String.self, forKey: .name)
         screenName = try container.decode(String.self, forKey: .screenName)
         photo100 = try container.decode(String.self, forKey: .photo100)
-        if let isMember = try container.decodeIfPresent(Int.self, forKey: .isMember) {
-            self.isMember = isMember
-        } else {
-            self.isMember = 0
-        }
+        isMember = (try? container.decodeIfPresent(Int.self, forKey: .isMember)) ?? 0
     }
     override static func primaryKey() -> String? {
         return "id"

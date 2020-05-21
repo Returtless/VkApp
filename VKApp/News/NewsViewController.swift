@@ -70,7 +70,6 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.messageLabel.text = currentNews.text
         cell.likeCounterControl.isLiked = currentNews.getLikesInfo().1
         cell.likeCounterControl.countOfLikes = currentNews.getLikesInfo().0
-        print("likes = \(currentNews.getLikesInfo().0)")
         cell.commentsCounter.counterLabel.text = "\(currentNews.comments?.count ?? 0)"
         cell.viewsCounter.text = "\(currentNews.views?.count ?? 0)"
         cell.photos = []
