@@ -13,7 +13,7 @@ class AddGroupTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        newGroups = Database.getNewGroupsData()
+        //newGroups = Database.getNewGroupsData()
         tableView.rowHeight = CGFloat(70)
     }
     
@@ -25,7 +25,7 @@ class AddGroupTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newGroupCell", for: indexPath) as! AddGroupTableViewCell
         let group = newGroups[indexPath.row]
         cell.groupNameLabel.text = group.name
-        cell.groupImageView.imageView.image = group.avatar
+        //cell.groupImageView.imageView.image = group.avatar
         return cell
     }
     

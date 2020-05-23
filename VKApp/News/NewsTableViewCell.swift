@@ -36,7 +36,9 @@ class NewsTableViewCell: UITableViewCell {
         photoCollectionView.reloadData()
         
         commentsCounter.delegate = self
-        
+        if photos.isEmpty {
+            photoCollectionView.isHidden = true
+        }
     }
     
     

@@ -7,17 +7,30 @@
 //
 
 import UIKit
+import Alamofire
+import RealmSwift
 
 class PhotoListViewController: UIViewController {
-    
-    var photos = [Photo]()
-        let photoInteractiveTransition = PhotoInteractiveTransition()
+    var userId = 0
+    var photos : Results<Photo>?
+    let photoInteractiveTransition = PhotoInteractiveTransition()
     
     @IBOutlet weak var imageView: PhotoListImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.photos = photos
-        imageView.image = photos[0].image
+        DataService.getAllPhotosForUser(userId: userId,
+            completion: {
+                [weak self] array in
+                self?.photos = array
+                self?.imageView.photos = array
+                if let unwrappedArray = array, !unwrappedArray.isEmpty{
+                    if let photo = unwrappedArray[0].getPhotoBigSize() {
+                        self?.imageView.image = photo
+                    }
+                }
+            }
+        )
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tap)
@@ -27,9 +40,9 @@ class PhotoListViewController: UIViewController {
         
         if segue.identifier == "openFullPhotoOnViewSegue" {
             let photoVC = segue.destination as! FullPhotoViewController
-            photoVC.photo = photos[imageView.activePhotoIndex]
+            photoVC.photo = photos![imageView.activePhotoIndex]
             photoVC.transitioningDelegate = self
-             self.photoInteractiveTransition.viewController = photoVC
+            self.photoInteractiveTransition.viewController = photoVC
         }
     }
     
@@ -39,7 +52,7 @@ class PhotoListViewController: UIViewController {
 }
 
 class PhotoListImageView : UIImageView {
-    var photos = [Photo]()
+    var photos : Results<Photo>?
     private var popupOffset: CGFloat {
         return self.frame.width + 100
     }
@@ -82,7 +95,7 @@ class PhotoListImageView : UIImageView {
             
         case .ended:
             let shouldComplete = recognizer.velocity(in: self).x > 0
-            let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos.count-1 //фотография последняя при свайпе вправо
+            let lastPhoto = swipeToLeft == 1 && activePhotoIndex==photos!.count-1 //фотография последняя при свайпе вправо
             let firstPhoto = swipeToLeft != 1 && activePhotoIndex==0 //фотография первая при свайпе влево
             //флаг того, что изменилось направление
             var reversedWasChanged = false
@@ -102,8 +115,9 @@ class PhotoListImageView : UIImageView {
                 if swipeToLeft == 1 && !lastPhoto { activePhotoIndex+=1 }
                 else if swipeToLeft != 1 && !firstPhoto { activePhotoIndex-=1 }
                 
-                image = photos[activePhotoIndex].image
-                
+                if let photo = photos![activePhotoIndex].getPhotoBigSize() {
+                    image = photo
+                }
                 self.layer.opacity = 0
                 self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 

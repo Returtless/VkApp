@@ -31,7 +31,9 @@ class LikeCounterControl: UIControl {
         iconButton.tintColor = isLiked ? .red : .blue
         
         counterLabel.text = String(countOfLikes)
-        counterLabel.font = .systemFont(ofSize: CGFloat(20))
+        counterLabel.adjustsFontSizeToFitWidth = true
+        counterLabel.minimumScaleFactor = 0.5
+        //counterLabel.font = .systemFont(ofSize: CGFloat(20))
         
         let stack = UIStackView()
         stack.addArrangedSubview(counterLabel)
@@ -46,6 +48,7 @@ class LikeCounterControl: UIControl {
             stack.bottomAnchor.constraint(equalTo: bottomAnchor),
             stack.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+        self.reloadInputViews()
     }
     
     @objc private func changeCounter(_ sender: UIButton) {

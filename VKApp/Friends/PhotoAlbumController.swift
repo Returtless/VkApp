@@ -26,9 +26,11 @@ class PhotoAlbumController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
         let currentPhoto = photos[indexPath.row]
-        cell.photoImageView.image = currentPhoto.image
-        cell.likeControl.countOfLikes = currentPhoto.countOfLikes
-        cell.likeControl.isLiked = currentPhoto.liked
+        if let photo = currentPhoto.getPhotoBigSize() {
+            cell.photoImageView.image = photo
+            cell.likeControl.countOfLikes = currentPhoto.getLikesCount()
+            cell.likeControl.isLiked = currentPhoto.getUserLike()
+        }
         return cell
     }
 }

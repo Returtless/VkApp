@@ -30,7 +30,8 @@ class CommentCounterControl: UIControl {
     private func setupView() {
         backgroundColor = .clear
         counterLabel.text = String(countOfComments)
-        counterLabel.font = .systemFont(ofSize: CGFloat(20))
+        counterLabel.adjustsFontSizeToFitWidth = true
+        counterLabel.minimumScaleFactor = 0.5
         
         let stack = UIStackView()
         stack.addArrangedSubview(counterLabel)

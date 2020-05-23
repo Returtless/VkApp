@@ -7,64 +7,125 @@
 //
 
 import UIKit
+import WebKit
+import Alamofire
+import RealmSwift
 
 class GroupsController: UITableViewController {
+    
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     
-    var groups : [Group] = []
+    var groups : Results<Group>?//список отображаемых групп
+    var userGroups : Results<Group>?//список групп пользователя
+    var groupsToken : NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        groups = Database.getGroupsData()
+        DataService.getAllGroups(
+            completion: {
+                [weak self] array in
+                self?.groups = array?.sorted(byKeyPath: "name")
+                self?.userGroups = self!.groups
+                self?.pairTableAndRealm()
+                self?.tableView.reloadData()
+            }
+        )
+        let alert = UIAlertController(title: "Важно!", message: "В новой версии появилась возможность вступать и выходить из групп в РЕАЛЬНОМ ВК! Для вступления поиском находим группу и при свайпе влево по ячейке есть кнопка для вступления", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true, completion: nil)
+
         tableView.rowHeight = CGFloat(70)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { groups.count }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { groups?.count ?? 0 }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupTableViewCell
         
-        let group = groups[indexPath.row]
+        let group = groups![indexPath.row]
         cell.groupNameLabel.text = group.name
-        cell.avatarImageView.imageView.image = group.avatar
-        
+        if let image = UIImage.getImage(from: group.photo100) {
+            cell.avatarImageView.imageView.image = image
+        }
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            groups.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
-    
-    @IBAction func addNewGroup(segue: UIStoryboardSegue) {
-        if segue.identifier == "addNewGroup" {
-            guard let addGroupController = segue.source as? AddGroupTableViewController else { return }
-            if let indexPath = addGroupController.tableView.indexPathForSelectedRow {
-                let group = addGroupController.newGroups[indexPath.row]
-                if !groups.contains(group) {
-                    groups.append(group)
-                    tableView.reloadData()
-                }
+    func pairTableAndRealm() {
+        userGroups = groups
+        groupsToken = groups?.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.endUpdates()
+            case .error(let error):
+                fatalError("\(error)")
             }
         }
     }
     
-    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+          
+        let joinButton = UIContextualAction(style: .normal, title: "Вступить") {  (contextualAction, view, boolValue) in
+            let item = self.groups![indexPath.row]
+            //возвращаем наши группы в список
+            self.groups = self.userGroups
+            tableView.reloadData()
+            //добавляем группы в рилм и на сервер ВК
+            DataService.postDataToServer(for: item, method: .joinGroup)
+            //чистим серчбар
+            self.groupsSearchBar.searchTextField.text = nil
+            self.groupsSearchBar.endEditing(true)
+            boolValue(true)
+        }
+          let leaveButton = UIContextualAction(style: .normal, title: "Выйти") {  (contextualAction, view, boolValue) in
+               let item = self.groups![indexPath.row]
+              //возвращаем наши группы в список
+              self.groups = self.userGroups
+              tableView.reloadData()
+              //добавляем группы на сервер ВК and isMember = 0
+               DataService.postDataToServer(for: item, method: .leaveGroup)
+              //чистим серчбар
+              self.groupsSearchBar.searchTextField.text = nil
+              self.groupsSearchBar.endEditing(true)
+              boolValue(true)
+          }
+          joinButton.backgroundColor = .green
+          leaveButton.backgroundColor = .red
+          let swipeActions = UISwipeActionsConfiguration(actions: [leaveButton, joinButton])
+          
+          return swipeActions
+      }
 }
 
 extension GroupsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        groups = Database.getGroupsData()
+        groups = userGroups
         if (!searchText.isEmpty){
-            groups = groups.filter({$0.name.range(of:  searchText, options: .caseInsensitive) != nil})
+            DataService.getSearchedGroups(
+                searchText: searchText,
+                completion: {
+                    [weak self] array in
+                    self?.groups = array
+                    self?.tableView.reloadData()
+                }
+            )
+        } else {
+            groups = userGroups
+            tableView.reloadData()
         }
-        tableView.reloadData()
+        
     }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

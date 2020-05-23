@@ -7,41 +7,58 @@
 //
 
 import UIKit
+import RealmSwift
 
-class User {
-    var name : String
-    var surname : String
-    var avatar : UIImage?
-    var photos : [Photo] = []
+class User: Object, Decodable {
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var id: Int = 0
+    @objc dynamic var lastName:  String = ""
+    @objc dynamic var nickname: String = ""
+    @objc dynamic var online: Int = 0
+    @objc dynamic var photo100 = "photo_100"
+    @objc dynamic var sex: Int = 0
     
-    init(name : String, surname : String, avatar : String) {
-        self.name = name
-        self.surname = surname
-        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
-        self.avatar = img
-        if let unwrappedImage = img {
-            self.photos = Array(repeating: Photo(image: unwrappedImage, countOfLikes: Int.random(in: 0...100), liked: Bool.random()), count: 10)
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.online = try container.decode(Int.self, forKey: .online)
+        self.firstName = try container.decode(String.self, forKey: .firstName)
+        self.lastName = try container.decode(String.self, forKey: .lastName)
+        self.photo100 = try container.decode(String.self, forKey: .photo100)
+        self.sex = try container.decode(Int.self, forKey: .sex)
+        if let nickname = try container.decodeIfPresent(String.self, forKey: .nickname) {
+            self.nickname = nickname
+        } else {
+            self.nickname = ""
         }
     }
-    init(name : String, surname : String, avatar : String, photos : [String]) {
-        self.name = name
-        self.surname = surname
-        let img = !avatar.isEmpty ? UIImage(named: avatar) : UIImage.init(systemName: "nosign")
-        self.avatar = img
-        for photo in photos {
-            if let unwrapped = UIImage(named: photo) {
-                self.photos.append(Photo(image: unwrapped, countOfLikes: Int.random(in: 1...100), liked: Bool.random()))
-            }
-        }
+    
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case id
+        case lastName = "last_name"
+        case photo100 = "photo_100"
+        case nickname, online
+        case sex
     }
     
     func getFullName() -> String {
-        "\(self.name) \(self.surname)"
+        "\(self.firstName) \(self.lastName)"
     }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
 }
 
-struct Photo {
-    var image = UIImage()
-    var countOfLikes = 0
-    var liked = false
+class Items<T:Decodable>  : Decodable {
+    var items : [T] = []
+}
+
+
+class Response<T:Decodable> : Decodable {
+    var response : Items<T>
 }
