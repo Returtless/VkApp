@@ -54,6 +54,7 @@
 		52B13C3E245ED6B300AA02C8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C3D245ED6B300AA02C8 /* Photo.swift */; };
 		52B2B6AF2450B44F00DDBE36 /* FullPhotoAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */; };
 		52DA5341244FC13000DEF4E7 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */; };
+		52FB1E122476F95D00FC2A22 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB1E112476F95D00FC2A22 /* RealmService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +108,7 @@
 		52B13C3D245ED6B300AA02C8 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoAnimationController.swift; sourceTree = "<group>"; };
 		52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
+		52FB1E112476F95D00FC2A22 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		FE30255A9F92F6BA9F37D6D6 /* Pods_VKApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -161,6 +163,7 @@
 				520674FF2438CADC00C76B86 /* AvatarView.swift */,
 				52335DBC242A89A6002A5318 /* AppDelegate.swift */,
 				52B13C3B245DBA2100AA02C8 /* DataService.swift */,
+				52FB1E112476F95D00FC2A22 /* RealmService.swift */,
 				52335DBE242A89A6002A5318 /* SceneDelegate.swift */,
 				52335DC0242A89A6002A5318 /* ViewController.swift */,
 				52335DC2242A89A6002A5318 /* Main.storyboard */,
@@ -409,6 +412,7 @@
 				522AF745244A4DD9004D40CA /* PhotoListViewController.swift in Sources */,
 				5286D9F6243E6894008E36C6 /* GroupsSearchBar.swift in Sources */,
 				522CAC7E243FC99B00896A14 /* CommentCounterControl.swift in Sources */,
+				52FB1E122476F95D00FC2A22 /* RealmService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

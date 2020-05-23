@@ -20,7 +20,7 @@ class DataService {
         ]
         DataService.getServerData(
             method: .getFriends,
-            with: params, typeName: User.self,
+            with: params,
             completion: completion
         )
         
@@ -34,7 +34,7 @@ class DataService {
         ]
         DataService.getServerData(
             method: .getUserGroups,
-            with: params, typeName: Group.self,
+            with: params,
             completion: completion
         )
     }
@@ -45,11 +45,18 @@ class DataService {
             "extended": "1",
             "owner_id" : userId
         ]
-        DataService.getServerData(
-            method: .getAllPhotos,
-            with: params, typeName: Photo.self,
-            completion: completion
-        )
+        AF.request("https://api.vk.com/method/" + Methods.getAllPhotos.rawValue,
+                   parameters: getFullParameters(params)).responseJSON{ response in
+                    print("Photos получены с сервера ВК")
+                    guard let data = response.data else { return }
+                    let array: [Photo]? = decodeRequestData(method: Methods.getAllPhotos, data: data)
+                    if let array = array {
+                        //сохрняем данные в БД
+                        RealmService.saveData(array)
+                        //получаем сохраненные данные из БД, чтобы получился Results<T>
+                        completion(RealmService.getData(for:("ownerID", "==", "Int"), with: userId))
+                    }
+        }
     }
     
     static func getSearchedGroups(searchText : String,
@@ -61,7 +68,7 @@ class DataService {
         ]
         DataService.getServerData(
             method: .getSearchGroups,
-            with: params, typeName: Group.self,
+            with: params,
             completion: completion
         )
     }
@@ -152,36 +159,23 @@ class DataService {
         }
     }
     // MARK: - private methods
-    private static func getServerData<T : Decodable & Object>(method : Methods,
-                                                                with parameters: Parameters,
-                                                                typeName : T.Type,
-                                                                completion: @escaping (_ array : Results<T>?) -> Void){
-          let dataFromRealm : Results<T>? = getDataFromRealm(params: parameters)
-          let useOnlyServerData : Bool = parameters[Constants.useOnlyServerData.rawValue] as? Bool ?? false
-          //если данные есть в БД, то берем их оттуда, иначе делаем запрос к серверу
-          //ИЛИ если использован параметр useOnlyServerData
-          if dataFromRealm == nil || dataFromRealm!.isEmpty || useOnlyServerData  {
-              AF.request("https://api.vk.com/method/" + method.rawValue,
-                         parameters: getFullParameters(parameters)).responseJSON{ response in
-                          
-                          print("\(typeName)s получены с сервера ВК")
-                          
-                          guard let data = response.data else { return }
-                          let array: [T]? = decodeRequestData(method: method, data: data)
-                          if let array = array {
-                              //сохрняем данные в БД
-                              saveDataToRealm(array, withoutDelete : !useOnlyServerData)
-                              //получаем сохраненные данные из БД, чтобы получился Results<T>
-                              completion(getDataFromRealm(params: parameters))
-                          }
-              }
-          } else {
-              print("\(typeName)s получены из Realm")
-              completion(dataFromRealm)
-          }
-          
-      }
-      
+    private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
+                                                              with parameters: Parameters,
+                                                              completion: @escaping (_ array : Results<T>?) -> Void){
+        AF.request("https://api.vk.com/method/" + method.rawValue,
+                   parameters: getFullParameters(parameters)).responseJSON{ response in
+                    print("\(T.self)s получены с сервера ВК")
+                    guard let data = response.data else { return }
+                    let array: [T]? = decodeRequestData(method: method, data: data)
+                    if let array = array {
+                        //сохрняем данные в БД
+                        RealmService.saveData(array)
+                        //получаем сохраненные данные из БД, чтобы получился Results<T>
+                        completion(RealmService.getData())
+                    }
+        }
+    }
+    
     
     private static func decodeRequestData<T : Object & Decodable>(method : Methods,
                                                                   data: Data) -> [T]? {
@@ -214,23 +208,6 @@ class DataService {
             print("error: ", error)
         }
         return array as? [T]
-    }
-    
-    private static func saveDataToRealm<T : Object>(_ array: [T], withoutDelete : Bool = false) {
-        do {
-            Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            let realm = try Realm()
-            //print(realm.configuration.fileURL)
-            realm.beginWrite()
-            let objects = realm.objects(T.self)
-            if !objects.isEmpty && !withoutDelete{
-                realm.delete(objects)
-            }
-            realm.add(array, update: .modified)
-            try realm.commitWrite()
-        } catch {
-            print(error)
-        }
     }
     
     

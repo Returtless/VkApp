@@ -12,22 +12,26 @@ import RealmSwift
 
 class PhotoListViewController: UIViewController {
     var userId = 0
-    var photos : Results<Photo>?
+    var photos : Results<Photo>?{
+        didSet{
+            imageView.photos = photos
+            if let unwrappedArray = photos, !unwrappedArray.isEmpty{
+                if let photo = unwrappedArray[0].getPhotoBigSize() {
+                    imageView.image = photo
+                }
+            }
+        }
+    }
     let photoInteractiveTransition = PhotoInteractiveTransition()
     
     @IBOutlet weak var imageView: PhotoListImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        photos = RealmService.getData(for:("ownerID", "==", "Int"), with: userId)
         DataService.getAllPhotosForUser(userId: userId,
             completion: {
                 [weak self] array in
-                self?.photos = array
-                self?.imageView.photos = array
-                if let unwrappedArray = array, !unwrappedArray.isEmpty{
-                    if let photo = unwrappedArray[0].getPhotoBigSize() {
-                        self?.imageView.image = photo
-                    }
-                }
+               self?.photos = array
             }
         )
         
