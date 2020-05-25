@@ -31,6 +31,7 @@ class RealmService {
                 }
             }
             let data = realm.objects(T.self).filter(predicate)
+            print("\(T.self)s получены из Realm")
             return data
         } catch {
             print(error)
@@ -80,6 +81,7 @@ class RealmService {
                 
                 realm.add(array, update: .modified)
                 try realm.commitWrite()
+                print("\(T.self)s сохранены в Realm")
             } catch {
                 print(error)
             }

@@ -28,6 +28,8 @@ class NewsTableViewCell: UITableViewCell {
     
     weak var delegate: CommentCounterDelegate?
     
+    weak var photoDelegate: NewsPhotoCollectionViewDelegate?
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         messageLabel.sizeToFit()
@@ -83,6 +85,6 @@ extension NewsTableViewCell : CommentCounterDelegate {
 }
 extension NewsTableViewCell : NewsPhotoCollectionViewDelegate {
     func onButtonTapped(_ data : UIImage){
-        delegate!.onButtonTapped()
+        photoDelegate!.onButtonTapped(data)
     }
 }

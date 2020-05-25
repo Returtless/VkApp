@@ -120,6 +120,66 @@ class DataService {
         }
     }
     
+    /// Метод для получения ленты с комментариями
+    /// - Parameter completion: замыкание для возврата
+    static func getNewsfeedComments(completion: @escaping (_ array : NewsItems?) -> Void) {
+        let params: Parameters = [
+            "last_comments_count" : 10,
+            "count" : 10,
+            "filters" : "post"
+        ]
+        AF.request("https://api.vk.com/method/" + Methods.getNewsComments.rawValue,
+                   parameters: getFullParameters(params)).responseJSON{ response in
+                    do {
+                        print("Newscomments получены с сервера ВК")
+                        
+                        guard let data = response.data else { return }
+                        print(response)
+                        let res = try JSONDecoder().decode(ResponseNews.self, from: data)
+                        completion(res.response)
+                    } catch let DecodingError.dataCorrupted(context) {
+                        print(context)
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        print("Key '\(key)' not found:", context.debugDescription)
+                        print("codingPath:",  context.codingPath)
+                    } catch let DecodingError.valueNotFound(value, context) {
+                        print("Value '\(value)' not found:", context.debugDescription)
+                        print("codingPath:", context.codingPath)
+                    } catch let DecodingError.typeMismatch(type, context)  {
+                        print("Type '\(type)' mismatch:", context.debugDescription)
+                        print("codingPath:", context.codingPath)
+                    } catch {
+                        print("error: ", error)
+                    }
+        }
+    }
+    
+    /// Метод для получения пользователея по ид
+    /// - Parameters:
+    ///   - userId: идентификатор пользователя
+    ///   - completion: замыкание для возврата данных
+    static func getUserById(userId : Int,
+                            completion: @escaping (_ array : User?) -> Void) {
+        let params: Parameters = [
+            "user_ids": userId,
+            "fields": "nickname, domain, sex, photo_100, online"
+        ]
+        AF.request("https://api.vk.com/method/" + Methods.getUsers.rawValue,
+                   parameters: getFullParameters(params)).responseJSON{ response in
+                    print(response)
+                    guard let data = response.data else { return }
+                    do {
+                        let res = try JSONDecoder().decode(ResponseUsers.self, from: data)
+                        let array: [User]? = res.response
+                        if let array = array {
+                            completion(array[0])
+                        }
+                    } catch {
+                        print("error")
+                    }
+        }
+    }
+    
     /// Метод для получения универсальных данных с сервера
     /// - Parameters:
     ///   - method: метод запроса
@@ -231,6 +291,7 @@ class DataService {
         case joinGroup = "groups.join"
         case leaveGroup = "groups.leave"
         case getUsers = "users.get"
+        case getNewsComments = "newsfeed.getComments"
     }
     
 }

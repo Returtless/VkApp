@@ -62,3 +62,8 @@ class Response<T:Decodable> : Decodable {
 protocol HaveID {
     var id: Int { get set }
 }
+
+class ResponseUsers: Decodable {
+    var response : [User] = []
+
+}

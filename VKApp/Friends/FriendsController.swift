@@ -21,12 +21,12 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         didSet{
             initUserArrays()
             initSorterControl()
-           
+            
         }
     }
     var usersToken: NotificationToken?
     
-
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var friendSearchBar: FriendsSearchBar!
@@ -53,7 +53,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         
         
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "photoAlbumSegue" {
             let photoAlbumVC = segue.destination as! PhotoListViewController

@@ -22,19 +22,24 @@ class PhotoListViewController: UIViewController {
             }
         }
     }
+    var newsPhoto : UIImage?
     let photoInteractiveTransition = PhotoInteractiveTransition()
     
-    @IBOutlet weak var imageView: PhotoListImageView!
+    @IBOutlet var imageView: PhotoListImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        photos = RealmService.getData(for:("ownerID", "==", "Int"), with: userId)
-        DataService.getAllPhotosForUser(userId: userId,
-            completion: {
-                [weak self] array in
-               self?.photos = array
-            }
-        )
-        
+        if userId != 0 {
+            photos = RealmService.getData(for:("ownerID", "==", "Int"), with: userId)
+            DataService.getAllPhotosForUser(userId: userId,
+                                            completion: {
+                                                [weak self] array in
+                                                self?.photos = array
+                }
+            )
+        }
+        if let newsPhoto = newsPhoto {
+            imageView.image = newsPhoto
+        }
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tap)
@@ -51,7 +56,9 @@ class PhotoListViewController: UIViewController {
     }
     
     @objc func onTap(_ recognizer: UIPanGestureRecognizer) {
-        performSegue(withIdentifier: "openFullPhotoOnViewSegue", sender: self)
+        if newsPhoto == nil {
+            performSegue(withIdentifier: "openFullPhotoOnViewSegue", sender: self)
+        }
     }
 }
 
@@ -69,8 +76,10 @@ class PhotoListImageView : UIImageView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
-        self.addGestureRecognizer(recognizer)
+        if photos != nil {
+            let recognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
+            self.addGestureRecognizer(recognizer)
+        }
     }
     //направление свайпа
     var swipeToLeft = 0

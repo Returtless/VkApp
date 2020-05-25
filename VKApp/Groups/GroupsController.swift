@@ -17,7 +17,7 @@ class GroupsController: UITableViewController {
     
     var groups : Results<Group>? //список отображаемых групп
     var userGroups : Results<Group>?//список групп пользователя
-    var isUserGroups : Bool = true
+    var isUserGroups : Bool = true //флаг обозначающий
     var groupsToken : NotificationToken?
     
     //var myTimer: Timer!

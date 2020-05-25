@@ -65,7 +65,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         let date = NSDate(timeIntervalSince1970: Double(currentNews.date))
         let currentDate = Date()
         let result = currentDate.timeIntervalSince(date as Date)
-        
+        cell.photoDelegate = self
         cell.createDateLabel.text = result.toRelativeDateTime()
         cell.messageLabel.text = currentNews.text
         cell.likeCounterControl.isLiked = currentNews.getLikesInfo().1
@@ -90,7 +90,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
             }
             
         }
-
+        
         cell.delegate = self
         return cell
     }
@@ -119,7 +119,20 @@ extension NewsViewController : CommentCounterDelegate {
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "News", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
-        //resultViewController.comments = news[0].comments
+        
+        resultViewController.comments = news!.items[0].comments!.list
+        navigationController?.pushViewController(resultViewController,
+                                                 animated: true)
+    }
+}
+
+extension NewsViewController : NewsPhotoCollectionViewDelegate {
+    func onButtonTapped(_ data : UIImage) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Friends", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "FullPhoto") as! PhotoListViewController
+        resultViewController.imageView = PhotoListImageView(image: data)
+        resultViewController.newsPhoto = data
         navigationController?.pushViewController(resultViewController,
                                                  animated: true)
     }
@@ -134,7 +147,7 @@ extension TimeInterval {
         let minutes = (time / 60) % 60
         let hours = (time / 3600)
         if hours > 24{
-            return ""
+            return "Давно"
         } else if hours > 1 {
             return "\(hours) часов назад"
         } else if minutes > 1 {

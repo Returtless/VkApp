@@ -30,20 +30,20 @@ class NewsItems: Decodable {
     var items: [News]
     var profiles: [User]
     var groups: [Group]
-    var nextFrom: String
+    //var nextFrom: String
     
     enum CodingKeys: String, CodingKey {
         case items
         case profiles
         case groups
-        case nextFrom = "next_from"
+       // case nextFrom = "next_from"
     }
     
-    init(items: [News], profiles: [User], groups: [Group], nextFrom: String) {
+    init(items: [News], profiles: [User], groups: [Group]) {
         self.items = items
         self.profiles = profiles
         self.groups = groups
-        self.nextFrom = nextFrom
+        //self.nextFrom = nextFrom
     }
 }
 
@@ -225,17 +225,24 @@ class FirstFrame: Decodable {
 
 // MARK: - Comments
 class Comments: Decodable {
-    var count, canPost: Int
+    var count : Int = 0
+    var canPost: Int = 0
+    var list : [CommentsList] = []
     
     enum CodingKeys: String, CodingKey {
         case count
         case canPost = "can_post"
+        case list
     }
-    
-    init(count: Int, canPost: Int) {
-        self.count = count
-        self.canPost = canPost
-    }
+
+    required convenience init(from decoder: Decoder) throws {
+           self.init()
+           let container = try decoder.container(keyedBy: CodingKeys.self)
+           
+           count = try container.decode(Int.self, forKey: .count)
+           canPost = try container.decode(Int.self, forKey: .canPost)
+           list = (try? container.decodeIfPresent(Array<CommentsList>.self, forKey: .list)) ?? []
+       }
 }
 
 // MARK: - Views
@@ -267,4 +274,22 @@ class OnlineInfo: Decodable {
         self.appID = appID
         self.isMobile = isMobile
     }
+}
+
+// MARK: - List
+class CommentsList: Codable {
+    var id = 0
+    var fromID: Int = 0
+    var date: Int = 0
+    var text: String = ""
+    var postID, ownerID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case fromID = "from_id"
+        case date, text
+        case postID = "post_id"
+        case ownerID = "owner_id"
+    }
+
 }

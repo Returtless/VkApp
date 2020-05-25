@@ -8,6 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--FullPhoto-->
+        <scene sceneID="X9V-wQ-YNE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Friends" referencedIdentifier="FullPhoto" id="Z2R-Sc-BJy" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ckI-z2-8t2"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ACt-KA-8vb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3370" y="564"/>
+        </scene>
         <!--News-->
         <scene sceneID="AIp-FN-LZz">
             <objects>
@@ -210,11 +220,12 @@
                     <connections>
                         <outlet property="tableView" destination="nBq-8w-p9i" id="SoQ-0m-r7n"/>
                         <segue destination="UJx-Hm-5fq" kind="show" identifier="showPhotoSegue" id="7PY-Co-3nW"/>
+                        <segue destination="Z2R-Sc-BJy" kind="show" identifier="FullPhotoFromNewsSegue" id="oK4-Kd-Tw5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHl-ZR-AWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2969.5652173913045" y="1057.3660714285713"/>
+            <point key="canvasLocation" x="2935" y="1057"/>
         </scene>
         <!--Комментарии-->
         <scene sceneID="F99-vZ-LcQ">
