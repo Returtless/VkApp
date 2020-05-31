@@ -30,20 +30,20 @@ class NewsItems: Decodable {
     var items: [News]
     var profiles: [User]
     var groups: [Group]
-    var nextFrom: String
+    //var nextFrom: String
     
     enum CodingKeys: String, CodingKey {
         case items
         case profiles
         case groups
-        case nextFrom = "next_from"
+       // case nextFrom = "next_from"
     }
     
-    init(items: [News], profiles: [User], groups: [Group], nextFrom: String) {
+    init(items: [News], profiles: [User], groups: [Group]) {
         self.items = items
         self.profiles = profiles
         self.groups = groups
-        self.nextFrom = nextFrom
+        //self.nextFrom = nextFrom
     }
 }
 
@@ -58,8 +58,8 @@ class News: Decodable {
     var attachments: [Attachment] = []
     var photos: Items<Photo>?
     var comments: Comments?
-    var likesNews: LikesNews?
-    var repostsNews: RepostsNews?
+    var likesNews: Likes?
+    var repostsNews: Reposts?
     var views: Views?
     var isFavorite: Bool = false
     var postID: Int = 0
@@ -72,46 +72,14 @@ class News: Decodable {
         sourceID = try container.decode(Int.self, forKey: .sourceID)
         date = try container.decode(Int.self, forKey: .date)
         type = try container.decode(String.self, forKey: .type)
-        if let arr = try container.decodeIfPresent(LikesNews.self, forKey: .likesNews) {
-            self.likesNews = arr
-        } else {
-            self.likesNews = nil
-        }
-        if let arr = try container.decodeIfPresent(Comments.self, forKey: .comments) {
-            self.comments = arr
-        } else {
-            self.comments = nil
-        }
-        if let arr = try container.decodeIfPresent(RepostsNews.self, forKey: .repostsNews) {
-            self.repostsNews = arr
-        } else {
-            self.repostsNews = nil
-        }
-        if let arr = try container.decodeIfPresent(Views.self, forKey: .views) {
-            self.views = arr
-        } else {
-            self.views = nil
-        }
-        if let postType = try container.decodeIfPresent(String.self, forKey: .postType) {
-            self.postType = postType
-        } else {
-            self.postType = ""
-        }
-        if let text = try container.decodeIfPresent(String.self, forKey: .text) {
-            self.text = text
-        } else {
-            self.text = ""
-        }
-        if let arr = try container.decodeIfPresent(Items<Photo>.self, forKey: .photos) {
-            self.photos = arr
-        } else {
-            self.photos = nil
-        }
-        if let arr = try container.decodeIfPresent(Array<Attachment>.self, forKey: .attachments) {
-            self.attachments = arr
-        } else {
-            self.attachments = []
-        }
+        likesNews = try? container.decodeIfPresent(Likes.self, forKey: .likesNews)
+        comments = try? container.decodeIfPresent(Comments.self, forKey: .comments)
+        repostsNews = try? container.decodeIfPresent(Reposts.self, forKey: .repostsNews)
+        views = try? container.decodeIfPresent(Views.self, forKey: .views)
+        photos = try? container.decodeIfPresent(Items<Photo>.self, forKey: .photos)
+        postType = (try? container.decodeIfPresent(String.self, forKey: .postType)) ?? ""
+        text = (try? container.decodeIfPresent(String.self, forKey: .text)) ?? ""
+        attachments = (try? container.decodeIfPresent(Array<Attachment>.self, forKey: .attachments)) ?? []
     }
     
     enum CodingKeys: String, CodingKey {
@@ -137,25 +105,6 @@ class News: Decodable {
         return (likes.count, likes.userLikes>0)
     }
     
-    
-    
-    func getAuthorInfo() -> Group?{
-        //        let params: Parameters = [
-        //            "group_id": abs(self.sourceID)
-        //        ]
-        //        var group : Group? = nil
-        //        DataService.getServerData(
-        //            method: DataService.Methods.getGroupById,
-        //            with: params,
-        //            typeName: Group.self,
-        //            completion: {
-        //                array in
-        //                group = (array as! [Group])[0]
-        //            }
-        //        )
-        //        return group!
-        return nil
-    }
 }
 
 // MARK: - Attachment
@@ -176,21 +125,9 @@ class Attachment: Decodable {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(String.self, forKey: .type)
-        if let arr = try container.decodeIfPresent(Photo.self, forKey: .photo) {
-            self.photo = arr
-        } else {
-            self.photo = nil
-        }
-        if let arr = try container.decodeIfPresent(Link.self, forKey: .link) {
-            self.link = arr
-        } else {
-            self.link = nil
-        }
-        if let arr = try container.decodeIfPresent(Video.self, forKey: .video) {
-            self.video = arr
-        } else {
-            self.video = nil
-        }
+        photo = try? container.decodeIfPresent(Photo.self, forKey: .photo)
+        link = try? container.decodeIfPresent(Link.self, forKey: .link)
+        video = try? container.decodeIfPresent(Video.self, forKey: .video)
     }
     
 }
@@ -211,16 +148,8 @@ class Link: Decodable {
         
         url = try container.decode(String.self, forKey: .url)
         title = try container.decode(String.self, forKey: .title)
-        if let caption = try container.decodeIfPresent(String.self, forKey: .caption) {
-            self.caption = caption
-        } else {
-            self.caption = ""
-        }
-        if let arr = try container.decodeIfPresent(Photo.self, forKey: .photo) {
-            self.photo = arr
-        } else {
-            self.photo = nil
-        }
+        photo = try? container.decodeIfPresent(Photo.self, forKey: .photo)
+        caption = (try? container.decodeIfPresent(String.self, forKey: .caption)) ?? ""
     }
 }
 
@@ -294,83 +223,26 @@ class FirstFrame: Decodable {
     }
 }
 
-// MARK: - Photo
-class PhotoNews: Decodable {
-    var id, albumID, ownerID, userID: Int
-    var sizes: [Size]
-    var text: String
-    var date: Int
-    var accessKey: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case albumID = "album_id"
-        case ownerID = "owner_id"
-        case userID = "user_id"
-        case sizes, text, date
-        case accessKey = "access_key"
-    }
-    
-    init(id: Int, albumID: Int, ownerID: Int, userID: Int, sizes: [Size], text: String, date: Int,  accessKey: String) {
-        self.id = id
-        self.albumID = albumID
-        self.ownerID = ownerID
-        self.userID = userID
-        self.sizes = sizes
-        self.text = text
-        self.date = date
-        self.accessKey = accessKey
-    }
-}
-
-
 // MARK: - Comments
 class Comments: Decodable {
-    var count, canPost: Int
+    var count : Int = 0
+    var canPost: Int = 0
+    var list : [CommentsList] = []
     
     enum CodingKeys: String, CodingKey {
         case count
         case canPost = "can_post"
+        case list
     }
-    
-    init(count: Int, canPost: Int) {
-        self.count = count
-        self.canPost = canPost
-    }
-}
 
-// MARK: - LikesNews
-class LikesNews: Decodable {
-    var count, userLikes, canLike, canPublish: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case count
-        case userLikes = "user_likes"
-        case canLike = "can_like"
-        case canPublish = "can_publish"
-    }
-    
-    init(count: Int, userLikes: Int, canLike: Int, canPublish: Int) {
-        self.count = count
-        self.userLikes = userLikes
-        self.canLike = canLike
-        self.canPublish = canPublish
-    }
-}
-
-// MARK: - RepostsNews
-class RepostsNews: Decodable {
-    var count, userReposted: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case count
-        case userReposted = "user_reposted"
-    }
-    
-    init(count: Int, userReposted: Int) {
-        self.count = count
-        self.userReposted = userReposted
-    }
+    required convenience init(from decoder: Decoder) throws {
+           self.init()
+           let container = try decoder.container(keyedBy: CodingKeys.self)
+           
+           count = try container.decode(Int.self, forKey: .count)
+           canPost = try container.decode(Int.self, forKey: .canPost)
+           list = (try? container.decodeIfPresent(Array<CommentsList>.self, forKey: .list)) ?? []
+       }
 }
 
 // MARK: - Views
@@ -404,33 +276,20 @@ class OnlineInfo: Decodable {
     }
 }
 
-//class News1{
-//
-//    var author : User
-//    var createDate : Date
-//    var text : String
-//    var photos : [UIImage]
-//    var comments : [Comment]
-//    var likesCount : Int
-//    var viewsCount : Int
-//
-//    init(author : User, text : String, photos : [String], comments : [Comment]) {
-//        self.author = author
-//        self.createDate = Date.init()
-//        self.text = text
-//        self.photos = photos.map({UIImage(named: $0)!})
-//        self.comments = comments
-//        self.likesCount = Int.random(in: 1...100)
-//        self.viewsCount = Int.random(in: 1...1000)
-//    }
-//}
-//
-//class Comment1 {
-//    var text : String
-//    var author : User
-//
-//    init(author : User, text : String) {
-//        self.author = author
-//        self.text = text
-//    }
-//}
+// MARK: - List
+class CommentsList: Codable {
+    var id = 0
+    var fromID: Int = 0
+    var date: Int = 0
+    var text: String = ""
+    var postID, ownerID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case fromID = "from_id"
+        case date, text
+        case postID = "post_id"
+        case ownerID = "owner_id"
+    }
+
+}

@@ -9,7 +9,7 @@
 import UIKit
 
 class CommentsViewController: UIViewController {
-    var comments : [Comments] = []
+    var comments : [CommentsList] = []
     @IBOutlet weak var newCommentTextField: UITextField!
     @IBOutlet weak var sendCommentButton: UIButton!
     @IBOutlet weak var commentsTableView: UITableView!{
@@ -30,10 +30,6 @@ class CommentsViewController: UIViewController {
     }
     
     @IBAction func buttonIsTapped(_ sender: Any) {
-//        self.comments.append(Comment(author: User(name: "Владислав",
-//                                                  surname: "Лихачев",
-//                                                  avatar: "vladislav"), text: newCommentTextField.text!))
-        
         self.commentsTableView.beginUpdates()
         self.commentsTableView.insertRows(at: [IndexPath.init(row: self.comments.count-1, section: 0)], with: .automatic)
         self.commentsTableView.endUpdates()
@@ -48,8 +44,14 @@ extension CommentsViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
-       // cell.textLabel?.text = comments[indexPath.row].
-       // cell.detailTextLabel?.text = comments[indexPath.row].author.getFullName()
+        
+        cell.textLabel?.text = comments[indexPath.row].text
+        DataService.getUserById(userId: comments[indexPath.row].fromID,
+                   completion: {
+                       array in
+                    cell.detailTextLabel?.text = array!.getFullName()
+                   }
+               )
         return cell
     }
 }

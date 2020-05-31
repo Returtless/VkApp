@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class Photo: Object, Decodable {
+class Photo: Object, Decodable, HaveID {
     @objc dynamic var id = 0
     @objc dynamic var albumID = 0
     @objc dynamic var ownerID = 0
@@ -40,21 +40,9 @@ class Photo: Object, Decodable {
         self.ownerID = try container.decode(Int.self, forKey: .ownerID)
         self.text = try container.decode(String.self, forKey: .text)
         self.date = try container.decode(Int.self, forKey: .date)
-        if let arr = try container.decodeIfPresent(Likes.self, forKey: .likes) {
-                   self.likes = arr
-               } else {
-                   self.likes = nil
-               }
-        if let arr = try container.decodeIfPresent(Reposts.self, forKey: .reposts) {
-            self.reposts = arr
-        } else {
-            self.reposts = nil
-        }
-        if let arr = try container.decodeIfPresent(Array<Size>.self, forKey: .sizes) {
-            self.sizes.append(objectsIn: arr)
-        } else {
-            self.sizes = List()
-        }
+        self.likes = try? container.decodeIfPresent(Likes.self, forKey: .likes) 
+        self.reposts = try? container.decodeIfPresent(Reposts.self, forKey: .reposts)
+        sizes = try container.decodeIfPresent(List<Size>.self, forKey: .sizes) ?? List()
     }
     
     func getPhotoBigSize() -> UIImage? {

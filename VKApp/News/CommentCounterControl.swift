@@ -17,7 +17,11 @@ class CommentCounterControl: UIControl {
         return iconButton
     }()
     
-    var countOfComments : Int = 0
+    var countOfComments : Int = 0 {
+        didSet{
+            counterLabel.text = String(countOfComments)
+        }
+    }
     
     
     weak var delegate: CommentCounterDelegate?
@@ -29,7 +33,7 @@ class CommentCounterControl: UIControl {
     
     private func setupView() {
         backgroundColor = .clear
-        counterLabel.text = String(countOfComments)
+        
         counterLabel.adjustsFontSizeToFitWidth = true
         counterLabel.minimumScaleFactor = 0.5
         

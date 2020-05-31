@@ -20,9 +20,12 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     var users : ResultsForUser? {
         didSet{
             initUserArrays()
+            initSorterControl()
+            
         }
     }
     var usersToken: NotificationToken?
+    
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -38,15 +41,17 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
+        users = RealmService.getData()?.sorted(byKeyPath: "lastName")
+        pairTableAndRealm()
         DataService.getAllFriends(
             completion: {
                 [weak self] array in
                 self?.users = array!.sorted(byKeyPath: "lastName")
-                self?.pairTableAndRealm()
-                self?.initSorterControl()
                 self?.tableView.reloadData()
             }
         )
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -94,13 +99,13 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     }
     
     func pairTableAndRealm() {
-        guard (try? Realm()) != nil else { return }
         usersToken = users?.observe { (changes: RealmCollectionChange) in
             guard let tableView = self.tableView else { return }
             switch changes {
             case .initial:
                 tableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
+            case .update(let collection, let deletions, let insertions, let modifications):
+                guard (deletions.count < collection.count && insertions.count < collection.count && modifications.count < collection.count) else {return}
                 tableView.beginUpdates()
                 tableView.insertRows(at: insertions.map({ self.calculateIndexPathInTableViewWithUpdateData(for: $0)}), with: .automatic)
                 tableView.deleteRows(at: deletions.map({
@@ -224,12 +229,9 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
 extension FriendsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (!searchText.isEmpty){
-            let params : Parameters = [
-                "lastName" : searchText
-            ]
-            users = DataService.getDataFromRealm(params: params)?.sorted(byKeyPath: "lastName")
+            users = RealmService.getData(for: ("lastName", "CONTAINS[c]", "String"), with: searchText)
         } else {
-            users = DataService.getDataFromRealm()?.sorted(byKeyPath: "lastName")
+            users = RealmService.getData()?.sorted(byKeyPath: "lastName")
         }
         initUserArrays()
         tableView.reloadData()

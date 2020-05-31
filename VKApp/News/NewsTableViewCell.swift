@@ -23,9 +23,12 @@ class NewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var commentsCounter: CommentCounterControl!
     
+    @IBOutlet weak var heightCollectionConstraint: NSLayoutConstraint!
     var photos = [UIImage]()
     
     weak var delegate: CommentCounterDelegate?
+    
+    weak var photoDelegate: NewsPhotoCollectionViewDelegate?
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -37,7 +40,7 @@ class NewsTableViewCell: UITableViewCell {
         
         commentsCounter.delegate = self
         if photos.isEmpty {
-            photoCollectionView.isHidden = true
+            heightCollectionConstraint.constant = 0
         }
     }
     
@@ -82,6 +85,6 @@ extension NewsTableViewCell : CommentCounterDelegate {
 }
 extension NewsTableViewCell : NewsPhotoCollectionViewDelegate {
     func onButtonTapped(_ data : UIImage){
-        delegate!.onButtonTapped()
+        photoDelegate!.onButtonTapped(data)
     }
 }

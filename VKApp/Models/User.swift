@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class User: Object, Decodable {
+class User: Object, Decodable, HaveID {
     @objc dynamic var firstName: String = ""
     @objc dynamic var id: Int = 0
     @objc dynamic var lastName:  String = ""
@@ -28,11 +28,7 @@ class User: Object, Decodable {
         self.lastName = try container.decode(String.self, forKey: .lastName)
         self.photo100 = try container.decode(String.self, forKey: .photo100)
         self.sex = try container.decode(Int.self, forKey: .sex)
-        if let nickname = try container.decodeIfPresent(String.self, forKey: .nickname) {
-            self.nickname = nickname
-        } else {
-            self.nickname = ""
-        }
+        self.nickname = (try? container.decodeIfPresent(String.self, forKey: .nickname)) ?? ""
     }
     
     enum CodingKeys: String, CodingKey {
@@ -61,4 +57,13 @@ class Items<T:Decodable>  : Decodable {
 
 class Response<T:Decodable> : Decodable {
     var response : Items<T>
+}
+
+protocol HaveID {
+    var id: Int { get set }
+}
+
+class ResponseUsers: Decodable {
+    var response : [User] = []
+
 }
