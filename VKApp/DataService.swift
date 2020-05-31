@@ -26,7 +26,18 @@ class DataService {
             with: params,
             completion: completion
         )
-        
+    }
+    
+    /// Метод для обновления информации о друзьях
+    static func updateAllFriends(){
+        let params: Parameters = [
+            "fields": "nickname, domain, sex, photo_100"
+        ]
+        DataService.getServerData(
+            method: .getFriends,
+            with: params,
+            dataType : User.self
+        )
     }
     
     /// Метод для получения всех групп пользователя
@@ -41,6 +52,19 @@ class DataService {
             method: .getUserGroups,
             with: params,
             completion: completion
+        )
+    }
+    
+    /// Метод для обновления всех групп пользователя
+    static func updateAllGroups(){
+        let params: Parameters = [
+            "extended": "1",
+            "isMember" : 1
+        ]
+        DataService.getServerData(
+            method: .getUserGroups,
+            with: params,
+            dataType: Group.self
         )
     }
     
@@ -202,6 +226,24 @@ class DataService {
         }
     }
     
+    /// Метод для получения универсальных данных с сервера без комплишна
+    /// - Parameters:
+    ///   - method: метод запроса
+    ///   - parameters: параметры для запроса
+    private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
+                                                                       with parameters: Parameters,
+                                                                       dataType : T.Type) {
+        AF.request("https://api.vk.com/method/" + method.rawValue,
+                   parameters: getFullParameters(parameters)).responseJSON{ response in
+                    print("\(T.self)s получены с сервера ВК")
+                    guard let data = response.data else { return }
+                    let array: [T]? = decodeRequestData(method: method, data: data)
+                    if let array = array {
+                        //сохрняем данные в БД
+                        RealmService.saveData(array)
+                    }
+        }
+    }
     
     /// Метод для отправки запроса на сервер
     /// - Parameters:
