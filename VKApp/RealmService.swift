@@ -21,6 +21,7 @@ class RealmService {
     static func getData<T : Object>(for filter : (String, String, String)? = nil, with value : Any? = nil) -> Results<T>?{
         do {
             let realm = try Realm()
+            print(realm.configuration.fileURL)
             var predicate = NSPredicate(value: true)
             if let filter = filter, let value = value {
                 switch filter.2 {

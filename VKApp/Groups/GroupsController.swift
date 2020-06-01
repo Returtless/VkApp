@@ -15,7 +15,11 @@ class GroupsController: UITableViewController {
     
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     
-    var groups : Results<Group>? //список отображаемых групп
+    var groups : Results<Group>?{ //список отображаемых групп
+        didSet{
+            pairTableAndRealm()
+        }
+    }
     var userGroups : Results<Group>?//список групп пользователя
     var isUserGroups : Bool = true //флаг обозначающий
     var groupsToken : NotificationToken?
@@ -26,14 +30,7 @@ class GroupsController: UITableViewController {
         super.viewDidLoad()
         groups = RealmService.getGroups()
         isUserGroups = true
-        pairTableAndRealm()
-        DataService.getAllGroups(
-            completion: {
-                [weak self] array in
-                self?.groups = array?.sorted(byKeyPath: "name")
-                self?.userGroups = self!.groups
-            }
-        )
+        DataService.updateAllGroups()
         let alert = UIAlertController(title: "Важно!", message: "В новой версии появилась возможность вступать и выходить из групп в РЕАЛЬНОМ ВК! Для вступления поиском находим группу и при свайпе влево по ячейке есть кнопка для вступления", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true, completion: nil)
@@ -44,13 +41,7 @@ class GroupsController: UITableViewController {
     
     @objc
     func refresh() {
-        DataService.getAllGroups(
-            completion: {
-                [weak self] array in
-                self?.groups = array?.sorted(byKeyPath: "name")
-                self?.userGroups = self!.groups
-            }
-        )
+        DataService.updateAllGroups()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
