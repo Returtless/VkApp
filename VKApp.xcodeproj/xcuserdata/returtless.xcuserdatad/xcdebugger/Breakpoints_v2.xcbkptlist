@@ -142,9 +142,9 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "sorterBarWasChanged(_:)"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "calculateSectionNames()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -302,9 +302,9 @@
             filePath = "VKApp/Friends/FriendsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "sorterBarWasChanged(_:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "calculateSectionNames()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -318,10 +318,10 @@
             filePath = "VKApp/News/NewsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -334,8 +334,8 @@
             filePath = "VKApp/News/NewsTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "collectionView(_:layout:sizeForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -494,10 +494,10 @@
             filePath = "VKApp/News/NewsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -510,10 +510,26 @@
             filePath = "VKApp/News/NewsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA810D82-ABB9-4F3F-8393-3389ACB64085"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/News/NewsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -622,8 +638,8 @@
             filePath = "VKApp/News/NewsTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -638,8 +654,8 @@
             filePath = "VKApp/News/NewsTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "onButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -654,8 +670,8 @@
             filePath = "VKApp/News/CommentCounterControl.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "CommentCounterControl"
             landmarkType = "3">
          </BreakpointContent>
@@ -670,8 +686,8 @@
             filePath = "VKApp/News/NewsTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "onButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -686,8 +702,8 @@
             filePath = "VKApp/News/CommentCounterControl.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "changeCounter(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -702,8 +718,8 @@
             filePath = "VKApp/News/NewsTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "onButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -798,8 +814,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "onPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -814,8 +830,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "onPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -824,54 +840,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "1CD2BF7D-9E11-46A4-8CAD-039263006713"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VKApp/Friends/PhotoListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "onPan(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D36A66B2-2C3A-4EA5-85D6-4C4B862DC7B2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VKApp/Friends/PhotoListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "onPan(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2E355EB5-6675-4C98-AAFA-6E6A3C5F89EC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VKApp/Friends/PhotoListViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "initAnimator(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "84197562-20A5-4841-84BD-45962A977A8B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -887,6 +855,54 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "D36A66B2-2C3A-4EA5-85D6-4C4B862DC7B2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/Friends/PhotoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "onPan(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E355EB5-6675-4C98-AAFA-6E6A3C5F89EC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/Friends/PhotoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "initAnimator(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84197562-20A5-4841-84BD-45962A977A8B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VKApp/Friends/PhotoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "onPan(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "6A4B3639-95AB-4CE1-B137-6D35DB52B8AE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -894,8 +910,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "onPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -910,8 +926,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "onPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -926,8 +942,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "animationController(forPresented:presenting:source:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -942,8 +958,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "animationController(forDismissed:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -990,8 +1006,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1262,8 +1278,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "onPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1278,8 +1294,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "onPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1294,8 +1310,8 @@
             filePath = "VKApp/Friends/PhotoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "onPan(_:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -8,4 +8,6 @@ target 'VKApp' do
   # Pods for VKApp
 pod 'Alamofire', '~> 5.1'
 pod 'RealmSwift'
+pod 'Firebase/Core'
+pod 'Firebase/Database'
 end

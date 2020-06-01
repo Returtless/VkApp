@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import FirebaseDatabase
 
 class ViewController: UIViewController {
     
@@ -97,6 +98,9 @@ extension ViewController: WKNavigationDelegate {
             Session.instance.userId = Int(unwrappedId)!
             print(unwrappedToken)
             print(unwrappedId)
+            let user = FirebaseUser(id: Session.instance.userId)
+            let userRef = Database.database().reference(withPath: "authorizedUsers").child(String(Session.instance.userId))
+            userRef.setValue(user.toAnyObject())
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
