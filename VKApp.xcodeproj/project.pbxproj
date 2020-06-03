@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		49E4CE2DD43EA9F8B06011AA /* Pods_VKApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE30255A9F92F6BA9F37D6D6 /* Pods_VKApp.framework */; };
 		5205E0E724859BF400AEB057 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5205E0E624859BF400AEB057 /* GoogleService-Info.plist */; };
-		5205E0E924859E3000AEB057 /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205E0E824859E3000AEB057 /* FirebaseUser.swift */; };
+		5205E0EB2485A69500AEB057 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205E0EA2485A69500AEB057 /* FirebaseData.swift */; };
 		520675002438CADC00C76B86 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520674FF2438CADC00C76B86 /* AvatarView.swift */; };
 		520675022438F12100C76B86 /* LikeCounterControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520675012438F12100C76B86 /* LikeCounterControl.swift */; };
 		520675042439266700C76B86 /* SorterBarControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520675032439266700C76B86 /* SorterBarControl.swift */; };
@@ -63,7 +63,7 @@
 		2991961EDDDC605234C330D1 /* Pods-VKApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp.release.xcconfig"; path = "Target Support Files/Pods-VKApp/Pods-VKApp.release.xcconfig"; sourceTree = "<group>"; };
 		2CBC1403525C9CEABFD3E41E /* Pods-VKApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp.debug.xcconfig"; path = "Target Support Files/Pods-VKApp/Pods-VKApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5205E0E624859BF400AEB057 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		5205E0E824859E3000AEB057 /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
+		5205E0EA2485A69500AEB057 /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		520674FF2438CADC00C76B86 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		520675012438F12100C76B86 /* LikeCounterControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCounterControl.swift; sourceTree = "<group>"; };
 		520675032439266700C76B86 /* SorterBarControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorterBarControl.swift; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 				528A488A24350F420063708D /* User.swift */,
 				52AAF703243E7CBC00191326 /* News.swift */,
 				52B13C35245D6AB000AA02C8 /* Session.swift */,
-				5205E0E824859E3000AEB057 /* FirebaseUser.swift */,
+				5205E0EA2485A69500AEB057 /* FirebaseData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5205E0EB2485A69500AEB057 /* FirebaseData.swift in Sources */,
 				52DA5341244FC13000DEF4E7 /* FullPhotoViewController.swift in Sources */,
 				5234852D2430D4DE003DF0BD /* GroupsController.swift in Sources */,
 				5234852B2430C25E003DF0BD /* TabBarViewController.swift in Sources */,
@@ -391,7 +392,6 @@
 				52443944244623480097C195 /* DotsIndicator.swift in Sources */,
 				52335DBD242A89A6002A5318 /* AppDelegate.swift in Sources */,
 				528A488B24350F420063708D /* User.swift in Sources */,
-				5205E0E924859E3000AEB057 /* FirebaseUser.swift in Sources */,
 				525B9B092443BB3600FE4E00 /* CommentsViewController.swift in Sources */,
 				522CAC80243FCEE300896A14 /* ShareCounterControl.swift in Sources */,
 				52335DBF242A89A6002A5318 /* SceneDelegate.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import Alamofire
 import RealmSwift
+import FirebaseDatabase
 
 class GroupsController: UITableViewController {
     
@@ -24,6 +25,9 @@ class GroupsController: UITableViewController {
     var isUserGroups : Bool = true //флаг обозначающий
     var groupsToken : NotificationToken?
     
+    private var firebaseGroups = [FirebaseData]()
+    private let ref = Database.database().reference(withPath: "authorizedUsers").child(String(Session.instance.userId)).child("addedGroups")
+    
     //var myTimer: Timer!
     
     override func viewDidLoad() {
@@ -37,7 +41,18 @@ class GroupsController: UITableViewController {
         // self.myTimer = Timer(timeInterval: 15.0, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
         //  RunLoop.main.add(self.myTimer, forMode: .default)
         tableView.rowHeight = CGFloat(70)
+        
+        ref.observe(.value, with: { snapshot in
+            var groups: [FirebaseData] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot, let group = FirebaseData(snapshot: snapshot) {
+                    groups.append(group)
+                }
+            }
+            self.firebaseGroups = groups
+        })
     }
+
     
     @objc
     func refresh() {
@@ -107,6 +122,10 @@ class GroupsController: UITableViewController {
                 tableView.reloadData()
                 //добавляем группы в рилм и на сервер ВК
                 DataService.postDataToServer(for: item, method: .joinGroup)
+                //добавляем информацию о вступленной группе в файрбейз
+                let data = FirebaseData(id: item.id, name: item.name)
+                let groupRef = self.ref.child(item.name)
+                groupRef.setValue(data.toAnyObject())
                 //чистим серчбар
                 self.groupsSearchBar.searchTextField.text = nil
                 self.groupsSearchBar.endEditing(true)

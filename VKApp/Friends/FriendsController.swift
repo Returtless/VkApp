@@ -62,8 +62,11 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     }
     
     func calculateSectionNames() -> [String]{
+        guard let users = users else {
+            return []
+        }
         //инициализация всех дополнительных массивов и сортера
-        let allUserLastNameFirstLetters : [String] = users!.map({
+        let allUserLastNameFirstLetters : [String] = users.map({
             if let first = $0.lastName.first {
                 return String(first)
             } else {
