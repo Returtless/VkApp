@@ -28,6 +28,7 @@ class NewsViewController: UIViewController {
     }
 }
 
+//добавляю комментарий для пулл реквеста, потому что новости уже есть
 extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
