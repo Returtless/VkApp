@@ -57,8 +57,13 @@ class GroupsController: UITableViewController {
         
         let group = groups![indexPath.row]
         cell.groupNameLabel.text = group.name
-        if let image = UIImage.getImage(from: group.photo100) {
-            cell.avatarImageView.imageView.image = image
+        let photoUrl = group.photo100
+        DispatchQueue.global(qos: .userInteractive).async{
+            if let image = UIImage.getImage(from: photoUrl) {
+                DispatchQueue.main.async {
+                   cell.avatarImageView.imageView.image = image
+                }
+            }
         }
         return cell
     }

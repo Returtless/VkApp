@@ -115,10 +115,14 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.letters[indexPath.section], row: indexPath.row, section: indexPath.section) {
             cell.userLabel.text = "\(user.firstName) \(user.lastName)"
             cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
-            if let image = UIImage.getImage(from: user.photo100) {
-                cell.photoView.imageView.image = image
+            let photoUrl = user.photo100
+            DispatchQueue.global(qos: .userInteractive).async{
+                if let image = UIImage.getImage(from: photoUrl) {
+                    DispatchQueue.main.async {
+                        cell.photoView.imageView.image = image
+                    }
+                }
             }
-            
             UIView.animate(
                 withDuration: 1,
                 delay: 0,
