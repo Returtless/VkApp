@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class User: Object, Decodable, HaveID {
+class User: Object, Decodable, HaveID, HavePhoto {
     @objc dynamic var firstName: String = ""
     @objc dynamic var id: Int = 0
     @objc dynamic var lastName:  String = ""
@@ -61,6 +61,10 @@ class Response<T:Decodable> : Decodable {
 
 protocol HaveID {
     var id: Int { get set }
+}
+
+protocol HavePhoto {
+    var photo100: String { get set }
 }
 
 class ResponseUsers: Decodable {

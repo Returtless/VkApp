@@ -233,14 +233,18 @@ class DataService {
     private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
                                                                        with parameters: Parameters,
                                                                        dataType : T.Type) {
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        var array: [T]?
         AF.request("https://api.vk.com/method/" + method.rawValue,
-                   parameters: getFullParameters(parameters)).responseJSON{ response in
+                   parameters: getFullParameters(parameters)).responseJSON(queue: queue){ response in
                     print("\(T.self)s получены с сервера ВК")
                     guard let data = response.data else { return }
-                    let array: [T]? = decodeRequestData(method: method, data: data)
-                    if let array = array {
-                        //сохрняем данные в БД
-                        RealmService.saveData(array)
+                    array = decodeRequestData(method: method, data: data)
+                    DispatchQueue.main.async {
+                        if let array = array {
+                            //сохрняем данные в БД
+                            RealmService.saveData(array)
+                        }
                     }
         }
     }

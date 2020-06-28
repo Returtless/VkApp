@@ -28,6 +28,7 @@ class NewsViewController: UIViewController {
     }
 }
 
+//добавляю комментарий для пулл реквеста, потому что новости уже есть
 extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
@@ -43,25 +44,33 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         let currentNews = newsItems.items[indexPath.row]
-        // cell.avatarView.imageView.image = currentNews.author.avatar
         let id = currentNews.sourceID
+        var author : HavePhoto?
         var authorName = ""
-        var authorImage : UIImage?
         if id > 0 {
             if let user = newsItems.profiles.first(where: {$0.id == abs(id)}) {
+                author = user
                 authorName = user.getFullName()
-                authorImage = UIImage.getImage(from: user.photo100)
             }
         } else {
             if let group = newsItems.groups.first(where: {$0.id == abs(id)}) {
+                author = group
                 authorName = group.name
-                authorImage = UIImage.getImage(from: group.photo100)
+            }
+        }
+        if let author = author {
+            let photoUrl = author.photo100
+            DispatchQueue.global(qos: .userInteractive).async{
+                if let image = UIImage.getImage(from: photoUrl) {
+                    DispatchQueue.main.async {
+                        cell.avatarView.imageView.image = image
+                        cell.avatarView.reloadInputViews()
+                    }
+                }
             }
         }
         cell.authorNameLabel.text = authorName
-        if let authorImage = authorImage {
-            cell.avatarView.imageView.image = authorImage
-        }
+        
         let date = NSDate(timeIntervalSince1970: Double(currentNews.date))
         let currentDate = Date()
         let result = currentDate.timeIntervalSince(date as Date)

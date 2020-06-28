@@ -108,7 +108,7 @@ class News: Decodable {
 }
 
 // MARK: - Attachment
-class Attachment: Decodable {
+class Attachment: Decodable, HavePhotoElement {
     var type: String = ""
     var photo: Photo?
     var link: Link?
@@ -133,7 +133,7 @@ class Attachment: Decodable {
 }
 
 // MARK: - Link
-class Link: Decodable {
+class Link: Decodable, HavePhotoElement {
     var url: String = ""
     var title = ""
     var caption: String = ""
@@ -292,4 +292,8 @@ class CommentsList: Codable {
         case ownerID = "owner_id"
     }
 
+}
+
+protocol HavePhotoElement {
+    var photo: Photo? { get set }
 }

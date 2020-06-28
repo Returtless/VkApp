@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class Group: Object, Codable, HaveID {
+class Group: Object, Codable, HaveID, HavePhoto {
     @objc dynamic var id: Int = 0
     @objc dynamic var name = ""
     @objc dynamic var screenName: String = ""
