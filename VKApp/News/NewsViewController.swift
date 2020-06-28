@@ -60,7 +60,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         }
         if let author = author {
             let photoUrl = author.photo100
-            DispatchQueue.global(qos: .userInteractive).async{
+            DispatchQueue.global(qos: .utility).async{
                 if let image = UIImage.getImage(from: photoUrl) {
                     DispatchQueue.main.async {
                         cell.avatarView.imageView.image = image
