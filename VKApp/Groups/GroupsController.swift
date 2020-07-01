@@ -30,7 +30,7 @@ class GroupsController: UITableViewController {
         super.viewDidLoad()
         groups = RealmService.getGroups()
         isUserGroups = true
-        DataService.updateAllGroups()
+        DataService.updateAllGroupsWithOperation()
         let alert = UIAlertController(title: "Важно!", message: "В новой версии появилась возможность вступать и выходить из групп в РЕАЛЬНОМ ВК! Для вступления поиском находим группу и при свайпе влево по ячейке есть кнопка для вступления", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true, completion: nil)
