@@ -52,6 +52,13 @@ class Photo: Object, Decodable, HaveID {
         return UIImage.getImage(from: sizes[sizes.count-1].url)
     }
     
+    func getPhotoBigSizeURL() -> String? {
+        guard !sizes.isEmpty else {
+            return nil
+        }
+        return sizes[sizes.count-1].url
+    }
+    
     func getLikesCount() -> Int {
         return likes!.count
     }

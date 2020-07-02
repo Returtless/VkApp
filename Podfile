@@ -6,6 +6,7 @@ target 'VKApp' do
   use_frameworks!
 
   # Pods for VKApp
-pod 'Alamofire', '~> 5.1'
+pod 'Alamofire', '~> 5.2'
 pod 'RealmSwift'
+pod "PromiseKit", "~> 6.8"
 end

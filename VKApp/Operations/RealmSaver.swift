@@ -22,7 +22,7 @@ class RealmSaver : Operation {
     override func main() {
         guard let getDataOperation = dependencies.first as? ParseData,
             let data = getDataOperation.outputData else { return }
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             if (!data.isEmpty) {
                 do {
                     Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)

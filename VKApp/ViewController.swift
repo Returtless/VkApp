@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import PromiseKit
 
 class ViewController: UIViewController {
     
@@ -107,6 +108,24 @@ extension ViewController: WKNavigationDelegate {
 }
 
 extension UIImage {
+    static func getImagePromise(from string: String) -> Promise<UIImage?> {
+        let promise = Promise<UIImage?> { resolver in
+            guard let url = URL(string: string)
+                else {
+                    print("Unable to create URL")
+                    resolver.reject(NSError())
+                    return
+            }
+            do {
+                let data = try Data(contentsOf: url, options: [])
+                resolver.fulfill(UIImage(data: data))
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+        return promise
+    }
     static func getImage(from string: String) -> UIImage? {
         guard let url = URL(string: string)
             else {

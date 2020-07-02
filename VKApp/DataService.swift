@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import Alamofire
 import RealmSwift
+import PromiseKit
 
 /// Сервис для работы с сервером VK
 class DataService {
@@ -167,6 +168,35 @@ class DataService {
                         print("error: ", error)
                     }
         }
+    }
+    
+    static func newsfeed() -> Promise<NewsItems> {
+        let params: Parameters = [
+            "count" : 10,
+            "filters" : "post"
+        ]
+        let promise = Promise<NewsItems> { resolver in
+            AF.request("https://api.vk.com/method/" + Methods.getNews.rawValue,
+                       parameters: getFullParameters(params)).responseJSON(queue: DispatchQueue.global(qos: .utility)) { response in
+                        switch response.result {
+                        case .success(_):
+                            do {
+                                print("News получены с сервера ВК")
+                                guard let data = response.data else { return }
+                                let res = try JSONDecoder().decode(ResponseNews.self, from: data)
+                                resolver.fulfill(res.response)
+                            } catch {
+                                print("error: ", error)
+                                resolver.reject(error)
+                            }
+                            
+                        case .failure(let error):
+                            resolver.reject(error)
+                        }
+            }
+        }
+        
+        return promise
     }
     
     /// Метод для получения ленты с комментариями

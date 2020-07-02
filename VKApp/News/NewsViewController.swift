@@ -17,13 +17,12 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        DataService.getNewsfeed(
-            completion: {
-                [weak self] array in
-                self?.news = array
-                self?.tableView.reloadData()
-            }
-        )
+        DataService.newsfeed()
+        // Обрабатываем ответ сетевого запроса
+        .get { [weak self] array in
+            self?.news = array
+            self?.tableView.reloadData()
+        }
         //news = Database.getNewsData()
     }
 }
