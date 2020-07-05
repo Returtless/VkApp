@@ -40,6 +40,18 @@ class DataService {
         )
     }
     
+    /// Метод для обновления информации о друзьях c Operation
+    static func updateAllFriendsWithOperation(){
+        let params: Parameters = [
+            "fields": "nickname, domain, sex, photo_100"
+        ]
+        DataService.getData(
+            method: .getFriends,
+            with: params,
+            dataType : User.self
+        )
+    }
+    
     /// Метод для получения всех групп пользователя
     /// - Parameter completion: замыкание для возврата данных
     static func getAllGroups(
@@ -67,6 +79,19 @@ class DataService {
             dataType: Group.self
         )
     }
+    
+    /// Метод для обновления всех групп пользователя c Operation
+       static func updateAllGroupsWithOperation(){
+           let params: Parameters = [
+               "extended": "1",
+               "isMember" : 1
+           ]
+           DataService.getData(
+               method: .getUserGroups,
+               with: params,
+               dataType: Group.self
+           )
+       }
     
     /// Метод для получения всех фотографий конкретного пользователя
     /// - Parameters:
@@ -233,16 +258,39 @@ class DataService {
     private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
                                                                        with parameters: Parameters,
                                                                        dataType : T.Type) {
+        let queue = DispatchQueue.global(qos: .utility)
+        var array: [T]?
         AF.request("https://api.vk.com/method/" + method.rawValue,
-                   parameters: getFullParameters(parameters)).responseJSON{ response in
+                   parameters: getFullParameters(parameters)).responseJSON(queue: queue){ response in
                     print("\(T.self)s получены с сервера ВК")
                     guard let data = response.data else { return }
-                    let array: [T]? = decodeRequestData(method: method, data: data)
-                    if let array = array {
-                        //сохрняем данные в БД
-                        RealmService.saveData(array)
+                    array = decodeRequestData(method: method, data: data)
+                    DispatchQueue.main.async {
+                        if let array = array {
+                            //сохрняем данные в БД
+                            RealmService.saveData(array)
+                        }
                     }
         }
+    }
+    
+    static func getData<T : Decodable & Object & HaveID>(method : Methods,
+                                                  with parameters: Parameters,
+                                                  dataType : T.Type) {
+        let opq : OperationQueue = OperationQueue()
+        opq.maxConcurrentOperationCount = 2
+        let request = AF.request("https://api.vk.com/method/" + method.rawValue,
+                                 parameters: DataService.getFullParameters(parameters))
+        let getDataOperation = GetDataOperation(request: request)
+        opq.addOperation(getDataOperation)
+        
+        let parseData = ParseData(method: method)
+        parseData.addDependency(getDataOperation)
+        opq.addOperation(parseData)
+        
+        let realmSaver = RealmSaver(inputData: nil)
+        realmSaver.addDependency(parseData)
+        OperationQueue.main.addOperation(realmSaver)
     }
     
     /// Метод для отправки запроса на сервер
