@@ -14,6 +14,7 @@ import RealmSwift
 class GroupsController: UITableViewController {
     
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
+    private var photoService: PhotoService?
     
     var groups : Results<Group>?{ //список отображаемых групп
         didSet{
@@ -28,6 +29,7 @@ class GroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoService = PhotoService(container: tableView)
         groups = RealmService.getGroups()
         isUserGroups = true
         DataService.updateAllGroups()
@@ -57,7 +59,7 @@ class GroupsController: UITableViewController {
         
         let group = groups![indexPath.row]
         cell.groupNameLabel.text = group.name
-        if let image = UIImage.getImage(from: group.photo100) {
+        if let image = photoService?.getPhoto(atIndexPath: indexPath, byUrl: group.photo100) {
             cell.avatarImageView.imageView.image = image
         }
         return cell

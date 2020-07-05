@@ -11,6 +11,7 @@
 		520675002438CADC00C76B86 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520674FF2438CADC00C76B86 /* AvatarView.swift */; };
 		520675022438F12100C76B86 /* LikeCounterControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520675012438F12100C76B86 /* LikeCounterControl.swift */; };
 		520675042439266700C76B86 /* SorterBarControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520675032439266700C76B86 /* SorterBarControl.swift */; };
+		5216D08F24B1E7C4007B8B58 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5216D08E24B1E7C4007B8B58 /* PhotoService.swift */; };
 		521FA4482435384D00522D8C /* AddGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521FA4472435384D00522D8C /* AddGroupTableViewController.swift */; };
 		521FA44A24353CD300522D8C /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521FA44924353CD300522D8C /* AddGroupTableViewCell.swift */; };
 		522AF745244A4DD9004D40CA /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522AF744244A4DD9004D40CA /* PhotoListViewController.swift */; };
@@ -63,6 +64,7 @@
 		520674FF2438CADC00C76B86 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		520675012438F12100C76B86 /* LikeCounterControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCounterControl.swift; sourceTree = "<group>"; };
 		520675032439266700C76B86 /* SorterBarControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorterBarControl.swift; sourceTree = "<group>"; };
+		5216D08E24B1E7C4007B8B58 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		521FA4472435384D00522D8C /* AddGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewController.swift; sourceTree = "<group>"; };
 		521FA44924353CD300522D8C /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		522AF744244A4DD9004D40CA /* PhotoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5216D09024B1EF04007B8B58 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				52B13C3B245DBA2100AA02C8 /* DataService.swift */,
+				5216D08E24B1E7C4007B8B58 /* PhotoService.swift */,
+				52FB1E112476F95D00FC2A22 /* RealmService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		52335DB0242A89A6002A5318 = {
 			isa = PBXGroup;
 			children = (
@@ -162,8 +174,7 @@
 				5280AF21246DC5F100B727E1 /* Animations */,
 				520674FF2438CADC00C76B86 /* AvatarView.swift */,
 				52335DBC242A89A6002A5318 /* AppDelegate.swift */,
-				52B13C3B245DBA2100AA02C8 /* DataService.swift */,
-				52FB1E112476F95D00FC2A22 /* RealmService.swift */,
+				5216D09024B1EF04007B8B58 /* Services */,
 				52335DBE242A89A6002A5318 /* SceneDelegate.swift */,
 				52335DC0242A89A6002A5318 /* ViewController.swift */,
 				52335DC2242A89A6002A5318 /* Main.storyboard */,
@@ -388,6 +399,7 @@
 				522CAC80243FCEE300896A14 /* ShareCounterControl.swift in Sources */,
 				52335DBF242A89A6002A5318 /* SceneDelegate.swift in Sources */,
 				52AAF701243E7C2700191326 /* NewsTableViewCell.swift in Sources */,
+				5216D08F24B1E7C4007B8B58 /* PhotoService.swift in Sources */,
 				52B13C3C245DBA2100AA02C8 /* DataService.swift in Sources */,
 				52B2B6AF2450B44F00DDBE36 /* FullPhotoAnimationController.swift in Sources */,
 				521FA44A24353CD300522D8C /* AddGroupTableViewCell.swift in Sources */,
