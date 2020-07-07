@@ -27,6 +27,7 @@ class LikeCounterControl: UIControl {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        counterLabel.backgroundColor = UIColor.white
         setupView()
     }
     

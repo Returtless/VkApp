@@ -28,11 +28,12 @@ class CommentCounterControl: UIControl {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        counterLabel.backgroundColor = UIColor.white
         setupView()
     }
     
     private func setupView() {
-        backgroundColor = .clear
+        backgroundColor = .white
         
         counterLabel.adjustsFontSizeToFitWidth = true
         counterLabel.minimumScaleFactor = 0.5

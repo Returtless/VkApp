@@ -110,8 +110,14 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         return users!.filter(predicate).count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sorterControl.letters[section]
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
+        headerView.backgroundColor = UIColor(hex: "#6689B3ff")
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: 15, height: 28))
+        label.backgroundColor = UIColor(hex: "#6689B3ff")
+        label.text = sorterControl.letters[section]
+        headerView.addSubview(label)
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

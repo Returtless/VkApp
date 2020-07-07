@@ -16,6 +16,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UHn-uP-79w">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
@@ -105,7 +107,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.32156862749999998" green="0.46274509800000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="w6m-bX-d69" firstAttribute="trailing" secondItem="O1P-PW-frm" secondAttribute="trailing" id="OsG-vw-cGo"/>
                             <constraint firstItem="w6m-bX-d69" firstAttribute="bottom" secondItem="O1P-PW-frm" secondAttribute="bottom" id="Vsw-Da-dIC"/>
