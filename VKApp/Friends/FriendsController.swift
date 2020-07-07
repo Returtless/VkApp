@@ -117,21 +117,7 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
         if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.letters[indexPath.section], row: indexPath.row, section: indexPath.section) {
-            cell.userLabel.text = "\(user.firstName) \(user.lastName)"
-            cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
-            if let image = photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100) {
-                cell.photoView.imageView.image = image
-            }
-            
-            UIView.animate(
-                withDuration: 1,
-                delay: 0,
-                usingSpringWithDamping: 0.4,
-                initialSpringVelocity: 0.8,
-                options:.curveEaseInOut,
-                animations: {
-                    cell.frame.origin.x+=70
-            })
+            cell.configure(with: user, image: photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100))
         }
         return cell
     }

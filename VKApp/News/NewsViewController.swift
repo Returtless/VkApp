@@ -26,7 +26,6 @@ class NewsViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         )
-        //news = Database.getNewsData()
     }
 }
 
@@ -39,71 +38,67 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         }
         return newsItems.items.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
         guard let newsItems = news, !newsItems.items.isEmpty else {
             return cell
         }
         let currentNews = newsItems.items[indexPath.row]
-        // cell.avatarView.imageView.image = currentNews.author.avatar
         let id = currentNews.sourceID
-        var authorName = ""
-        var authorImage : UIImage?
+        var author : (name: String, photo: UIImage?) = ("", nil)
         if id > 0 {
             if let user = newsItems.profiles.first(where: {$0.id == abs(id)}), let photo = photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100) {
-                authorName = user.getFullName()
-                authorImage = photo
+                author.name = user.getFullName()
+                author.photo = photo
             }
         } else {
             if let group = newsItems.groups.first(where: {$0.id == abs(id)}), let photo = photoService?.getPhoto(atIndexPath: indexPath, byUrl: group.photo100) {
-                authorName = group.name
-                authorImage = photo
-            }
-        }
-        cell.authorNameLabel.text = authorName
-        if let authorImage = authorImage {
-            cell.avatarView.imageView.image = authorImage
-        }
-        let date = NSDate(timeIntervalSince1970: Double(currentNews.date))
-        let currentDate = Date()
-        let result = currentDate.timeIntervalSince(date as Date)
-        cell.photoDelegate = self
-        cell.createDateLabel.text = result.toRelativeDateTime()
-        cell.messageLabel.text = currentNews.text
-        cell.likeCounterControl.isLiked = currentNews.getLikesInfo().1
-        cell.likeCounterControl.countOfLikes = currentNews.getLikesInfo().0
-        cell.commentsCounter.counterLabel.text = "\(currentNews.comments?.count ?? 0)"
-        cell.viewsCounter.text = "\(currentNews.views?.count ?? 0)"
-        cell.photos = []
-        if !currentNews.attachments.isEmpty {
-            for attach in currentNews.attachments {
-                if let photos = attach.photo, let url = photos.getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
-                    cell.photos.append(bigPhoto)
-                } else if let link = currentNews.attachments[0].link, let photo = link.photo,
-                    let url = photo.getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url){
-                    cell.photos.append(bigPhoto)
-                } else if currentNews.attachments[0].video != nil{
-                    cell.photos = [UIImage(systemName: "arrowtriangle.right.circle")!]
-                }
-            }
-        } else if currentNews.photos != nil{
-            if let url = currentNews.photos!.items[0].getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
-                cell.photos = [bigPhoto]
-                
+                author.name = group.name
+                author.photo = photo
             }
         }
         
+        cell.configure(for: currentNews, with: configurePhotoList(for: currentNews, with: indexPath), by: author)
         cell.delegate = self
+        cell.photoDelegate = self
         return cell
     }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
         guard let newsItems = news, !newsItems.items.isEmpty else {
             return
         }
         let currentNews = newsItems.items[indexPath.row]
-        cell.likeCounterControl.countOfLikes = currentNews.getLikesInfo().0
+        cell.setLikeCounterControl(count: currentNews.getLikesInfo().0)
         cell.reloadInputViews()
+    }
+    
+    private func configurePhotoList(for currentNews: News, with indexPath: IndexPath) -> [UIImage]{
+        var cellPhotos = [UIImage]()
+        if !currentNews.attachments.isEmpty {
+            for attach in currentNews.attachments {
+                var photo : Photo = Photo()
+                if let photos = attach.photo {
+                    photo = photos
+                } else if let link = attach.link, let photos = link.photo{
+                    photo = photos
+                }
+                
+                if let url = photo.getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
+                     cellPhotos.append(bigPhoto)
+                }
+            }
+        } else if currentNews.photos != nil{
+            if let url = currentNews.photos!.items[0].getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
+                cellPhotos = [bigPhoto]
+            }
+        }
+        if (cellPhotos.isEmpty){
+            cellPhotos = [UIImage(systemName: "arrowtriangle.right.circle")!]
+        }
+        return cellPhotos
     }
 }
 

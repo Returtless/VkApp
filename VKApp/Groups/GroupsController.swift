@@ -56,12 +56,8 @@ class GroupsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupTableViewCell
-        
         let group = groups![indexPath.row]
-        cell.groupNameLabel.text = group.name
-        if let image = photoService?.getPhoto(atIndexPath: indexPath, byUrl: group.photo100) {
-            cell.avatarImageView.imageView.image = image
-        }
+        cell.configure(with: group, image: photoService?.getPhoto(atIndexPath: indexPath, byUrl: group.photo100))
         return cell
     }
     

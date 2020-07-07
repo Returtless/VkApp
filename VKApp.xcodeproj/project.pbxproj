@@ -34,6 +34,10 @@
 		525B9B092443BB3600FE4E00 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B9B082443BB3600FE4E00 /* CommentsViewController.swift */; };
 		525F8A00244F7D170052F8F3 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F89FF244F7D170052F8F3 /* AnimationController.swift */; };
 		525F8A02244F7D250052F8F3 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F8A01244F7D250052F8F3 /* CustomNavigationController.swift */; };
+		5277F1E224B461AF00C514C0 /* RealmSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277F1DE24B461AF00C514C0 /* RealmSaver.swift */; };
+		5277F1E324B461AF00C514C0 /* ParseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277F1DF24B461AF00C514C0 /* ParseData.swift */; };
+		5277F1E424B461AF00C514C0 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277F1E024B461AF00C514C0 /* GetDataOperation.swift */; };
+		5277F1E524B461AF00C514C0 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277F1E124B461AF00C514C0 /* AsyncOperation.swift */; };
 		5286D9EC243D0404008E36C6 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9EA243D0404008E36C6 /* Friends.storyboard */; };
 		5286D9EE243D0423008E36C6 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9ED243D0423008E36C6 /* Groups.storyboard */; };
 		5286D9F2243D1B6F008E36C6 /* NavigationTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */; };
@@ -89,6 +93,10 @@
 		525B9B082443BB3600FE4E00 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		525F89FF244F7D170052F8F3 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		525F8A01244F7D250052F8F3 /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		5277F1DE24B461AF00C514C0 /* RealmSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSaver.swift; sourceTree = "<group>"; };
+		5277F1DF24B461AF00C514C0 /* ParseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseData.swift; sourceTree = "<group>"; };
+		5277F1E024B461AF00C514C0 /* GetDataOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
+		5277F1E124B461AF00C514C0 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		5286D9EB243D0404008E36C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VKApp/Base.lproj/Friends.storyboard; sourceTree = "<group>"; };
 		5286D9ED243D0423008E36C6 /* Groups.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabBar.swift; sourceTree = "<group>"; };
@@ -176,6 +184,7 @@
 				52335DBC242A89A6002A5318 /* AppDelegate.swift */,
 				5216D09024B1EF04007B8B58 /* Services */,
 				52335DBE242A89A6002A5318 /* SceneDelegate.swift */,
+				5277F1E624B461BF00C514C0 /* Operations */,
 				52335DC0242A89A6002A5318 /* ViewController.swift */,
 				52335DC2242A89A6002A5318 /* Main.storyboard */,
 				5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */,
@@ -185,6 +194,17 @@
 				5234852A2430C25D003DF0BD /* TabBarViewController.swift */,
 			);
 			path = VKApp;
+			sourceTree = "<group>";
+		};
+		5277F1E624B461BF00C514C0 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				5277F1E124B461AF00C514C0 /* AsyncOperation.swift */,
+				5277F1E024B461AF00C514C0 /* GetDataOperation.swift */,
+				5277F1DF24B461AF00C514C0 /* ParseData.swift */,
+				5277F1DE24B461AF00C514C0 /* RealmSaver.swift */,
+			);
+			path = Operations;
 			sourceTree = "<group>";
 		};
 		5280AF21246DC5F100B727E1 /* Animations */ = {
@@ -386,11 +406,13 @@
 			files = (
 				52DA5341244FC13000DEF4E7 /* FullPhotoViewController.swift in Sources */,
 				5234852D2430D4DE003DF0BD /* GroupsController.swift in Sources */,
+				5277F1E324B461AF00C514C0 /* ParseData.swift in Sources */,
 				5234852B2430C25E003DF0BD /* TabBarViewController.swift in Sources */,
 				525B9B07244358C500FE4E00 /* ViewPhotoViewController.swift in Sources */,
 				52335DC1242A89A6002A5318 /* ViewController.swift in Sources */,
 				522AF747244C5DEC004D40CA /* CloudIndicator.swift in Sources */,
 				522CAC84243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift in Sources */,
+				5277F1E424B461AF00C514C0 /* GetDataOperation.swift in Sources */,
 				528A48952435356B0063708D /* GroupTableViewCell.swift in Sources */,
 				52443944244623480097C195 /* DotsIndicator.swift in Sources */,
 				52335DBD242A89A6002A5318 /* AppDelegate.swift in Sources */,
@@ -403,6 +425,7 @@
 				52B13C3C245DBA2100AA02C8 /* DataService.swift in Sources */,
 				52B2B6AF2450B44F00DDBE36 /* FullPhotoAnimationController.swift in Sources */,
 				521FA44A24353CD300522D8C /* AddGroupTableViewCell.swift in Sources */,
+				5277F1E224B461AF00C514C0 /* RealmSaver.swift in Sources */,
 				5234852F2430DEDE003DF0BD /* FriendsController.swift in Sources */,
 				525F8A02244F7D250052F8F3 /* CustomNavigationController.swift in Sources */,
 				520675022438F12100C76B86 /* LikeCounterControl.swift in Sources */,
@@ -424,6 +447,7 @@
 				522AF745244A4DD9004D40CA /* PhotoListViewController.swift in Sources */,
 				5286D9F6243E6894008E36C6 /* GroupsSearchBar.swift in Sources */,
 				522CAC7E243FC99B00896A14 /* CommentCounterControl.swift in Sources */,
+				5277F1E524B461AF00C514C0 /* AsyncOperation.swift in Sources */,
 				52FB1E122476F95D00FC2A22 /* RealmService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

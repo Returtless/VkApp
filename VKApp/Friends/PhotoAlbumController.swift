@@ -28,8 +28,7 @@ class PhotoAlbumController: UICollectionViewController {
         let currentPhoto = photos[indexPath.row]
         if let photo = currentPhoto.getPhotoBigSize() {
             cell.photoImageView.image = photo
-            cell.likeControl.countOfLikes = currentPhoto.getLikesCount()
-            cell.likeControl.isLiked = currentPhoto.getUserLike()
+            cell.likeControl.configure(count: currentPhoto.getLikesCount(), isLiked: currentPhoto.getUserLike())
         }
         return cell
     }
