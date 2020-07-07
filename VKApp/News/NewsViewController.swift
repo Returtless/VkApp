@@ -12,11 +12,13 @@ class NewsViewController: UIViewController {
     var news : NewsItems?
     
     @IBOutlet weak var tableView: UITableView!
+    private var photoService: PhotoService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        photoService = PhotoService(container: tableView)
         DataService.getNewsfeed(
             completion: {
                 [weak self] array in
@@ -28,7 +30,6 @@ class NewsViewController: UIViewController {
     }
 }
 
-//добавляю комментарий для пулл реквеста, потому что новости уже есть
 extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
@@ -44,33 +45,25 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         let currentNews = newsItems.items[indexPath.row]
+        // cell.avatarView.imageView.image = currentNews.author.avatar
         let id = currentNews.sourceID
-        var author : HavePhoto?
         var authorName = ""
+        var authorImage : UIImage?
         if id > 0 {
-            if let user = newsItems.profiles.first(where: {$0.id == abs(id)}) {
-                author = user
+            if let user = newsItems.profiles.first(where: {$0.id == abs(id)}), let photo = photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100) {
                 authorName = user.getFullName()
+                authorImage = photo
             }
         } else {
-            if let group = newsItems.groups.first(where: {$0.id == abs(id)}) {
-                author = group
+            if let group = newsItems.groups.first(where: {$0.id == abs(id)}), let photo = photoService?.getPhoto(atIndexPath: indexPath, byUrl: group.photo100) {
                 authorName = group.name
-            }
-        }
-        if let author = author {
-            let photoUrl = author.photo100
-            DispatchQueue.global(qos: .utility).async{
-                if let image = UIImage.getImage(from: photoUrl) {
-                    DispatchQueue.main.async {
-                        cell.avatarView.imageView.image = image
-                        cell.avatarView.reloadInputViews()
-                    }
-                }
+                authorImage = photo
             }
         }
         cell.authorNameLabel.text = authorName
-        
+        if let authorImage = authorImage {
+            cell.avatarView.imageView.image = authorImage
+        }
         let date = NSDate(timeIntervalSince1970: Double(currentNews.date))
         let currentDate = Date()
         let result = currentDate.timeIntervalSince(date as Date)
@@ -84,20 +77,20 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.photos = []
         if !currentNews.attachments.isEmpty {
             for attach in currentNews.attachments {
-                if let photos = attach.photo, let bigPhoto = photos.getPhotoBigSize() {
+                if let photos = attach.photo, let url = photos.getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
                     cell.photos.append(bigPhoto)
-                } else if let link = currentNews.attachments[0].link, let photo = link.photo, let bigPhoto = photo.getPhotoBigSize() {
+                } else if let link = currentNews.attachments[0].link, let photo = link.photo,
+                    let url = photo.getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url){
                     cell.photos.append(bigPhoto)
                 } else if currentNews.attachments[0].video != nil{
                     cell.photos = [UIImage(systemName: "arrowtriangle.right.circle")!]
                 }
             }
         } else if currentNews.photos != nil{
-            if let photo = currentNews.photos!.items[0].getPhotoBigSize() {
-                cell.photos = [photo]
+            if let url = currentNews.photos!.items[0].getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
+                cell.photos = [bigPhoto]
                 
             }
-            
         }
         
         cell.delegate = self

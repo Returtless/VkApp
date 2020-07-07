@@ -15,10 +15,13 @@ typealias ResultsForUser = Results<User>
 class FriendsController: UIViewController, UINavigationControllerDelegate {
     var users : ResultsForUser? {
         didSet{
+            if users != nil {
             initSorterControl()
             pairTableAndRealm()
+            }
         }
     }
+    private var photoService: PhotoService?
     
     var usersToken: NotificationToken?
     var sorterControl: SorterBarControl!
@@ -31,11 +34,12 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = CGFloat(70)
+        photoService = PhotoService(container: tableView)
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
         users = RealmService.getData()?.sorted(byKeyPath: "lastName")
-        DataService.updateAllFriendsWithOperation()
+        DataService.updateAllFriends()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,14 +119,10 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.letters[indexPath.section], row: indexPath.row, section: indexPath.section) {
             cell.userLabel.text = "\(user.firstName) \(user.lastName)"
             cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
-            let photoUrl = user.photo100
-            DispatchQueue.global(qos: .utility).async{
-                if let image = UIImage.getImage(from: photoUrl) {
-                    DispatchQueue.main.async {
-                        cell.photoView.imageView.image = image
-                    }
-                }
+            if let image = photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100) {
+                cell.photoView.imageView.image = image
             }
+            
             UIView.animate(
                 withDuration: 1,
                 delay: 0,

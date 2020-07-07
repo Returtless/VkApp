@@ -14,6 +14,7 @@ import RealmSwift
 class GroupsController: UITableViewController {
     
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
+    private var photoService: PhotoService?
     
     var groups : Results<Group>?{ //список отображаемых групп
         didSet{
@@ -28,9 +29,10 @@ class GroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoService = PhotoService(container: tableView)
         groups = RealmService.getGroups()
         isUserGroups = true
-        DataService.updateAllGroupsWithOperation()
+        DataService.updateAllGroups()
         let alert = UIAlertController(title: "Важно!", message: "В новой версии появилась возможность вступать и выходить из групп в РЕАЛЬНОМ ВК! Для вступления поиском находим группу и при свайпе влево по ячейке есть кнопка для вступления", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true, completion: nil)
@@ -57,13 +59,8 @@ class GroupsController: UITableViewController {
         
         let group = groups![indexPath.row]
         cell.groupNameLabel.text = group.name
-        let photoUrl = group.photo100
-        DispatchQueue.global(qos: .userInteractive).async{
-            if let image = UIImage.getImage(from: photoUrl) {
-                DispatchQueue.main.async {
-                   cell.avatarImageView.imageView.image = image
-                }
-            }
+        if let image = photoService?.getPhoto(atIndexPath: indexPath, byUrl: group.photo100) {
+            cell.avatarImageView.imageView.image = image
         }
         return cell
     }
