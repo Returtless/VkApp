@@ -139,46 +139,17 @@ class DataService {
     
     /// Метод для получения новостей с сервера
     /// - Parameter completion: замыкание для возврата данных
-    static func getNewsfeed(completion: @escaping (_ array : NewsItems?) -> Void) {
-        let params: Parameters = [
-            "count" : 10,
+    static func getNewsfeed(startTime: String = "", startFrom: String = "", completion: @escaping (_ array : NewsItems?) -> Void) {
+        var params: Parameters = [
+            "count" : 20,
             "filters" : "post"
         ]
-        AF.request("https://api.vk.com/method/" + Methods.getNews.rawValue,
-                   parameters: getFullParameters(params)).responseJSON(queue: .global()){ response in
-                    do {
-                        print("News получены с сервера ВК")
-                        
-                        guard let data = response.data else { return }
-                        let res = try JSONDecoder().decode(ResponseNews.self, from: data)
-                        DispatchQueue.main.async {
-                            completion(res.response)
-                        }
-                    } catch let DecodingError.dataCorrupted(context) {
-                        print(context)
-                    } catch let DecodingError.keyNotFound(key, context) {
-                        print("Key '\(key)' not found:", context.debugDescription)
-                        print("codingPath:",  context.codingPath)
-                    } catch let DecodingError.valueNotFound(value, context) {
-                        print("Value '\(value)' not found:", context.debugDescription)
-                        print("codingPath:", context.codingPath)
-                    } catch let DecodingError.typeMismatch(type, context)  {
-                        print("Type '\(type)' mismatch:", context.debugDescription)
-                        print("codingPath:", context.codingPath)
-                    } catch {
-                        print("error: ", error)
-                    }
+        if !startTime.isEmpty {
+            params["start_time"] = startTime
         }
-    }
-    
-    /// Метод для получения новостей с сервера
-    /// - Parameter completion: замыкание для возврата данных
-    static func getFreshNewsfeed(startFrom: String = "", completion: @escaping (_ array : NewsItems?) -> Void) {
-        let params: Parameters = [
-            "start_time": startFrom,
-            "count" : 10,
-            "filters" : "post"
-        ]
+        if !startFrom.isEmpty {
+            params["start_from"] = startFrom
+        }
         AF.request("https://api.vk.com/method/" + Methods.getNews.rawValue,
                    parameters: getFullParameters(params)).responseJSON(queue: .global()){ response in
                     do {
@@ -189,7 +160,6 @@ class DataService {
                         DispatchQueue.main.async {
                             completion(res.response)
                         }
-                        
                     } catch let DecodingError.dataCorrupted(context) {
                         print(context)
                     } catch let DecodingError.keyNotFound(key, context) {

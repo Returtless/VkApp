@@ -27,28 +27,36 @@ class ResponseNews: Decodable {
 
 // MARK: - Response
 class NewsItems: Decodable {
-    var items: [News]
-    var profiles: [User]
-    var groups: [Group]
-    //var nextFrom: String
+    var items: [News] = []
+    var profiles: [User] = []
+    var groups: [Group] = []
+    var nextFrom: String = ""
     
     enum CodingKeys: String, CodingKey {
         case items
         case profiles
         case groups
-       // case nextFrom = "next_from"
+        case nextFrom = "next_from"
     }
     
-    init(items: [News], profiles: [User], groups: [Group]) {
-        self.items = items
-        self.profiles = profiles
-        self.groups = groups
-        //self.nextFrom = nextFrom
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.items = (try? container.decodeIfPresent(Array<News>.self, forKey: .items)) ?? []
+        self.profiles = (try? container.decodeIfPresent(Array<User>.self, forKey: .profiles)) ?? []
+        self.groups = (try? container.decodeIfPresent(Array<Group>.self, forKey: .groups)) ?? []
+        self.nextFrom = (try? container.decodeIfPresent(String.self, forKey: .nextFrom)) ?? ""
     }
+    
     func addNewsToStart(new : NewsItems){
         self.items = new.items + self.items
         self.profiles = new.profiles + self.profiles
         self.groups = new.groups + self.groups
+    }
+    func addNewsToEnd(new : NewsItems){
+        self.items =  self.items + new.items
+        self.profiles = self.profiles + new.profiles
+        self.groups = self.groups + new.groups
     }
 }
 
