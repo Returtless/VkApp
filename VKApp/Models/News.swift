@@ -45,6 +45,11 @@ class NewsItems: Decodable {
         self.groups = groups
         //self.nextFrom = nextFrom
     }
+    func addNewsToStart(new : NewsItems){
+        self.items = new.items + self.items
+        self.profiles = new.profiles + self.profiles
+        self.groups = new.groups + self.groups
+    }
 }
 
 

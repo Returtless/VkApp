@@ -81,17 +81,17 @@ class DataService {
     }
     
     /// Метод для обновления всех групп пользователя c Operation
-       static func updateAllGroupsWithOperation(){
-           let params: Parameters = [
-               "extended": "1",
-               "isMember" : 1
-           ]
-           DataService.getData(
-               method: .getUserGroups,
-               with: params,
-               dataType: Group.self
-           )
-       }
+    static func updateAllGroupsWithOperation(){
+        let params: Parameters = [
+            "extended": "1",
+            "isMember" : 1
+        ]
+        DataService.getData(
+            method: .getUserGroups,
+            with: params,
+            dataType: Group.self
+        )
+    }
     
     /// Метод для получения всех фотографий конкретного пользователя
     /// - Parameters:
@@ -145,13 +145,51 @@ class DataService {
             "filters" : "post"
         ]
         AF.request("https://api.vk.com/method/" + Methods.getNews.rawValue,
-                   parameters: getFullParameters(params)).responseJSON{ response in
+                   parameters: getFullParameters(params)).responseJSON(queue: .global()){ response in
                     do {
                         print("News получены с сервера ВК")
                         
                         guard let data = response.data else { return }
                         let res = try JSONDecoder().decode(ResponseNews.self, from: data)
-                        completion(res.response)
+                        DispatchQueue.main.async {
+                            completion(res.response)
+                        }
+                    } catch let DecodingError.dataCorrupted(context) {
+                        print(context)
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        print("Key '\(key)' not found:", context.debugDescription)
+                        print("codingPath:",  context.codingPath)
+                    } catch let DecodingError.valueNotFound(value, context) {
+                        print("Value '\(value)' not found:", context.debugDescription)
+                        print("codingPath:", context.codingPath)
+                    } catch let DecodingError.typeMismatch(type, context)  {
+                        print("Type '\(type)' mismatch:", context.debugDescription)
+                        print("codingPath:", context.codingPath)
+                    } catch {
+                        print("error: ", error)
+                    }
+        }
+    }
+    
+    /// Метод для получения новостей с сервера
+    /// - Parameter completion: замыкание для возврата данных
+    static func getFreshNewsfeed(startFrom: String = "", completion: @escaping (_ array : NewsItems?) -> Void) {
+        let params: Parameters = [
+            "start_time": startFrom,
+            "count" : 10,
+            "filters" : "post"
+        ]
+        AF.request("https://api.vk.com/method/" + Methods.getNews.rawValue,
+                   parameters: getFullParameters(params)).responseJSON(queue: .global()){ response in
+                    do {
+                        print("News получены с сервера ВК")
+                        
+                        guard let data = response.data else { return }
+                        let res = try JSONDecoder().decode(ResponseNews.self, from: data)
+                        DispatchQueue.main.async {
+                            completion(res.response)
+                        }
+                        
                     } catch let DecodingError.dataCorrupted(context) {
                         print(context)
                     } catch let DecodingError.keyNotFound(key, context) {
@@ -275,8 +313,8 @@ class DataService {
     }
     
     static func getData<T : Decodable & Object & HaveID>(method : Methods,
-                                                  with parameters: Parameters,
-                                                  dataType : T.Type) {
+                                                         with parameters: Parameters,
+                                                         dataType : T.Type) {
         let opq : OperationQueue = OperationQueue()
         opq.maxConcurrentOperationCount = 2
         let request = AF.request("https://api.vk.com/method/" + method.rawValue,

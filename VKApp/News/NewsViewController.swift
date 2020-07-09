@@ -13,6 +13,7 @@ class NewsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var photoService: PhotoService?
+    var refreshControl : UIRefreshControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,30 @@ class NewsViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         )
+        setupRefreshControl()
+    }
+    fileprivate func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Обновление...")
+        refreshControl?.tintColor = UIColor(hex: "#6689B3ff")
+        refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+        tableView.addSubview(refreshControl!)
+    }
+    @objc func refreshNews() {
+        refreshControl!.endRefreshing()
+        self.refreshControl?.beginRefreshing()
+        let mostFreshNewsDate = self.news!.items.first?.date ?? Int(Date().timeIntervalSince1970)
+        DataService.getFreshNewsfeed(startFrom: String(mostFreshNewsDate + 1)) { [weak self] news in
+            guard let self = self else { return }
+            self.refreshControl?.endRefreshing()
+            guard news!.items.count > 0 else { return }
+            self.news?.addNewsToStart(new: news!)
+            var indexPathes : [IndexPath] = []
+            for i in 0..<(news?.items.count)! {
+                indexPathes.append(IndexPath(row: i, section: 0))
+            }
+            self.tableView.insertRows(at: indexPathes, with: .automatic)
+        }
     }
 }
 
@@ -87,7 +112,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
                 }
                 
                 if let url = photo.getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
-                     cellPhotos.append(bigPhoto)
+                    cellPhotos.append(bigPhoto)
                 }
             }
         } else if currentNews.photos != nil{
