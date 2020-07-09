@@ -22,13 +22,21 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet private weak var viewsCounter: UILabel!
     
     @IBOutlet private weak var commentsCounter: CommentCounterControl!
+    @IBOutlet weak var hideButton: UIButton!
+    @IBOutlet weak var hideButtonBottomContraint: NSLayoutConstraint!
     
+    @IBAction func touchHideButton(_ sender: Any) {
+        messageLabelHeightConstraint?.isActive = false
+        hideButton.isHidden = true
+    }
     @IBOutlet weak var heightCollectionConstraint: NSLayoutConstraint!
     var photos = [UIImage]()
     
     weak var delegate: CommentCounterDelegate?
     
     weak var photoDelegate: NewsPhotoCollectionViewDelegate?
+    
+    private var messageLabelHeightConstraint : NSLayoutConstraint?
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -42,6 +50,16 @@ class NewsTableViewCell: UITableViewCell {
         if photos.isEmpty {
             heightCollectionConstraint.constant = 0
         }
+        if messageLabel.bounds.height > 200 {
+            messageLabelHeightConstraint = messageLabel.heightAnchor.constraint(equalToConstant: 200)
+            messageLabelHeightConstraint?.isActive = true
+       hideButton.isHidden = false
+            hideButtonBottomContraint.constant = 30
+        } else {
+            hideButton.isHidden = true
+            hideButtonBottomContraint.constant = 0
+        }
+        
     }
     
     func configure(for currentNews : News, with photos : [UIImage], by author : (name: String, photo: UIImage?)){
