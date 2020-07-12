@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" id="ZGe-yZ-Vy8" customClass="NewsTableViewCell" customModule="VKApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" id="ZGe-yZ-Vy8" customClass="NewsTableViewCell" customModule="VKApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="571"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZGe-yZ-Vy8" id="vWR-hE-Tdd">
@@ -55,9 +55,13 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIZ-ct-vkM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="400" verticalCompressionResistancePriority="800" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIZ-ct-vkM">
                                                     <rect key="frame" x="10" y="80" width="394" height="21"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="8W0-hN-AsP"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="1" id="Amd-ZH-TB6"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -221,6 +225,8 @@
                                             <outlet property="hideButtonBottomContraint" destination="NI5-CI-Z6E" id="7Fc-5s-0L4"/>
                                             <outlet property="likeCounterControl" destination="66G-T8-9a7" id="tq6-jY-CGj"/>
                                             <outlet property="messageLabel" destination="gIZ-ct-vkM" id="mle-B9-ayD"/>
+                                            <outlet property="msgLabelHeightConstraintGreaterThen" destination="Amd-ZH-TB6" id="XQP-Qc-mtW"/>
+                                            <outlet property="msgLabelHeightConstraintLessThen" destination="8W0-hN-AsP" id="xes-j3-rZY"/>
                                             <outlet property="photoCollectionView" destination="zBR-j1-xo4" id="hbA-iQ-UP4"/>
                                             <outlet property="viewsCounter" destination="zLP-Fb-gCw" id="Hnw-dG-6dR"/>
                                         </connections>
