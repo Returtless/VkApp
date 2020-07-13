@@ -17,16 +17,25 @@ class LikeCounterControl: UIControl {
         return iconButton
     }()
     
-    var countOfLikes : Int = 0 {
+    private var countOfLikes : Int = 0 {
         didSet{
             counterLabel.text = String(countOfLikes)
         }
     }
-    var isLiked : Bool = false
+    
+    private var isLiked : Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        counterLabel.backgroundColor = UIColor.white
         setupView()
+    }
+    
+    func configure(count: Int, isLiked : Bool?){
+        if let isLiked = isLiked {
+            self.isLiked = isLiked
+        }
+        self.countOfLikes = count
     }
     
     private func setupView() {

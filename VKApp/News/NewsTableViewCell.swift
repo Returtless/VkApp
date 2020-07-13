@@ -10,18 +10,18 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var avatarView: AvatarView!
-    @IBOutlet weak var authorNameLabel: UILabel!
-    @IBOutlet weak var createDateLabel: UILabel!
+    @IBOutlet private weak var avatarView: AvatarView!
+    @IBOutlet private weak var authorNameLabel: UILabel!
+    @IBOutlet private weak var createDateLabel: UILabel!
     
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet private weak var messageLabel: UILabel!
     
-    @IBOutlet weak var likeCounterControl: LikeCounterControl!
-    @IBOutlet weak var photoCollectionView: UICollectionView!
+    @IBOutlet private weak var likeCounterControl: LikeCounterControl!
+    @IBOutlet private weak var photoCollectionView: UICollectionView!
     
-    @IBOutlet weak var viewsCounter: UILabel!
+    @IBOutlet private weak var viewsCounter: UILabel!
     
-    @IBOutlet weak var commentsCounter: CommentCounterControl!
+    @IBOutlet private weak var commentsCounter: CommentCounterControl!
     
     @IBOutlet weak var heightCollectionConstraint: NSLayoutConstraint!
     var photos = [UIImage]()
@@ -44,7 +44,29 @@ class NewsTableViewCell: UITableViewCell {
         }
     }
     
+    func configure(for currentNews : News, with photos : [UIImage], by author : (name: String, photo: UIImage?)){
+        authorNameLabel.text = author.name
+        if let authorImage = author.photo {
+            avatarView.imageView.image = authorImage
+        }
+        createDateLabel.text = formatTimeAgo(date: currentNews.date)
+        messageLabel.text = currentNews.text
+        setLikeCounterControl(count: currentNews.getLikesInfo().0, isLiked: currentNews.getLikesInfo().1)
+        commentsCounter.counterLabel.text = "\(currentNews.comments?.count ?? 0)"
+        viewsCounter.text = "\(currentNews.views?.count ?? 0)"
+        
+        self.photos = photos
+    }
     
+    func setLikeCounterControl(count : Int, isLiked : Bool? = nil){
+        likeCounterControl.configure(count: count, isLiked: isLiked)
+    }
+    
+    private func formatTimeAgo(date: Int) -> String {
+        let date = NSDate(timeIntervalSince1970: Double(date))
+        let result = Date().timeIntervalSince(date as Date)
+        return result.toRelativeDateTime()
+    }
 }
 extension NewsTableViewCell : UICollectionViewDataSource, UICollectionViewDelegate {
     

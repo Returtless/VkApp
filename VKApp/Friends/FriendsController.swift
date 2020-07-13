@@ -110,28 +110,20 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
         return users!.filter(predicate).count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sorterControl.letters[section]
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
+        headerView.backgroundColor = UIColor(hex: "#6689B3ff")
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: 15, height: 28))
+        label.backgroundColor = UIColor(hex: "#6689B3ff")
+        label.text = sorterControl.letters[section]
+        headerView.addSubview(label)
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
         if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.letters[indexPath.section], row: indexPath.row, section: indexPath.section) {
-            cell.userLabel.text = "\(user.firstName) \(user.lastName)"
-            cell.userLabel.font = .systemFont(ofSize: CGFloat(16))
-            if let image = photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100) {
-                cell.photoView.imageView.image = image
-            }
-            
-            UIView.animate(
-                withDuration: 1,
-                delay: 0,
-                usingSpringWithDamping: 0.4,
-                initialSpringVelocity: 0.8,
-                options:.curveEaseInOut,
-                animations: {
-                    cell.frame.origin.x+=70
-            })
+            cell.configure(with: user, image: photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100))
         }
         return cell
     }
