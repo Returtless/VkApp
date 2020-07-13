@@ -13,11 +13,15 @@ class NewsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var photoService: PhotoService?
+    var refreshControl : UIRefreshControl?
+    var nextFrom = ""
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.prefetchDataSource = self
         photoService = PhotoService(container: tableView)
         DataService.getNewsfeed(
             completion: {
@@ -26,6 +30,30 @@ class NewsViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         )
+        setupRefreshControl()
+    }
+    fileprivate func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Обновление...")
+        refreshControl?.tintColor = UIColor(hex: "#6689B3ff")
+        refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+        tableView.addSubview(refreshControl!)
+    }
+    @objc func refreshNews() {
+        refreshControl!.endRefreshing()
+        self.refreshControl?.beginRefreshing()
+        let mostFreshNewsDate = self.news!.items.first?.date ?? Int(Date().timeIntervalSince1970)
+        DataService.getNewsfeed(startTime: String(mostFreshNewsDate + 1)) { [weak self] news in
+            guard let self = self else { return }
+            self.refreshControl?.endRefreshing()
+            guard news!.items.count > 0 else { return }
+            self.news?.addNewsToStart(new: news!)
+            var indexPathes : [IndexPath] = []
+            for i in 0..<(news?.items.count)! {
+                indexPathes.append(IndexPath(row: i, section: 0))
+            }
+            self.tableView.insertRows(at: indexPathes, with: .automatic)
+        }
     }
 }
 
@@ -87,7 +115,7 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
                 }
                 
                 if let url = photo.getPhotoBigSizeURL(), let bigPhoto = photoService?.getPhoto(atIndexPath: indexPath, byUrl: url) {
-                     cellPhotos.append(bigPhoto)
+                    cellPhotos.append(bigPhoto)
                 }
             }
         } else if currentNews.photos != nil{
@@ -134,6 +162,29 @@ extension NewsViewController : NewsPhotoCollectionViewDelegate {
                                                  animated: true)
     }
 }
+
+extension NewsViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxSection = indexPaths.map({ $0.row }).max() else { return }
+        if maxSection > news!.items.count - 15,
+            !isLoading {
+            isLoading = true
+            DataService.getNewsfeed(startFrom: news!.nextFrom) { [weak self] news in
+                guard let self = self else { return }
+                guard news!.items.count > 0 else { return }
+                let oldIndex = self.news?.items.count
+                self.news?.addNewsToEnd(new: news!)
+                var indexPathes : [IndexPath] = []
+                for i in oldIndex!..<(self.news?.items.count)!{
+                    indexPathes.append(IndexPath(row: i, section: 0))
+                }
+                self.tableView.insertRows(at: indexPathes, with: .automatic)
+                self.isLoading = false
+            }
+        }
+    }
+}
+
 extension TimeInterval {
     
     func toRelativeDateTime() -> String {

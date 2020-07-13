@@ -22,13 +22,25 @@ class NewsTableViewCell: UITableViewCell {
     @IBOutlet private weak var viewsCounter: UILabel!
     
     @IBOutlet private weak var commentsCounter: CommentCounterControl!
-    
+    @IBOutlet weak var hideButton: UIButton!
+    @IBOutlet weak var hideButtonBottomContraint: NSLayoutConstraint!
     @IBOutlet weak var heightCollectionConstraint: NSLayoutConstraint!
-    var photos = [UIImage]()
-    
-    weak var delegate: CommentCounterDelegate?
+    @IBOutlet var msgLabelHeightConstraintGreaterThen: NSLayoutConstraint!
+    @IBOutlet var msgLabelHeightConstraintLessThen: NSLayoutConstraint!
     
     weak var photoDelegate: NewsPhotoCollectionViewDelegate?
+    weak var delegate: CommentCounterDelegate?
+    
+    var photos = [UIImage]()
+    var isButtonHidden = false
+    
+    @IBAction func touchHideButton(_ sender: Any) {
+        hideButton.isHidden = true
+        hideButtonBottomContraint.constant = 0
+        msgLabelHeightConstraintLessThen.isActive = false
+        msgLabelHeightConstraintGreaterThen.isActive = true
+        isButtonHidden.toggle()
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -42,6 +54,23 @@ class NewsTableViewCell: UITableViewCell {
         if photos.isEmpty {
             heightCollectionConstraint.constant = 0
         }
+        if msgLabelHeightConstraintLessThen != nil {
+            msgLabelHeightConstraintLessThen.isActive = false
+        }
+        if messageLabel.text != nil {
+            if messageLabel.bounds.height > 200 {
+                msgLabelHeightConstraintLessThen.isActive = true
+                msgLabelHeightConstraintGreaterThen.isActive = false
+                if !isButtonHidden {
+                    hideButton.isHidden = false
+                    hideButtonBottomContraint.constant = 30
+                }
+            } else {
+                hideButton.isHidden = true
+                hideButtonBottomContraint.constant = 0
+            }
+        }
+        
     }
     
     func configure(for currentNews : News, with photos : [UIImage], by author : (name: String, photo: UIImage?)){
