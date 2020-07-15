@@ -40,6 +40,14 @@ class RealmService {
         return nil
     }
     
+    static func getSearchedFriends(for searchText: String) -> Results<User>?{
+        if (!searchText.isEmpty){
+            return RealmService.getData(for: ("lastName", "CONTAINS[c]", "String"), with: searchText)
+        } else {
+            return RealmService.getData()?.sorted(byKeyPath: "lastName")
+        }
+    }
+    
     /// Метод для получения групп, в которых состоит пользователь
     /// - Returns: объект типа Results с полученными данными из Realm
     static func getGroups() -> Results<Group>? {

@@ -46,7 +46,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "photoAlbumSegue" {
             let photoAlbumVC = segue.destination as! PhotoListViewController
-            if let index = tableView.indexPathForSelectedRow, let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.getLetter(for: index.section), row: index.row, section: index.section) {
+            if let index = tableView.indexPathForSelectedRow, let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.getLetter(for: index.section), row: index.row) {
                 photoAlbumVC.configure(for: user.id, with: "\(user.firstName) \(user.lastName)")
             }
         }
@@ -92,9 +92,7 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { self.sorterControl.getLettersCount() }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let predicate = NSPredicate(format:
-            sorterControl.getLetter(for: section) == "" ? "lastName == ''" : "lastName BEGINSWITH[c] '\(sorterControl.getLetter(for: section))'")
-        return users!.filter(predicate).count
+        return users!.filter(NSPredicate(for: sorterControl.getLetter(for: section))).count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -104,8 +102,8 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
-        if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.getLetter(for: indexPath.section), row: indexPath.row, section: indexPath.section) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCell.identifier, for: indexPath) as! FriendTableViewCell
+        if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.getLetter(for: indexPath.section), row: indexPath.row) {
             cell.configure(with: user, image: photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100))
         }
         return cell
@@ -120,11 +118,7 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
 }
 extension FriendsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if (!searchText.isEmpty){
-            users = RealmService.getData(for: ("lastName", "CONTAINS[c]", "String"), with: searchText)
-        } else {
-            users = RealmService.getData()?.sorted(byKeyPath: "lastName")
-        }
+        users = RealmService.getSearchedFriends(for: searchText)
         tableView.reloadData()
     }
     
@@ -135,8 +129,13 @@ extension FriendsController: UISearchBarDelegate {
 
 extension ResultsForUser {
     
-    func getUserForIndexPathAndLetter(letter: String, row: Int, section : Int) -> User? {
-        let predicate = NSPredicate(format: letter == "" ? "lastName == ''" : "lastName BEGINSWITH[c] '\(letter)'")
-        return self.filter(predicate)[row]
+    func getUserForIndexPathAndLetter(letter: String, row: Int) -> User? {
+        return self.filter(NSPredicate(for: letter))[row]
+    }
+}
+
+extension NSPredicate {
+    public convenience init(for letter: String) {
+        self.init(format: letter == "" ? "lastName == ''" : "lastName BEGINSWITH[c] '\(letter)'")
     }
 }

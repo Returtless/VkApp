@@ -9,6 +9,7 @@
 import UIKit
 
 class FriendTableViewCell: UITableViewCell {
+    static let identifier = "userCell"
     
     @IBOutlet private weak var userLabel: UILabel!
     @IBOutlet private weak var photoView: AvatarView!
