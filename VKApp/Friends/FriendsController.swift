@@ -16,8 +16,8 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     var users : ResultsForUser? {
         didSet{
             if users != nil {
-            initSorterControl()
-            pairTableAndRealm()
+                initSorterControl()
+                pairTableAndRealm()
             }
         }
     }
@@ -34,6 +34,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = CGFloat(70)
+        tableView.register(HeaderViewForCell.self, forHeaderFooterViewReuseIdentifier: HeaderViewForCell.identifier)
         photoService = PhotoService(container: tableView)
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
@@ -45,17 +46,15 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "photoAlbumSegue" {
             let photoAlbumVC = segue.destination as! PhotoListViewController
-            if let index = tableView.indexPathForSelectedRow, let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.letters[index.section], row: index.row, section: index.section) {
-                photoAlbumVC.userId = user.id
-                photoAlbumVC.title = "\(user.firstName) \(user.lastName)"
+            if let index = tableView.indexPathForSelectedRow, let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.getLetter(for: index.section), row: index.row, section: index.section) {
+                photoAlbumVC.configure(for: user.id, with: "\(user.firstName) \(user.lastName)")
             }
         }
     }
     
     @objc func sorterBarWasChanged(_ sender: SorterBarControl) {
-        let indexPath = IndexPath(row: 0, section: sender.letters.firstIndex(where: {$0 == sender.choosedLetter}) ?? 0)
+        let indexPath = IndexPath(row: 0, section: sender.getIndexForChoosedLetter())
         self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,23 +64,11 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    func calculateSectionNames() -> [String]{
-        //инициализация всех дополнительных массивов и сортера
-        let allUserLastNameFirstLetters : [String] = users!.map({
-            if let first = $0.lastName.first {
-                return String(first)
-            } else {
-                return ""
-            }
-        })
-        return Array<String>(Set(allUserLastNameFirstLetters)).sorted()
-    }
-    
     func initSorterControl(){
-        sorterControl.letters = calculateSectionNames()
+        sorterControl.configure(users: users)
         sorterControl.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*sorterControl.letters.count)), sorterControl.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
+            sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*sorterControl.getLettersCount())), sorterControl.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
             sorterControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
     }
     
@@ -102,27 +89,23 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
 }
 
 extension FriendsController : UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int { self.sorterControl.letters.count }
+    func numberOfSections(in tableView: UITableView) -> Int { self.sorterControl.getLettersCount() }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let predicate = NSPredicate(format:
-            sorterControl.letters[section] == "" ? "lastName == ''" : "lastName BEGINSWITH[c] '\(sorterControl.letters[section])'")
+            sorterControl.getLetter(for: section) == "" ? "lastName == ''" : "lastName BEGINSWITH[c] '\(sorterControl.getLetter(for: section))'")
         return users!.filter(predicate).count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
-        headerView.backgroundColor = UIColor(hex: "#6689B3ff")
-        let label = UILabel(frame: CGRect(x: 15, y: 0, width: 15, height: 28))
-        label.backgroundColor = UIColor(hex: "#6689B3ff")
-        label.text = sorterControl.letters[section]
-        headerView.addSubview(label)
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderViewForCell.identifier) as! HeaderViewForCell
+        headerView.configure(with: sorterControl.getLetter(for: section))
         return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! FriendTableViewCell
-        if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.letters[indexPath.section], row: indexPath.row, section: indexPath.section) {
+        if let user = users?.getUserForIndexPathAndLetter(letter: sorterControl.getLetter(for: indexPath.section), row: indexPath.row, section: indexPath.section) {
             cell.configure(with: user, image: photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100))
         }
         return cell

@@ -9,26 +9,21 @@
 import UIKit
 
 class SorterBarControl: UIControl {
-    var letters = [String]() {
+    private var letters = [String]() {
         didSet{
             if oldValue != letters{
                 setupView()
             }
         }
     }
-    var choosedLetter = ""
+    private var choosedLetter = ""
     
     private var letterButtons = [UIButton]()
     private var stackView = UIStackView()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func configure(users : ResultsForUser?){
+        self.letters = calculateSectionNames(users: users)
     }
-    
-    override func awakeFromNib() {
-           super.awakeFromNib()
-           
-       }
     
     func setupView() {
         letterButtons.removeAll()
@@ -60,5 +55,32 @@ class SorterBarControl: UIControl {
             choosedLetter = letters[index]
             sendActions(for: .valueChanged)
         }
+    }
+    
+    func calculateSectionNames(users : ResultsForUser?) -> [String]{
+        //инициализация всех дополнительных массивов и сортера
+        let allUserLastNameFirstLetters : [String] = users!.map({
+            if let first = $0.lastName.first {
+                return String(first)
+            } else {
+                return ""
+            }
+        })
+        return Array<String>(Set(allUserLastNameFirstLetters)).sorted()
+    }
+    
+    func getLetter(for index: Int) -> String{
+        self.letters[index]
+    }
+    func getIndex(for letter: String) -> Int {
+        letters.firstIndex(where: {$0 == letter}) ?? 0
+    }
+    
+    func getIndexForChoosedLetter() -> Int {
+        letters.firstIndex(where: {$0 == self.choosedLetter}) ?? 0
+    }
+    
+    func getLettersCount() -> Int{
+        letters.count
     }
 }

@@ -79,8 +79,8 @@ class AvatarView: UIImageView {
     {
         UIView.animate(
             withDuration: 1,
-            animations: {
-                self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            animations: { [weak self] in
+                self!.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         })
         
         UIView.animate(
@@ -89,8 +89,8 @@ class AvatarView: UIImageView {
             usingSpringWithDamping: 0.2,
             initialSpringVelocity: 0.1,
             options: [],
-            animations: {
-                self.transform = CGAffineTransform(scaleX: 1, y: 1)
+            animations: { [weak self] in
+                self!.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
     }
 }

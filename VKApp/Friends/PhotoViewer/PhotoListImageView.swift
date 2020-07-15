@@ -79,9 +79,9 @@ class PhotoListImageView : UIImageView {
                 self.layer.opacity = 0
                 self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 
-                interactiveAnimator.addAnimations({
-                    self.transform = .identity
-                    self.layer.opacity = 1
+                interactiveAnimator.addAnimations({ [weak self] in
+                    self!.transform = .identity
+                    self!.layer.opacity = 1
                 })
                 
                 interactiveAnimator.startAnimation()
@@ -97,8 +97,8 @@ class PhotoListImageView : UIImageView {
     func initAnimator(_ swipeToLeft : CGFloat){
         interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear)
         interactiveAnimator.addAnimations(
-            {
-                self.transform = CGAffineTransform(translationX: swipeToLeft * (self.popupOffset), y: 0)
+            { [weak self] in
+                self!.transform = CGAffineTransform(translationX: swipeToLeft * (self!.popupOffset), y: 0)
             }
         )
         interactiveAnimator?.startAnimation()

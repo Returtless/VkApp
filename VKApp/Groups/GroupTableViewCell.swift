@@ -32,8 +32,8 @@ class GroupTableViewCell: UITableViewCell {
             usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.8,
             options:.curveEaseInOut,
-            animations: {
-                self.frame.origin.x+=70
+            animations: { [weak self] in
+                self!.frame.origin.x+=70
         })
     }
 }

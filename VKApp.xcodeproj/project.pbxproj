@@ -59,6 +59,7 @@
 		52B13C3C245DBA2100AA02C8 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C3B245DBA2100AA02C8 /* DataService.swift */; };
 		52B13C3E245ED6B300AA02C8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B13C3D245ED6B300AA02C8 /* Photo.swift */; };
 		52B2B6AF2450B44F00DDBE36 /* FullPhotoAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */; };
+		52C9811D24BF2C73006DA562 /* HeaderViewForCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C9811C24BF2C73006DA562 /* HeaderViewForCell.swift */; };
 		52DA5341244FC13000DEF4E7 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */; };
 		52FB1E122476F95D00FC2A22 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB1E112476F95D00FC2A22 /* RealmService.swift */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 		52B13C3B245DBA2100AA02C8 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		52B13C3D245ED6B300AA02C8 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		52B2B6AE2450B44F00DDBE36 /* FullPhotoAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoAnimationController.swift; sourceTree = "<group>"; };
+		52C9811C24BF2C73006DA562 /* HeaderViewForCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewForCell.swift; sourceTree = "<group>"; };
 		52DA5340244FC13000DEF4E7 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
 		52FB1E112476F95D00FC2A22 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		FE30255A9F92F6BA9F37D6D6 /* Pods_VKApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,6 +252,7 @@
 				5221524824B66ECE00B7D018 /* Controls */,
 				5286D9EA243D0404008E36C6 /* Friends.storyboard */,
 				5234852E2430DEDE003DF0BD /* FriendsController.swift */,
+				52C9811C24BF2C73006DA562 /* HeaderViewForCell.swift */,
 				528A488724350CBD0063708D /* FriendTableViewCell.swift */,
 			);
 			path = Friends;
@@ -427,6 +430,7 @@
 				5234852D2430D4DE003DF0BD /* GroupsController.swift in Sources */,
 				5277F1E324B461AF00C514C0 /* ParseData.swift in Sources */,
 				5234852B2430C25E003DF0BD /* TabBarViewController.swift in Sources */,
+				52C9811D24BF2C73006DA562 /* HeaderViewForCell.swift in Sources */,
 				525B9B07244358C500FE4E00 /* ViewPhotoViewController.swift in Sources */,
 				52335DC1242A89A6002A5318 /* ViewController.swift in Sources */,
 				522AF747244C5DEC004D40CA /* CloudIndicator.swift in Sources */,

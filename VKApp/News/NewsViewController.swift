@@ -156,8 +156,7 @@ extension NewsViewController : NewsPhotoCollectionViewDelegate {
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Friends", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "FullPhoto") as! PhotoListViewController
-        resultViewController.imageView = PhotoListImageView(image: data)
-        resultViewController.newsPhoto = data
+        resultViewController.configureForNews(for: data)
         navigationController?.pushViewController(resultViewController,
                                                  animated: true)
     }

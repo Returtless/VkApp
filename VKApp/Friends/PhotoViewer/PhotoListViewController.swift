@@ -11,8 +11,8 @@ import Alamofire
 import RealmSwift
 
 class PhotoListViewController: UIViewController {
-    var userId = 0
-    var photos : Results<Photo>?{
+    private var userId = 0
+    private var photos : Results<Photo>?{
         didSet{
             imageView.photos = photos
             if let unwrappedArray = photos, !unwrappedArray.isEmpty{
@@ -22,8 +22,8 @@ class PhotoListViewController: UIViewController {
             }
         }
     }
-    var newsPhoto : UIImage?
-    let photoInteractiveTransition = PhotoInteractiveTransition()
+    private var newsPhoto : UIImage?
+    private let photoInteractiveTransition = PhotoInteractiveTransition()
     
     @IBOutlet var imageView: PhotoListImageView!
     override func viewDidLoad() {
@@ -43,6 +43,16 @@ class PhotoListViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tap)
+    }
+    
+    func configure(for id: Int, with fullName: String) {
+        userId = id
+        title = fullName
+    }
+    
+    func configureForNews(for data : UIImage) {
+        imageView = PhotoListImageView(image: data)
+        newsPhoto = data
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
