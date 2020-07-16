@@ -16,16 +16,14 @@ class GroupsController: UITableViewController {
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     private var photoService: PhotoService?
     
-    var groups : Results<Group>?{ //список отображаемых групп
+    private var groups : Results<Group>?{ //список отображаемых групп
         didSet{
             pairTableAndRealm()
         }
     }
-    var userGroups : Results<Group>?//список групп пользователя
-    var isUserGroups : Bool = true //флаг обозначающий
-    var groupsToken : NotificationToken?
-    
-    //var myTimer: Timer!
+    private var userGroups : Results<Group>?//список групп пользователя
+    private var isUserGroups : Bool = true //флаг обозначающий
+    private var groupsToken : NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +34,6 @@ class GroupsController: UITableViewController {
         let alert = UIAlertController(title: "Важно!", message: "В новой версии появилась возможность вступать и выходить из групп в РЕАЛЬНОМ ВК! Для вступления поиском находим группу и при свайпе влево по ячейке есть кнопка для вступления", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true, completion: nil)
-        // self.myTimer = Timer(timeInterval: 15.0, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
-        //  RunLoop.main.add(self.myTimer, forMode: .default)
         tableView.rowHeight = CGFloat(70)
     }
     

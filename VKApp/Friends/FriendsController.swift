@@ -13,7 +13,7 @@ import RealmSwift
 typealias ResultsForUser = Results<User>
 
 class FriendsController: UIViewController, UINavigationControllerDelegate {
-    var users : ResultsForUser? {
+    private var users : ResultsForUser? {
         didSet{
             if users != nil {
                 initSorterControl()
@@ -23,8 +23,8 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
     }
     private var photoService: PhotoService?
     
-    var usersToken: NotificationToken?
-    var sorterControl: SorterBarControl!
+    private var usersToken: NotificationToken?
+    private var sorterControl: SorterBarControl!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var friendSearchBar: FriendsSearchBar!
