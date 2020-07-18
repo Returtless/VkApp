@@ -39,7 +39,8 @@ class RealmService {
         }
         return nil
     }
-    
+    /// Метод для получения пользователей по подстроке
+    /// - Returns: объект типа Results с полученными данными из Realm
     static func getSearchedFriends(for searchText: String) -> Results<User>?{
         if (!searchText.isEmpty){
             return RealmService.getData(for: ("lastName", "CONTAINS[c]", "String"), with: searchText)
@@ -47,7 +48,11 @@ class RealmService {
             return RealmService.getData()?.sorted(byKeyPath: "lastName")
         }
     }
-    
+    /// Метод для получения фотографий пользователя
+    /// - Returns: объект типа Results с полученными данными из Realm
+    static func getPhotos(for userId:Int) -> Results<Photo>?{
+        return RealmService.getData(for:("ownerID", "==", "Int"), with: userId)
+    }
     /// Метод для получения групп, в которых состоит пользователь
     /// - Returns: объект типа Results с полученными данными из Realm
     static func getGroups() -> Results<Group>? {

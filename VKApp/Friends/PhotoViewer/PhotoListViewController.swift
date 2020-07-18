@@ -29,7 +29,7 @@ class PhotoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if userId != 0 {
-            photos = RealmService.getData(for:("ownerID", "==", "Int"), with: userId)
+            photos = RealmService.getPhotos(for: userId)
             DataService.getAllPhotosForUser(userId: userId,
                                             completion: {
                                                 [weak self] array in

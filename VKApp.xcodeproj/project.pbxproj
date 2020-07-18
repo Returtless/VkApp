@@ -30,7 +30,6 @@
 		52443944244623480097C195 /* DotsIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52443943244623480097C195 /* DotsIndicator.swift */; };
 		52547B2224B506C2004A3C3A /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52547B2124B506C2004A3C3A /* UIColor+extension.swift */; };
 		525B9B052442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */; };
-		525B9B07244358C500FE4E00 /* ViewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B9B06244358C500FE4E00 /* ViewPhotoViewController.swift */; };
 		525B9B092443BB3600FE4E00 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B9B082443BB3600FE4E00 /* CommentsViewController.swift */; };
 		525F8A00244F7D170052F8F3 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F89FF244F7D170052F8F3 /* AnimationController.swift */; };
 		525F8A02244F7D250052F8F3 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F8A01244F7D250052F8F3 /* CustomNavigationController.swift */; };
@@ -89,7 +88,6 @@
 		52443943244623480097C195 /* DotsIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsIndicator.swift; sourceTree = "<group>"; };
 		52547B2124B506C2004A3C3A /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPhotoCellCollectionViewLayout.swift; sourceTree = "<group>"; };
-		525B9B06244358C500FE4E00 /* ViewPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPhotoViewController.swift; sourceTree = "<group>"; };
 		525B9B082443BB3600FE4E00 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		525F89FF244F7D170052F8F3 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		525F8A01244F7D250052F8F3 /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
@@ -280,17 +278,32 @@
 		52AAF702243E7C8400191326 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				52BBE67224C2ECFD00CBE3EA /* Photos */,
+				52BBE67124C2ECEA00CBE3EA /* Controls */,
 				52AAF705243E87E100191326 /* News.storyboard */,
 				52AAF6FE243E7B0D00191326 /* NewsViewController.swift */,
 				52AAF700243E7C2700191326 /* NewsTableViewCell.swift */,
-				525B9B06244358C500FE4E00 /* ViewPhotoViewController.swift */,
-				522CAC83243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift */,
 				525B9B082443BB3600FE4E00 /* CommentsViewController.swift */,
-				525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		52BBE67124C2ECEA00CBE3EA /* Controls */ = {
+			isa = PBXGroup;
+			children = (
 				522CAC7D243FC99B00896A14 /* CommentCounterControl.swift */,
 				522CAC7F243FCEE300896A14 /* ShareCounterControl.swift */,
 			);
-			path = News;
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		52BBE67224C2ECFD00CBE3EA /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				522CAC83243FE57F00896A14 /* NewsPhotoCollectionViewCell.swift */,
+				525B9B042442581100FE4E00 /* NewsPhotoCellCollectionViewLayout.swift */,
+			);
+			path = Photos;
 			sourceTree = "<group>";
 		};
 		9A9AD6934EE5B124CF6EDBD6 /* Frameworks */ = {
@@ -425,7 +438,6 @@
 				5277F1E324B461AF00C514C0 /* ParseData.swift in Sources */,
 				5234852B2430C25E003DF0BD /* TabBarViewController.swift in Sources */,
 				52C9811D24BF2C73006DA562 /* HeaderViewForCell.swift in Sources */,
-				525B9B07244358C500FE4E00 /* ViewPhotoViewController.swift in Sources */,
 				52335DC1242A89A6002A5318 /* ViewController.swift in Sources */,
 				522AF747244C5DEC004D40CA /* CloudIndicator.swift in Sources */,
 				52547B2224B506C2004A3C3A /* UIColor+extension.swift in Sources */,
