@@ -73,6 +73,18 @@ class NewsTableViewCell: UITableViewCell {
         
     }
     
+    func configure(with viewModel: NewsViewModel) {
+        authorNameLabel.text = viewModel.authorNameText
+        avatarView.imageView.image = viewModel.authorImage
+        createDateLabel.text = viewModel.createDateText
+        messageLabel.text = viewModel.messageText
+        setLikeCounterControl(count: viewModel.likesCount, isLiked: viewModel.isLiked)
+        commentsCounter.counterLabel.text = "\(viewModel.commentsCount)"
+        viewsCounter.text = "\(viewModel.viewsCount)"
+        
+        self.photos = viewModel.photos
+    }
+    
     func configure(for currentNews : News, with photos : [UIImage], by author : (name: String, photo: UIImage?)){
         authorNameLabel.text = author.name
         if let authorImage = author.photo {

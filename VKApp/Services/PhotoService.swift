@@ -15,7 +15,7 @@ class PhotoService {
     
     private var images = [String: UIImage]()
     
-    private let container: DataReloadable
+    private let container: DataReloadable?
     
     private static let pathName: String = {
         let pathName = "images"
@@ -39,6 +39,10 @@ class PhotoService {
     
     init(container: UICollectionView) {
         self.container = Collection(collectionView: container)
+    }
+    
+    init(){
+        self.container = nil
     }
     
     /// Получение пути к файлу из url
@@ -98,7 +102,7 @@ class PhotoService {
     /// - Parameters:
     ///   - indexPath: номер строки для загрузки и обновления
     ///   - url: адрес для загрузки изображения
-    private func loadPhoto(atIndexPath indexPath: IndexPath, byUrl url: String) {
+    private func loadPhoto(atIndexPath indexPath: IndexPath?, byUrl url: String) {
         AF.request(url).responseData(
             queue: DispatchQueue.global(),
             completionHandler: { [weak self] response in
@@ -113,9 +117,10 @@ class PhotoService {
                 }
                 
                 self?.saveImageToCache(url: url, image: image)
-                
-                DispatchQueue.main.async { [weak self] in
-                    self?.container.reloadRow(atIndexPath: indexPath)
+                if (self?.container) != nil {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.container!.reloadRow(atIndexPath: indexPath!)
+                    }
                 }
             }
         )
@@ -126,7 +131,7 @@ class PhotoService {
     ///   - indexPath: строка для обновления
     ///   - url: адрес изображения
     /// - Returns: изображение
-    func getPhoto(atIndexPath indexPath: IndexPath, byUrl url: String) -> UIImage? {
+    func getPhoto(atIndexPath indexPath: IndexPath?, byUrl url: String) -> UIImage? {
         var image: UIImage?
         
         if let photo = images[url] {
