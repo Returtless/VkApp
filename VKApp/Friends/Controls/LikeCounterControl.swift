@@ -72,7 +72,7 @@ class LikeCounterControl: UIControl {
         }
         isLiked.toggle()
         iconButton.setImage(UIImage(systemName: isLiked ? "heart.fill": "heart"), for: .normal)
-        iconButton.tintColor = isLiked ? .red : UIColor(named: "VK")
+        iconButton.tintColor = isLiked ? .red : UIColor.vkColor
         UIView.transition(with: counterLabel,
                           duration: 0.75,
                           options: .transitionFlipFromTop,

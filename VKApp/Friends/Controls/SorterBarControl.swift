@@ -21,7 +21,7 @@ class SorterBarControl: UIControl {
     private var letterButtons = [UIButton]()
     private var stackView = UIStackView()
     
-    func configure(users : ResultsForUser?){
+    func configure(users : [SimpleUser]?){
         self.letters = calculateSectionNames(users: users)
     }
     
@@ -57,7 +57,7 @@ class SorterBarControl: UIControl {
         }
     }
     
-    func calculateSectionNames(users : ResultsForUser?) -> [String]{
+    func calculateSectionNames(users : [SimpleUser]?) -> [String]{
         //инициализация всех дополнительных массивов и сортера
         let allUserLastNameFirstLetters : [String] = users!.map({
             if let first = $0.lastName.first {

@@ -23,7 +23,7 @@ class FriendTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configure(with user: User, image: UIImage?) {
+    func configure(with user: SimpleUser, image: UIImage?) {
         userLabel.text = "\(user.firstName) \(user.lastName)"
         if let image = image {
             photoView.imageView.image = image

@@ -17,6 +17,9 @@ class NewsViewController: UIViewController {
     var nextFrom = ""
     var isLoading = false
     
+    private let viewModelFactory = NewsViewModelFactory()
+    private var viewModels: [NewsViewModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -26,6 +29,7 @@ class NewsViewController: UIViewController {
         DataService.getNewsfeed(
             completion: {
                 [weak self] array in
+                self?.viewModels = self!.viewModelFactory.constructViewModels(from: array!.items, users: array!.profiles, groups: array!.groups)
                 self?.news = array
                 self?.tableView.reloadData()
             }
@@ -35,10 +39,11 @@ class NewsViewController: UIViewController {
     fileprivate func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Обновление...")
-        refreshControl?.tintColor = UIColor(hex: "#6689B3ff")
+        refreshControl?.tintColor = UIColor.vkColor
         refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
         tableView.addSubview(refreshControl!)
     }
+    
     @objc func refreshNews() {
         refreshControl!.endRefreshing()
         self.refreshControl?.beginRefreshing()
@@ -61,33 +66,13 @@ extension NewsViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let newsItems = news, !newsItems.items.isEmpty else {
-            return 0
-        }
-        return newsItems.items.count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
-        guard let newsItems = news, !newsItems.items.isEmpty else {
-            return cell
-        }
-        let currentNews = newsItems.items[indexPath.row]
-        let id = currentNews.sourceID
-        var author : (name: String, photo: UIImage?) = ("", nil)
-        if id > 0 {
-            if let user = newsItems.profiles.first(where: {$0.id == abs(id)}), let photo = photoService?.getPhoto(atIndexPath: indexPath, byUrl: user.photo100) {
-                author.name = user.getFullName()
-                author.photo = photo
-            }
-        } else {
-            if let group = newsItems.groups.first(where: {$0.id == abs(id)}), let photo = photoService?.getPhoto(atIndexPath: indexPath, byUrl: group.photo100) {
-                author.name = group.name
-                author.photo = photo
-            }
-        }
         
-        cell.configure(for: currentNews, with: configurePhotoList(for: currentNews, with: indexPath), by: author)
+        cell.configure(with: viewModels[indexPath.row])
         cell.delegate = self
         cell.photoDelegate = self
         return cell
@@ -164,23 +149,23 @@ extension NewsViewController : NewsPhotoCollectionViewDelegate {
 
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        guard let maxSection = indexPaths.map({ $0.row }).max() else { return }
-        if maxSection > news!.items.count - 15,
-            !isLoading {
-            isLoading = true
-            DataService.getNewsfeed(startFrom: news!.nextFrom) { [weak self] news in
-                guard let self = self else { return }
-                guard news!.items.count > 0 else { return }
-                let oldIndex = self.news?.items.count
-                self.news?.addNewsToEnd(new: news!)
-                var indexPathes : [IndexPath] = []
-                for i in oldIndex!..<(self.news?.items.count)!{
-                    indexPathes.append(IndexPath(row: i, section: 0))
-                }
-                self.tableView.insertRows(at: indexPathes, with: .automatic)
-                self.isLoading = false
-            }
-        }
+//        guard let maxSection = indexPaths.map({ $0.row }).max() else { return }
+//        if maxSection > news!.items.count - 15,
+//            !isLoading {
+//            isLoading = true
+//            DataService.getNewsfeed(startFrom: news!.nextFrom) { [weak self] news in
+//                guard let self = self else { return }
+//                guard news!.items.count > 0 else { return }
+//                let oldIndex = self.news?.items.count
+//                self.news?.addNewsToEnd(new: news!)
+//                var indexPathes : [IndexPath] = []
+//                for i in oldIndex!..<(self.news?.items.count)!{
+//                    indexPathes.append(IndexPath(row: i, section: 0))
+//                }
+//                self.tableView.insertRows(at: indexPathes, with: .automatic)
+//                self.isLoading = false
+//            }
+//        }
     }
 }
 
