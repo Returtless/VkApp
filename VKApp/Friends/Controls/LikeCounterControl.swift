@@ -76,10 +76,10 @@ class LikeCounterControl: UIControl {
         UIView.transition(with: counterLabel,
                           duration: 0.75,
                           options: .transitionFlipFromTop,
-                          animations: {
+                          animations: { [weak self] in
                             //нужно отключить возможность нажатия на кнопку, пока идет анимация и вернуть после окончания
-                            self.iconButton.isUserInteractionEnabled = false
-                            self.counterLabel.text = String(self.countOfLikes)
+                            self!.iconButton.isUserInteractionEnabled = false
+                            self!.counterLabel.text = String(self!.countOfLikes)
         }, completion : { _ in
             self.iconButton.isUserInteractionEnabled = true
         })

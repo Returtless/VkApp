@@ -84,10 +84,10 @@ class PhotoInteractiveTransition: UIPercentDrivenInteractiveTransition {
     func initAnimator(){
         interactiveAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear)
         interactiveAnimator.addAnimations(
-            {
-                self.viewController?.imageView.transform = CGAffineTransform(
+            {[weak self] in
+                self!.viewController?.imageView.transform = CGAffineTransform(
                     translationX: 0,
-                    y: (self.viewController?.imageView.frame.height)!)
+                    y: (self!.viewController?.imageView.frame.height)!)
             }
         )
         interactiveAnimator?.startAnimation()

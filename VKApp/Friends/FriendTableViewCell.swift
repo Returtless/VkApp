@@ -9,6 +9,7 @@
 import UIKit
 
 class FriendTableViewCell: UITableViewCell {
+    static let identifier = "userCell"
     
     @IBOutlet private weak var userLabel: UILabel!
     @IBOutlet private weak var photoView: AvatarView!
@@ -34,8 +35,8 @@ class FriendTableViewCell: UITableViewCell {
             usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.8,
             options:.curveEaseInOut,
-            animations: {
-                self.frame.origin.x+=70
+            animations: { [weak self] in
+                self!.frame.origin.x+=70
         })
     }
 }
