@@ -10,18 +10,18 @@ import UIKit
 import Alamofire
 import RealmSwift
 
-typealias ResultsForUser = Results<User>
+typealias ResultsForUser = [SimpleUser]
 
 class FriendsController: UIViewController, UINavigationControllerDelegate {
-    private var users : ResultsForUser? {
+    private var users : [SimpleUser]? {
         didSet{
             if users != nil {
                 initSorterControl()
-                pairTableAndRealm()
             }
         }
     }
     private var photoService: PhotoService?
+    private let userService = UserAdapter()
     
     private var usersToken: NotificationToken?
     private var sorterControl: SorterBarControl!
@@ -39,7 +39,13 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         sorterControl = SorterBarControl()
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
-        users = RealmService.getData()?.sorted(byKeyPath: "lastName")
+        userService.getUsers(){
+            [weak self] array in
+            self!.users = array
+            DispatchQueue.main.async {
+                self!.tableView.reloadData()
+            }
+        }
         DataService.updateAllFriends()
     }
     
@@ -71,28 +77,14 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
             sorterControl.widthAnchor.constraint(equalToConstant: CGFloat(20)),      sorterControl.heightAnchor.constraint(equalToConstant: CGFloat(30*sorterControl.getLettersCount())), sorterControl.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
             sorterControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
     }
-    
-    func pairTableAndRealm() {
-        usersToken = users?.observe { (changes: RealmCollectionChange) in
-            guard let tableView = self.tableView else { return }
-            switch changes {
-            case .initial:
-                tableView.reloadData()
-            case .update(_,_,_,_):
-                self.initSorterControl()
-                tableView.reloadData()
-            case .error(let error):
-                fatalError("\(error)")
-            }
-        }
-    }
+
 }
 
 extension FriendsController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { self.sorterControl.getLettersCount() }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users!.filter(NSPredicate(for: sorterControl.getLetter(for: section))).count
+        users!.filter({$0.lastName.starts(with: sorterControl.getLetter(for: section))}).count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -118,7 +110,7 @@ extension FriendsController : UITableViewDataSource, UITableViewDelegate {
 }
 extension FriendsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        users = RealmService.getSearchedFriends(for: searchText)
+       // users = RealmService.getSearchedFriends(for: searchText)
         tableView.reloadData()
     }
     
@@ -129,8 +121,8 @@ extension FriendsController: UISearchBarDelegate {
 
 extension ResultsForUser {
     
-    func getUserForIndexPathAndLetter(letter: String, row: Int) -> User? {
-        return self.filter(NSPredicate(for: letter))[row]
+    func getUserForIndexPathAndLetter(letter: String, row: Int) -> SimpleUser? {
+        return self.filter({$0.lastName.starts(with: letter)})[row]
     }
 }
 

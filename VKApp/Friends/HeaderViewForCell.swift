@@ -10,11 +10,10 @@ import UIKit
 
 class HeaderViewForCell: UITableViewHeaderFooterView {
     static let identifier = "headerViewCell"
-    private let color = UIColor(hex: "#6689B3ff")
     
     func configure(with text: String) {
-        self.tintColor = color
-        textLabel!.backgroundColor = color
+        self.tintColor = UIColor.vkColor
+        textLabel!.backgroundColor = UIColor.vkColor
         textLabel!.text = text
     }
     

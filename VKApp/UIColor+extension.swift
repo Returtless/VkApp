@@ -35,3 +35,8 @@ extension UIColor {
         return nil
     }
 }
+
+
+extension UIColor {
+    static var vkColor = UIColor(hex: "#6689B3ff")
+}

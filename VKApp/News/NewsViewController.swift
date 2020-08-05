@@ -35,7 +35,7 @@ class NewsViewController: UIViewController {
     fileprivate func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Обновление...")
-        refreshControl?.tintColor = UIColor(hex: "#6689B3ff")
+        refreshControl?.tintColor = UIColor.vkColor
         refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
         tableView.addSubview(refreshControl!)
     }
