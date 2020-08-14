@@ -12,7 +12,7 @@ import Alamofire
 import RealmSwift
 
 class GroupsController: UITableViewController {
-    
+      private let dataServiceProxy = DataServiceProxy(dataService: DataService())
     @IBOutlet weak var groupsSearchBar: GroupsSearchBar!
     private var photoService: PhotoService?
     
@@ -30,7 +30,7 @@ class GroupsController: UITableViewController {
         photoService = PhotoService(container: tableView)
         groups = RealmService.getGroups()
         isUserGroups = true
-        DataService.updateAllGroups()
+        dataServiceProxy.updateAllGroups()
         let alert = UIAlertController(title: "Важно!", message: "В новой версии появилась возможность вступать и выходить из групп в РЕАЛЬНОМ ВК! Для вступления поиском находим группу и при свайпе влево по ячейке есть кнопка для вступления", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true, completion: nil)
@@ -39,7 +39,7 @@ class GroupsController: UITableViewController {
     
     @objc
     func refresh() {
-        DataService.updateAllGroups()
+        dataServiceProxy.updateAllGroups()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int { 1 }
@@ -84,7 +84,7 @@ class GroupsController: UITableViewController {
             let leaveButton = UIContextualAction(style: .normal, title: "Выйти") {  (contextualAction, view, boolValue) in
                 let item = self.groups![indexPath.row]
                 //добавляем группы на сервер ВК and isMember = 0
-                DataService.postDataToServer(for: item, method: .leaveGroup)
+                self.dataServiceProxy.postDataToServer(for: item, method: .leaveGroup)
                 //чистим серчбар
                 self.groupsSearchBar.searchTextField.text = nil
                 self.groupsSearchBar.endEditing(true)
@@ -100,7 +100,7 @@ class GroupsController: UITableViewController {
                 self.isUserGroups = true
                 tableView.reloadData()
                 //добавляем группы в рилм и на сервер ВК
-                DataService.postDataToServer(for: item, method: .joinGroup)
+                self.dataServiceProxy.postDataToServer(for: item, method: .joinGroup)
                 //чистим серчбар
                 self.groupsSearchBar.searchTextField.text = nil
                 self.groupsSearchBar.endEditing(true)
@@ -117,7 +117,7 @@ class GroupsController: UITableViewController {
 extension GroupsController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (!searchText.isEmpty){
-            DataService.getSearchedGroups(
+            dataServiceProxy.getSearchedGroups(
                 searchText: searchText,
                 completion: {
                     [weak self] array in

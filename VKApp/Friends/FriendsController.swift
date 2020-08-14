@@ -22,6 +22,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         }
     }
     private var photoService: PhotoService?
+      private let dataServiceProxy = DataServiceProxy(dataService: DataService())
     
     private var usersToken: NotificationToken?
     private var sorterControl: SorterBarControl!
@@ -40,7 +41,7 @@ class FriendsController: UIViewController, UINavigationControllerDelegate {
         sorterControl.addTarget(self, action: #selector(sorterBarWasChanged), for: .valueChanged)
         view.addSubview(sorterControl)
         users = RealmService.getData()?.sorted(byKeyPath: "lastName")
-        DataService.updateAllFriends()
+        dataServiceProxy.updateAllFriends()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -13,91 +13,11 @@ import RealmSwift
 
 /// Сервис для работы с сервером VK
 class DataService {
-    
-    /// Метод для получения всех друзей пользователя
-    /// - Parameter completion: замыкание для возврата данных
-    static func getAllFriends(
-        completion: @escaping (_ array : Results<User>?) -> Void){
-        let params: Parameters = [
-            "fields": "nickname, domain, sex, photo_100"
-        ]
-        DataService.getServerData(
-            method: .getFriends,
-            with: params,
-            completion: completion
-        )
-    }
-    
-    /// Метод для обновления информации о друзьях
-    static func updateAllFriends(){
-        let params: Parameters = [
-            "fields": "nickname, domain, sex, photo_100"
-        ]
-        DataService.getServerData(
-            method: .getFriends,
-            with: params,
-            dataType : User.self
-        )
-    }
-    
-    /// Метод для обновления информации о друзьях c Operation
-    static func updateAllFriendsWithOperation(){
-        let params: Parameters = [
-            "fields": "nickname, domain, sex, photo_100"
-        ]
-        DataService.getData(
-            method: .getFriends,
-            with: params,
-            dataType : User.self
-        )
-    }
-    
-    /// Метод для получения всех групп пользователя
-    /// - Parameter completion: замыкание для возврата данных
-    static func getAllGroups(
-        completion: @escaping (_ array : Results<Group>?) -> Void){
-        let params: Parameters = [
-            "extended": "1",
-            "isMember" : 1
-        ]
-        DataService.getServerData(
-            method: .getUserGroups,
-            with: params,
-            completion: completion
-        )
-    }
-    
-    /// Метод для обновления всех групп пользователя
-    static func updateAllGroups(){
-        let params: Parameters = [
-            "extended": "1",
-            "isMember" : 1
-        ]
-        DataService.getServerData(
-            method: .getUserGroups,
-            with: params,
-            dataType: Group.self
-        )
-    }
-    
-    /// Метод для обновления всех групп пользователя c Operation
-    static func updateAllGroupsWithOperation(){
-        let params: Parameters = [
-            "extended": "1",
-            "isMember" : 1
-        ]
-        DataService.getData(
-            method: .getUserGroups,
-            with: params,
-            dataType: Group.self
-        )
-    }
-    
     /// Метод для получения всех фотографий конкретного пользователя
     /// - Parameters:
     ///   - userId: id пользователя
     ///   - completion: замыкание для возврата данных
-    static func getAllPhotosForUser(userId : Int,
+     func getAllPhotosForUser(userId : Int,
                                     completion: @escaping (_ array : Results<Photo>?) -> Void) {
         let params: Parameters = [
             "extended": "1",
@@ -107,7 +27,7 @@ class DataService {
                    parameters: getFullParameters(params)).responseJSON{ response in
                     print("Photos получены с сервера ВК")
                     guard let data = response.data else { return }
-                    let array: [Photo]? = decodeRequestData(method: Methods.getAllPhotos, data: data)
+                    let array: [Photo]? = self.decodeRequestData(method: Methods.getAllPhotos, data: data)
                     if let array = array {
                         RealmService.saveData(array)
                         completion(RealmService.getData(for:("ownerID", "==", "Int"), with: userId))
@@ -119,7 +39,7 @@ class DataService {
     /// - Parameters:
     ///   - searchText: искомый текст
     ///   - completion: замыкание для возврата данных
-    static func getSearchedGroups(searchText : String,
+    func getSearchedGroups(searchText : String,
                                   completion: @escaping (_ array : Results<Group>?) -> Void) {
         let params: Parameters = [
             "q": searchText,
@@ -129,7 +49,7 @@ class DataService {
                    parameters: getFullParameters(params)).responseJSON{ response in
                     print("\(Group.self)s получены с сервера ВК")
                     guard let data = response.data else { return }
-                    let array: [Group]? = decodeRequestData(method: Methods.getSearchGroups, data: data)
+                    let array: [Group]? = self.decodeRequestData(method: Methods.getSearchGroups, data: data)
                     if let array = array {
                         RealmService.saveData(array, withoutDelete: true)
                         completion(RealmService.getData(for: ("name", "CONTAINS[c]", "String"), with: searchText))
@@ -139,7 +59,7 @@ class DataService {
     
     /// Метод для получения новостей с сервера
     /// - Parameter completion: замыкание для возврата данных
-    static func getNewsfeed(startTime: String = "", startFrom: String = "", completion: @escaping (_ array : NewsItems?) -> Void) {
+     func getNewsfeed(startTime: String = "", startFrom: String = "", completion: @escaping (_ array : NewsItems?) -> Void) {
         var params: Parameters = [
             "count" : 20,
             "filters" : "post"
@@ -179,7 +99,7 @@ class DataService {
     
     /// Метод для получения ленты с комментариями
     /// - Parameter completion: замыкание для возврата
-    static func getNewsfeedComments(completion: @escaping (_ array : NewsItems?) -> Void) {
+     func getNewsfeedComments(completion: @escaping (_ array : NewsItems?) -> Void) {
         let params: Parameters = [
             "last_comments_count" : 10,
             "count" : 10,
@@ -215,7 +135,7 @@ class DataService {
     /// - Parameters:
     ///   - userId: идентификатор пользователя
     ///   - completion: замыкание для возврата данных
-    static func getUserById(userId : Int,
+     func getUserById(userId : Int,
                             completion: @escaping (_ array : User?) -> Void) {
         let params: Parameters = [
             "user_ids": userId,
@@ -242,14 +162,14 @@ class DataService {
     ///   - method: метод запроса
     ///   - parameters: параметры для запроса
     ///   - completion: замыкание для возврата данных
-    private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
+    internal  func getServerData<T : Decodable & Object & HaveID>(method : Methods,
                                                                        with parameters: Parameters,
                                                                        completion: @escaping (_ array : Results<T>?) -> Void){
         AF.request("https://api.vk.com/method/" + method.rawValue,
                    parameters: getFullParameters(parameters)).responseJSON{ response in
                     print("\(T.self)s получены с сервера ВК")
                     guard let data = response.data else { return }
-                    let array: [T]? = decodeRequestData(method: method, data: data)
+                    let array: [T]? = self.decodeRequestData(method: method, data: data)
                     if let array = array {
                         //сохрняем данные в БД
                         RealmService.saveData(array)
@@ -263,7 +183,7 @@ class DataService {
     /// - Parameters:
     ///   - method: метод запроса
     ///   - parameters: параметры для запроса
-    private static func getServerData<T : Decodable & Object & HaveID>(method : Methods,
+    internal  func getServerData<T : Decodable & Object & HaveID>(method : Methods,
                                                                        with parameters: Parameters,
                                                                        dataType : T.Type) {
         let queue = DispatchQueue.global(qos: .utility)
@@ -272,7 +192,7 @@ class DataService {
                    parameters: getFullParameters(parameters)).responseJSON(queue: queue){ response in
                     print("\(T.self)s получены с сервера ВК")
                     guard let data = response.data else { return }
-                    array = decodeRequestData(method: method, data: data)
+                    array = self.decodeRequestData(method: method, data: data)
                     DispatchQueue.main.async {
                         if let array = array {
                             //сохрняем данные в БД
@@ -282,13 +202,13 @@ class DataService {
         }
     }
     
-    static func getData<T : Decodable & Object & HaveID>(method : Methods,
+     func getData<T : Decodable & Object & HaveID>(method : Methods,
                                                          with parameters: Parameters,
                                                          dataType : T.Type) {
         let opq : OperationQueue = OperationQueue()
         opq.maxConcurrentOperationCount = 2
         let request = AF.request("https://api.vk.com/method/" + method.rawValue,
-                                 parameters: DataService.getFullParameters(parameters))
+                                 parameters: getFullParameters(parameters))
         let getDataOperation = GetDataOperation(request: request)
         opq.addOperation(getDataOperation)
         
@@ -305,7 +225,7 @@ class DataService {
     /// - Parameters:
     ///   - item: добавляемый/изменяемый объект
     ///   - method: метод запроса
-    static func postDataToServer<T: Object & Codable>(for item: T, method : Methods){
+     func postDataToServer<T: Object & Codable>(for item: T, method : Methods){
         switch method {
         case .joinGroup, .leaveGroup:
             let params: Parameters = ["group_id" : (item as! Group).id]
@@ -325,7 +245,7 @@ class DataService {
     ///   - method: метод, по которому определяется тип возвращаемых данных
     ///   - data: json
     /// - Returns: опциональный массив с объектами
-    private static func decodeRequestData<T : Object & Decodable>(method : Methods,
+    private  func decodeRequestData<T : Object & Decodable>(method : Methods,
                                                                   data: Data) -> [T]? {
         var array = Array<Any>()
         do {
@@ -363,7 +283,7 @@ class DataService {
     /// Метод для формаирования полных параметров запроса, включая токен и номер версии АПИ
     /// - Parameter params: параметры запроса
     /// - Returns: полные параметры для запроса
-    private static func getFullParameters(_ params : Parameters) -> Parameters {
+    private  func getFullParameters(_ params : Parameters) -> Parameters {
         var parameters = params
         parameters["access_token"] = Session.instance.token
         parameters["v"] = "5.103"
@@ -371,25 +291,56 @@ class DataService {
     }
     
     
-    /// Типы запросов
-    private enum RequestTypes: String {
-        case auth
-        case method
-    }
+
+    enum RequestTypes: String {
+          case auth
+          case method
+      }
+      
+      /// Типы методов
+      enum Methods: String {
+          case getFriends = "friends.get"
+          case authorize
+          case getAllPhotos = "photos.getAll"
+          case getUserGroups = "groups.get"
+          case getSearchGroups = "groups.search"
+          case getGroupById = "groups.getById"
+          case getNews = "newsfeed.get"
+          case joinGroup = "groups.join"
+          case leaveGroup = "groups.leave"
+          case getUsers = "users.get"
+          case getNewsComments = "newsfeed.getComments"
+      }
+
+}
+
+
+protocol DataServiceInterface {
+
+     func getServerData<T : Decodable & Object & HaveID>(method : DataService.Methods,
+    with parameters: Parameters,
+    completion: @escaping (_ array : Results<T>?) -> Void)
     
-    /// Типы методов
-    enum Methods: String {
-        case getFriends = "friends.get"
-        case authorize
-        case getAllPhotos = "photos.getAll"
-        case getUserGroups = "groups.get"
-        case getSearchGroups = "groups.search"
-        case getGroupById = "groups.getById"
-        case getNews = "newsfeed.get"
-        case joinGroup = "groups.join"
-        case leaveGroup = "groups.leave"
-        case getUsers = "users.get"
-        case getNewsComments = "newsfeed.getComments"
-    }
+     func getServerData<T : Decodable & Object & HaveID>(method : DataService.Methods,
+    with parameters: Parameters,
+    dataType : T.Type)
     
+     func getData<T : Decodable & Object & HaveID>(method : DataService.Methods,
+    with parameters: Parameters,
+    dataType : T.Type)
+    
+     func postDataToServer<T: Object & Codable>(for item: T, method : DataService.Methods)
+    
+     func getUserById(userId : Int,
+    completion: @escaping (_ array : User?) -> Void)
+    
+     func getNewsfeedComments(completion: @escaping (_ array : NewsItems?) -> Void)
+    
+     func getNewsfeed(startTime: String, startFrom: String, completion: @escaping (_ array : NewsItems?) -> Void)
+    
+     func getSearchedGroups(searchText : String,
+    completion: @escaping (_ array : Results<Group>?) -> Void)
+    
+     func getAllPhotosForUser(userId : Int,
+    completion: @escaping (_ array : Results<Photo>?) -> Void)
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 class CommentsViewController: UIViewController {
+      private let dataServiceProxy = DataServiceProxy(dataService: DataService())
     var comments : [CommentsList] = []
     @IBOutlet weak var newCommentTextField: UITextField!
     @IBOutlet weak var sendCommentButton: UIButton!
@@ -46,7 +47,7 @@ extension CommentsViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
         
         cell.textLabel?.text = comments[indexPath.row].text
-        DataService.getUserById(userId: comments[indexPath.row].fromID,
+        dataServiceProxy.getUserById(userId: comments[indexPath.row].fromID,
                    completion: {
                        array in
                     cell.detailTextLabel?.text = array!.getFullName()
