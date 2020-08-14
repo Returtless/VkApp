@@ -9,6 +9,7 @@
 import UIKit
 
 class NewsViewController: UIViewController {
+      private let dataServiceProxy = DataServiceProxy(dataService: DataService())
     var news : NewsItems?
     
     @IBOutlet weak var tableView: UITableView!
@@ -23,7 +24,7 @@ class NewsViewController: UIViewController {
         tableView.delegate = self
         tableView.prefetchDataSource = self
         photoService = PhotoService(container: tableView)
-        DataService.getNewsfeed(
+        dataServiceProxy.getNewsfeed(
             completion: {
                 [weak self] array in
                 self?.news = array
@@ -43,7 +44,7 @@ class NewsViewController: UIViewController {
         refreshControl!.endRefreshing()
         self.refreshControl?.beginRefreshing()
         let mostFreshNewsDate = self.news!.items.first?.date ?? Int(Date().timeIntervalSince1970)
-        DataService.getNewsfeed(startTime: String(mostFreshNewsDate + 1)) { [weak self] news in
+        dataServiceProxy.getNewsfeed(startTime: String(mostFreshNewsDate + 1)) { [weak self] news in
             guard let self = self else { return }
             self.refreshControl?.endRefreshing()
             guard news!.items.count > 0 else { return }
@@ -168,7 +169,7 @@ extension NewsViewController: UITableViewDataSourcePrefetching {
         if maxSection > news!.items.count - 15,
             !isLoading {
             isLoading = true
-            DataService.getNewsfeed(startFrom: news!.nextFrom) { [weak self] news in
+            dataServiceProxy.getNewsfeed(startFrom: news!.nextFrom) { [weak self] news in
                 guard let self = self else { return }
                 guard news!.items.count > 0 else { return }
                 let oldIndex = self.news?.items.count

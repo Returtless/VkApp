@@ -11,6 +11,7 @@ import Alamofire
 import RealmSwift
 
 class PhotoListViewController: UIViewController {
+    private let dataServiceProxy = DataServiceProxy(dataService: DataService())
     private var userId = 0
     private var photos : Results<Photo>?{
         didSet{
@@ -30,7 +31,7 @@ class PhotoListViewController: UIViewController {
         super.viewDidLoad()
         if userId != 0 {
             photos = RealmService.getPhotos(for: userId)
-            DataService.getAllPhotosForUser(userId: userId,
+            dataServiceProxy.getAllPhotosForUser(userId: userId,
                                             completion: {
                                                 [weak self] array in
                                                 self?.photos = array

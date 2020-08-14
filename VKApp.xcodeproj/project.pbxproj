@@ -38,6 +38,7 @@
 		5277F1E424B461AF00C514C0 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277F1E024B461AF00C514C0 /* GetDataOperation.swift */; };
 		5277F1E524B461AF00C514C0 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277F1E124B461AF00C514C0 /* AsyncOperation.swift */; };
 		5285A6A424E1D2E500DAC08F /* Coffee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5285A6A324E1D2E500DAC08F /* Coffee.swift */; };
+		5285A6D224E7069400DAC08F /* DataServiceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5285A6D124E7069300DAC08F /* DataServiceProxy.swift */; };
 		5286D9EC243D0404008E36C6 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9EA243D0404008E36C6 /* Friends.storyboard */; };
 		5286D9EE243D0423008E36C6 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5286D9ED243D0423008E36C6 /* Groups.storyboard */; };
 		5286D9F2243D1B6F008E36C6 /* NavigationTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */; };
@@ -97,6 +98,7 @@
 		5277F1E024B461AF00C514C0 /* GetDataOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
 		5277F1E124B461AF00C514C0 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		5285A6A324E1D2E500DAC08F /* Coffee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffee.swift; sourceTree = "<group>"; };
+		5285A6D124E7069300DAC08F /* DataServiceProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceProxy.swift; sourceTree = "<group>"; };
 		5286D9EB243D0404008E36C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = VKApp/Base.lproj/Friends.storyboard; sourceTree = "<group>"; };
 		5286D9ED243D0423008E36C6 /* Groups.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		5286D9F1243D1B6F008E36C6 /* NavigationTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabBar.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				52B13C3B245DBA2100AA02C8 /* DataService.swift */,
+				5285A6D124E7069300DAC08F /* DataServiceProxy.swift */,
 				5216D08E24B1E7C4007B8B58 /* PhotoService.swift */,
 				52FB1E112476F95D00FC2A22 /* RealmService.swift */,
 			);
@@ -454,6 +457,7 @@
 				525B9B092443BB3600FE4E00 /* CommentsViewController.swift in Sources */,
 				522CAC80243FCEE300896A14 /* ShareCounterControl.swift in Sources */,
 				52335DBF242A89A6002A5318 /* SceneDelegate.swift in Sources */,
+				5285A6D224E7069400DAC08F /* DataServiceProxy.swift in Sources */,
 				52AAF701243E7C2700191326 /* NewsTableViewCell.swift in Sources */,
 				5216D08F24B1E7C4007B8B58 /* PhotoService.swift in Sources */,
 				52B13C3C245DBA2100AA02C8 /* DataService.swift in Sources */,
