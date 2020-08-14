@@ -15,6 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let coffee = SimpleCoffee()
+        
+        let milkCoffee = Milk(base: coffee)
+        let milkCoffeeWithSugar = Sugar(base: milkCoffee)
+        let milkCoffeeWithSugarAndCinnamon = Cinnamon(base: milkCoffeeWithSugar)
+        let milkCoffeeWithSugarAndCinnamonAndSyrup = Syrup(base: milkCoffeeWithSugarAndCinnamon)
+        print(milkCoffee.cost, milkCoffeeWithSugar.cost, milkCoffeeWithSugarAndCinnamon.cost, milkCoffeeWithSugarAndCinnamonAndSyrup.cost)
         return true
     }
 
